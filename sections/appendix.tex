@@ -9,7 +9,7 @@
 
 \subsubsection{Part (i)}
 
-Rewriting the test statistic in definition \ref{def: Zeta}:
+Rewriting the test statistic in Definition~\ref{def: Zeta}:
 \begin{align*}
 Z_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} - \mathds{1}\left\{ S^{q(\mathcal{N}-1)} < S_{i,\tau(t) }\right\} \right) \\
 & + \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} - \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} \right) \\
@@ -39,11 +39,11 @@ II_{T,N}^{B} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{
 &=o_{p}(1).
 \end{align*} 
 
-Third, using similar arguments as above, also $III_{T,N}=o_{p}(1)$. 
+Third, using similar arguments as above, $III_{T,N}=o_{p}(1)$ as well.
 
 \subsubsection{Part (ii)}
 
-Under the alternative hypothesis in equation \eqref{HA}, $Z_{T,N}$ is the sum of $T-\mathcal{T}$ non-zero differences divided by $\sqrt{T-\mathcal{T}}$ and diverges at the rate $\sqrt{T-\mathcal{T}}$. Dividing by $\sqrt{T-\mathcal{T}}$ the result follows.
+Under the alternative hypothesis in equation \eqref{HA}, $Z_{T,N}$ is the sum of $T-\mathcal{T}$ non-zero differences divided by $\sqrt{T-\mathcal{T}}$ and diverges at the rate $\sqrt{T-\mathcal{T}}$. After dividing by $\sqrt{T-\mathcal{T}}$, the result follows.
 
 
 
@@ -56,7 +56,7 @@ Under the alternative hypothesis in equation \eqref{HA}, $Z_{T,N}$ is the sum of
 
 \subsubsection{Part (i)}
 
-As in theorem \ref{th:observable}, $Z_{T.N}=I_{T,N}+II_{T,N}+III_{T,N}$. First, under the null hypothesis \ref{H0} and given assumption \refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem, $I_{T,N}\overset{d}{\rightarrow } N\left( 0,V\right)$. Second, $II_{T,N}=II_{T,N}^{A}+II_{T,N}^{B}$. In particular, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. On the other hand, under assumption \ref{ass:strongdep} in place of \refAssPart{ass:mixing, v}, $\rho =1$ and $II_{T,N}^{B}$ is no longer $o_{p}(1)$, since var $\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) $ is bounded away from zero. In fact, given assumptions \refAssPart{ass:mixing, i} and \ref{ass:strongdep},
+As in Theorem~\ref{th:observable}, $Z_{T,N}=I_{T,N}+II_{T,N}+III_{T,N}$. First, under the null hypothesis \ref{H0} and given Assumption~\refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem, $I_{T,N}\overset{d}{\rightarrow } N\left( 0,V\right)$. Second, $II_{T,N}=II_{T,N}^{A}+II_{T,N}^{B}$. In particular, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. On the other hand, under Assumption~\ref{ass:strongdep} in place of \refAssPart{ass:mixing, v}, $\rho =1$ and $II_{T,N}^{B}$ is no longer $o_{p}(1)$, since $\mathrm{var}\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right)$ is bounded away from zero. In fact, given Assumptions~\refAssPart{ass:mixing, i} and \ref{ass:strongdep},
 \begin{align*}
 II_{T,N}^{B}=\mathrm{E}\left( r_{i,t} f\left( S^{q(1)}\right) \right) \frac{\mathcal{N}}{\sqrt{T - \mathcal{T}}} \sum_{t=\mathcal{T}+1}^{T}\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) 
 \end{align*}
@@ -64,7 +64,7 @@ satisfies a central limit theorem and the statement follows. Finally, $III_{T,N}
 
 \subsubsection{Part (ii)}
 
-Analogous reasoning to that in theorem \ref{th:observable}.
+The reasoning is analogous to that in Theorem~\ref{th:observable}.
 
 
 %=========================================
@@ -73,11 +73,11 @@ Analogous reasoning to that in theorem \ref{th:observable}.
 
 \subsection{Lemma 1}
 
-We derive lemma \ref{lem:trimerror}, which will be used in the derivation of theorem \ref{th:feasible} and corollary \ref{cor:error}.
+We derive Lemma~\ref{lem:trimerror}, which will be used in the derivation of Theorem~\ref{th:feasible} and Corollary~\ref{cor:error}.
 
 \begin{lemma}
 \label{lem:trimerror} 
-Let assumptions \ref{ass:mixing}, \ref{ass:exogenous}, \ref{ass:crosssec}, \ref{ass:sups}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
+Let either Assumptions~\ref{ass:mixing}, \ref{ass:exogenous}, \ref{ass:crosssec}, \ref{ass:sups} hold, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
 \begin{align*}
 &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t) }} r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t) } \right\} \right. \\
 &\hspace{3.9cm} \left. - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t) } \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}\right\} \right) = o_{a.s.}(1).
@@ -113,7 +113,7 @@ An analogous result holds for the last portfolio.
 
 \subsubsection{Part (i)}
 
-Rewriting the test statistic in definition \ref{def: Ztilde}, and because of lemma \ref{lem:trimerror}:
+Rewriting the test statistic in Definition~\ref{def: Ztilde} and using Lemma~\ref{lem:trimerror}:
 \begin{align*}
     \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)} \right\} \right) \\
     &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
@@ -219,7 +219,7 @@ By Theorem~\ref{th:feasible}, under $H_0$,
 Consider only the first quantile, as the argument for the last quantile is identical. The first sample quantile and the corresponding order statistic are asymptotically equivalent, hence:
 \begin{align*}
 \frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right)
-=\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)} \right)+o_p(1).
+=\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)} \right)+o_p(1),
 \end{align*}
 where $\widehat{S}_{\tau(t),R}^{q(1)}$ and $S_{\tau(t)}^{q(1)}$ are the estimators of the first quantile based on the estimated and true sorting variable, i.e.
 \begin{align*}
@@ -340,7 +340,7 @@ This follows immediately from Theorem~\ref{th:feasible}, part (ii).
 % PROOF OF THEOREM 4
 %=========================================
 
-\section{Theorem 4}
+\subsection{Theorem 4}
 \label{Proof of th:subsampling}
 
 \subsubsection{Part (i)}
@@ -392,7 +392,7 @@ assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv},
 \end{align*}
 Hence, for each $k$, the subsampled statistic
 $\widehat{Z}_{T_\delta,N,R_\delta}^{(k)}$ has the same continuous limiting
-law as $\widehat{Z}_{T,N,R}$ under $H_0$. Moreover, since $R_\delta=\lfloor RT_\delta/T\rfloor$, then $0\leq \frac{RT_\delta}{T}-R_\delta < 1$. Therefore,
+law as $\widehat{Z}_{T,N,R}$ under $H_0$. Moreover, since $R_\delta=\lfloor RT_\delta/T\rfloor$, $0\leq \frac{RT_\delta}{T}-R_\delta < 1$. Therefore,
 \begin{align*}
 \frac{T_\delta-R_\delta}{T-R}
 &= \frac{T_\delta-RT_\delta/T}{T-R}
@@ -404,7 +404,7 @@ law as $\widehat{Z}_{T,N,R}$ under $H_0$. Moreover, since $R_\delta=\lfloor RT_\
 because $T_\delta/T\to 0$ and $0<\pi<\infty$ implies $T-R\to\infty$. In
 addition, $T_\delta=\lfloor T^\delta\rfloor$ with $0<\delta<1$ implies
 $T_\delta\to\infty$, and therefore $K=T-T_\delta+1\to\infty$.
-Therefore, Theorem 2.1 in \cite{politis1997subsampling} applies and yields
+Theorem 2.1 in \cite{politis1997subsampling} applies and yields
 consistency of the empirical subsampling distribution. Consequently,
 \begin{align*}
 \lim_{T,N,R\rightarrow \infty }
@@ -451,7 +451,7 @@ Combining the last display with Corollary~\ref{cor:error}(ii) gives
 
 \subsubsection{Part (i)}
 
-Given assumption \ref{ass:B1} and \ref{ass:B2}, by the Law of the Iterated Logarithm for ergodic strong mixing process, for all $i=1,...,N_{\tau(t)}$ and $t=R,...,T,$:
+Given Assumptions~\ref{ass:B1} and \ref{ass:B2}, by the Law of the Iterated Logarithm for an ergodic strongly mixing process, for all $i=1,...,N_{\tau(t)}$ and $t=R,...,T,$:
 \begin{equation*}
 \lim \sup_{R\rightarrow \infty }\frac{1}{\sqrt{2R\ln \ln R}}%
 \sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon
@@ -495,7 +495,7 @@ and analogously, a.s.%
 \lim \inf_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( \widehat{%
 \beta }_{i,\tau(t),R}-\beta _{i,\tau(t)}\right) =-\sqrt{A_{i,\tau(t)}^{-1}v_{i,\tau(t)}^{2}A_{i,\tau(t)}^{-1}}=-\sigma _{i,\tau(t)}
 \end{equation*}
-It then follows from Lemma 2.1 in \cite{corradi1999deciding}, that for all $%
+It then follows from Lemma 2.1 in \cite{corradi1999deciding} that for all $%
 i=1,...,N_{\tau(t)},$\ and each $t=R,...,T,$ $%
 \widehat{v}_{i,R,\tau(t)}^{2}-v_{i,\tau(t)}^{2}=o_{a.s.}(1),$ and thus $\widehat{\sigma }%
 _{R,i,\tau(t)}^{2}-\sigma _{R,i}^{2}=o_{a.s.}(1).$
@@ -508,10 +508,10 @@ and so the statement in the Lemma follows.
 
 \subsubsection{Part (ii)}
 
-Given part (i), by the same argument as in Lemma~\ref{lem:trimerror} replacing $%
+Given part (i), by the same argument as in Lemma~\ref{lem:trimerror}, replacing $%
 c_{i,\tau(t),R}^{L}$ and $c_{i,\tau(t),R}^{U} $ with $\widehat{c}_{LIL,i,\tau(t),R}^{L}$
 and $\widehat{c}_{LIL,i,\tau(t),R}^{U}$
-respectively.\medskip
+respectively, the statement follow.\medskip
 
 %=========================================
 % PROOF OF PROPOSITION B'
@@ -542,7 +542,7 @@ Finally, since for $j=0,1$ $\widehat{\sigma }_{R,\beta _{j,i},\tau(t)}^{2}=\sigm
 
 By the same argument as in Lemma~\ref{lem:trimerror}, replacing $c_{i,\tau(t),R}^{L}$ and $c_{i,\tau(t),R}^{U}$ with $\pm
 \sigma _{\beta _{0},i,\tau(t)}\pm \sigma _{\beta
-_{1},i,\tau(t)}\left\vert W_{i,\tau(t)}\right\vert .$
+_{1},i,\tau(t)}\left\vert W_{i,\tau(t)}\right\vert$, the statement follow.
 
 %=========================================
 % PROOF OF THEOREM B1
@@ -550,9 +550,9 @@ _{1},i,\tau(t)}\left\vert W_{i,\tau(t)}\right\vert .$
 
 \subsection{Theorem B1}
 
-\subsubsection{Parts (i)}
+\subsubsection{Part (i)}
 
-Given Propositions \ref{ass:B1'} and \ref{ass:B2'}, Assumption~\ref{ass:sups} is satisfied with $c_{\tau(t),R}^{U}=\sup_{i\leq
+Given Assumptions~\ref{ass:B1'} and \ref{ass:B2'}, Assumption~\ref{ass:sups} is satisfied with $c_{\tau(t),R}^{U}=\sup_{i\leq
 N_{\tau(t)}}\sigma _{i,\tau(t)}%
 \sqrt{\frac{2\ln \ln R}{R}},$ $c_{\tau(t),R}^{L}=-c_{\tau(t),R}^{U}$ for the unconditional case, and with 
 \begin{equation*}
@@ -561,12 +561,12 @@ c_{\tau(t),R}^{U}=\sup_{i\leq N_{\tau(t)}}\sigma _{\beta _{0},i,\tau(t)}%
 \sigma _{\beta _{1},i,\tau(t)}\sqrt{\frac{2\ln
 \ln R}{R}}\left\vert W_{i,\tau(t)}\right\vert
 \end{equation*}%
-and $c_{\tau(t),R}^{L}=-c_{\tau(t),R}^{U}$ for the conditional case. Also, note that for both the unconditional and the conditional case, \hl{$\frac{N_{\tau(t)}^{1+\varepsilon
-}c_{\tau(t),R}^{U}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$} a.s. Given this, and given part (ii) of propositions \ref{prop:B} and \ref{prop:B'}, the statement in Lemma~\ref{lem:trimerror} follows. Then the statements in (i) and (ii) follow the same argument as in Theorem~\ref{th:feasible} and in Corollary~\ref{cor:error}.
+and $c_{\tau(t),R}^{L}=-c_{\tau(t),R}^{U}$ for the conditional case. Also, note that for both the unconditional and conditional cases, \hl{$\frac{N_{\tau(t)}^{1+\varepsilon
+}c_{\tau(t),R}^{U}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$} a.s. Given this, and given part (ii) of Propositions~\ref{prop:B} and \ref{prop:B'}, the statement in Lemma~\ref{lem:trimerror} follows. Then the statements in (i) and (ii) follow the same argument as in Theorem~\ref{th:feasible} and in Corollary~\ref{cor:error}.
 
 \subsubsection{Part (ii)}
  
-By the same argument as in part (i) of Theorem~\ref{th:feasible}.
+By the same argument as in part (i) of Theorem~\ref{th:feasible}, the statement follow.
 
 %=========================================
 % SIMULATIONS
@@ -595,7 +595,7 @@ Tables \ref{tab:estim-beta-252-10}-\ref{tab:estim-beta-1260-5} show summary stat
 \subsection{Classification Errors}
 \label{app:Classification Errors}
 
-Tables \ref{tab:errors-untrim-252-10}-\ref{tab:errors-trim-1260-5} show the contamination error and the information loss error without and with trimming, for different values of $E$, when stocks are sorted into $\mathcal{N}$ portfolios. Since larger $E$ corresponds to a larger estimation window $R$, the tables display a clear pattern: both contamination and information-loss errors fall as $R$ increases and as the number of portfolios is reduced from $\mathcal{N}=10$ to $\mathcal{N}=5$. In the untrimmed case, the overall error for the first portfolio declines from $32.92\%$ to $19.60\%$ when $\mathcal{N}=10$ and from $23.00\%$ to $12.38\%$ when $\mathcal{N}=5$ as $E$ rises from $12$ to $60$; the corresponding figures for the last portfolio fall from $24.83\%$ to $13.40\%$ and from $19.44\%$ to $10.38\%$, respectively. The same ranking is preserved in the trimmed tables. Moreover, as $E$ becomes larger, the remaining errors are increasingly concentrated in adjacent portfolios, while contamination from more distant portfolios becomes negligible; reducing $\mathcal{N}$ has a similar effect, because wider portfolio bins make the portfolio cutoffs less sensitive to beta-estimation noise.
+Tables \ref{tab:errors-untrim-252-10}-\ref{tab:errors-trim-1260-5} show the contamination error and the information loss error with and without trimming, for different values of $E$, when stocks are sorted into $\mathcal{N}$ portfolios. Since larger $E$ corresponds to a larger estimation window $R$, the tables display a clear pattern: both contamination and information-loss errors fall as $R$ increases and as the number of portfolios is reduced from $\mathcal{N}=10$ to $\mathcal{N}=5$. In the untrimmed case, the overall error for the first portfolio declines from $32.92\%$ to $19.60\%$ when $\mathcal{N}=10$ and from $23.00\%$ to $12.38\%$ when $\mathcal{N}=5$ as $E$ rises from $12$ to $60$; the corresponding figures for the last portfolio fall from $24.83\%$ to $13.40\%$ and from $19.44\%$ to $10.38\%$, respectively. The same ranking is preserved in the trimmed tables. Moreover, as $E$ becomes larger, the remaining errors are increasingly concentrated in adjacent portfolios, while contamination from more distant portfolios becomes negligible; reducing $\mathcal{N}$ has a similar effect, because wider portfolio bins make the portfolio cutoffs less sensitive to beta-estimation noise.
 
 \input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim.tex} 
 
@@ -619,4 +619,4 @@ Tables \ref{tab:errors-untrim-252-10}-\ref{tab:errors-trim-1260-5} show the cont
 
 \input{../../portfolio-sorts/tables/simul-errors/1260-5/errors-untrim.tex} 
 
-\input{../../portfolio-sorts/tables/simul-errors/1260-5/errors-trim.tex} 
+\input{../../portfolio-sorts/tables/simul-errors/1260-5/errors-trim.tex}
