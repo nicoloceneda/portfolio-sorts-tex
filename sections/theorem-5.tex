@@ -1,0 +1,65 @@
+%=========================================
+% PROOF OF THEOREM 5
+%=========================================
+
+\section{Proof of Theorem \cref{th:condbetas}}
+\label{Proof of th:condbetas}
+
+{\small \noindent \textsc{Part} (i). }
+
+{\small Given \ref{lem:condbetas}, we can follow the same steps as in the
+proof of Theorem\ \ref{th:feasible} to show that:%
+\begin{eqnarray}
+&&\widehat{Z(\beta )}_{T,N,R}  \notag \\
+&=&Z(\beta )_{T,N}  \notag \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}m_{1,\beta }\left( 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}-\beta _{\lfloor t/\tau \rfloor }^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}\right)  \notag \\
+&&-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}m_{\mathcal{N},\beta
+}\left( \widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{(\mathcal{N}%
+-1)n_{\lfloor t/\tau \rfloor }/\mathcal{N}}-\beta _{\lfloor t/\tau \rfloor
+}^{(\mathcal{N}-1)n_{\lfloor t/\tau \rfloor }/\mathcal{N}}\right)  \notag \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}r_{i,t}\left( 1\left\{ 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}-c_{N,R}}\leq \widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}\right\} \right.  \notag \\
+&&\phantom{+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{%
+\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}\left( \right.}\left. -1\left\{ \widehat{\beta }_{\lfloor t/\tau
+\rfloor ,R}^{(\mathcal{N}-1)n_{\lfloor t/\tau \rfloor }/(\mathcal{N}-1)}\leq 
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq \widehat{\beta }_{\lfloor
+t/\tau \rfloor ,R}^{(\mathcal{N}-1)n_{\lfloor t/\tau \rfloor }/\mathcal{N}%
++c_{N,R}}\right\} \right) ,  \label{last-beta}
+\end{eqnarray}%
+we need to show that the term in (\ref{last-beta}) is }$o_{p}(1).$ {\small %
+Now, by the same argument used in the proof of} {\small Theorem\ \ref%
+{th:feasible}%
+\begin{eqnarray*}
+&&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}r_{i,t}\left( 1\left\{ 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}-c_{N,R}}\leq \widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}\right\} \right. \\
+&&\phantom{+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{%
+\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}\left( \right.}\left. -1\left\{ \widehat{\beta }_{\lfloor t/\tau
+\rfloor ,R}^{(\mathcal{N}-1)n_{\lfloor t/\tau \rfloor }/(\mathcal{N}-1)}\leq 
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq \widehat{\beta }_{\lfloor
+t/\tau \rfloor ,R}^{(\mathcal{N}-1)n_{\lfloor t/\tau \rfloor }/\mathcal{N}%
++c_{N,R}}\right\} \right) \\
+&=&O_{p}\left( \frac{c_{N,R}}{\inf_{t}n_{\lfloor t/\tau \rfloor }}\right)
+=o_{p}(1).
+\end{eqnarray*}%
+The statement follows. }
+
+{\small \noindent \textsc{Part} (ii). }
+
+{\small Follows directly by adapting the proof of Part (ii) in theorem\ \ref%
+{th:feasible}. }
+

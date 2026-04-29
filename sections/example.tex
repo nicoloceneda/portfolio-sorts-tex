@@ -1,0 +1,242 @@
+%=========================================
+% A MOTIVATING EXAMPLE: SORTING ON STOCKS' BETAS
+%=========================================
+
+\setcounter{assumption}{0}
+\setcounter{proposition}{0}
+
+\renewcommand{\theassumption}{B\arabic{assumption}}
+\renewcommand{\theproposition}{B\arabic{proposition}}
+
+\section{A Motivating Example: Sorting on Stocks' $\beta$s}
+\label{A Motivating Example: Sorting on Stocks' betas}
+
+The relationship between betas and expected returns has a long history in the asset pricing literature. The Sharpe-Lintner CAPM model (Sharpe 1964, Lintner 1965) predicts a positive association between betas and expected returns. Empirically, there is widespread evidence of violations of the CAPM prediction (see, e.g., Black, Jensen and Scholes, 1972, and Fama and French, 1992, 2006). More recently, Frazzini and Pedersen (2014) show that agents constrained in their leverage capability tend to overinvest in risky high beta stocks and underinvest in low beta stocks. This leads to a reduction of returns on high beta stocks and determines the abnormal returns of the Betting Against Beta strategy.
+
+The empirical evidence against the unconditional CAPM has sparked interest in considering conditional betas. Following, e.g., Shanken (1990), Cederburg and O’Doherty (2016), we model betas as affine functions of stock characteristics and macroeconomic variables.
+
+In the sequel, we show how sorting according to unconditional or conditional betas satisfies the existence of almost sure bounds under mild memory and moment conditions. We begin with the standard CAPM model, where:
+\begin{align}
+r_{i,t} = \alpha_{i,\tau(t)} + \beta_{i, \tau(t)} r_{M,t} + \epsilon_{i,t}.
+\end{align}
+The reason why, even in the unconditional case, we let the "true" alpha and beta of stock $i$ depend on $\tau(t)$, is that the pool of stocks alive varies over time. So, with an abuse of notation, we allow stock $i$ at time $\tau(t)$ to be different from stock $i$ at time $\tau(s)$, with $s \neq t$. We estimate $\beta_{i, \tau(t)}$ by OLS for $i = 1, \dots , N_{\tau(t)}$, for each $i$ and $\tau(t)$, using a window of $R$ observations:
+\begin{align}
+\widehat{\beta}_{i, \tau(t), R} &= \left( \frac{1}{R} \sum_{j=\tau(t) - R + 1}^{\tau(t)} (r_{M,j} - \overline{r}_{M,R})^2 \right)^{-1} \left( \frac{1}{R} \sum_{j=\tau(t) - R + 1}^{\tau(t)} (r_{M,j} - \overline{r}_{M,R})(r_{i,j} - \overline{r}_{i,R}) \right) \\
+&= \widehat{A}_{i,R, \tau(t)}^{-1} \left( \frac{1}{R} \sum_{j=\tau(t) - R + 1}^{\tau(t)} (r_{M,j} - \overline{r}_{M,R})(r_{i,j} - \overline{r}_{i,R}) \right), \notag
+\end{align}
+and we also estimate the asymptotic variance $\text{avar} \left( \sqrt{R} \widehat{\beta}_{i, \tau(t), R} \right)$ \textcolor{red}{Newey-West estimator}:
+\begin{align}
+\widehat{\sigma}_{R,i, \tau(t)}^2 &= \widehat{A}_{i,R, \tau(t)}^{-1} \widehat{v}_{i,R, \tau(t)}^2 \widehat{A}_{i,R, \tau(t)}^{-1}, 
+\end{align} 
+where\textcolor{red}{Define $l_T$}
+\begin{align}
+\widehat{v}_{i,R, \tau(t)}^2 = \frac{1}{T - R} \sum_{s=-l_T}^{l_T} \sum_{t=R+1+l_T}^{T-l_T} \left( 1 - \frac{\mathcal{T}}{l_T + 1} \right) r_{M,t} r_{M,s} \widehat{\epsilon}_{i,t} \widehat{\epsilon}_{i,s},
+\end{align}
+Finally, define:
+\begin{align}
+\widehat{c}_{LIL, i, \tau(t), R}^L = -\widehat{\sigma}_{R,i, \tau(t)} \sqrt{\frac{2 \ln \ln R}{R}},
+\end{align}
+\begin{align}
+\widehat{c}_{LIL, i, \tau(t), R}^U = \widehat{\sigma}_{R,i, \tau(t)} \sqrt{\frac{2 \ln \ln R}{R}},
+\end{align}
+and letting $I^{(j)}_{i,T,R} = \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t), R}^{p(j-1)} \leq \widehat{\beta}_{i, \tau(t), R} \leq \widehat{\beta}_{\tau(t), R}^{p(j)} \right\}$ for $j = 1, \dots, \mathcal{N}$,
+\begin{align}
+\widehat{\beta}_{i, \tau(t), R}^L = \widehat{\beta}_{i, \tau(t), R} I^{(j)}_{i,T,R} - \inf_{i \text{ s.t. } I^{(j)}_{i,T,R}=1} \widehat{c}_{LIL, i, \tau(t), R}^U,
+\end{align}
+\begin{align}
+\widehat{\beta}_{i, \tau(t), R}^U = \widehat{\beta}{i, \tau(t), R} I^{(j)}_{i,T,R} + \inf_{i \text{ s.t. } I^{(j)}_{i,T,R}=1} \widehat{c}_{LIL, i, \tau(t), R}^U,
+\end{align}
+and finally let $\widehat{\beta}_{\tau(t), R}^j$ be the $j$-th order statistic of $\widehat{\beta}_{i, \tau(t) R}$, and let $\widehat{\beta}_{\tau(t), R}^{L,j}$ be the $j$-th order statistic of $\widehat{\beta}_{i, \tau(t), R}^L$, and $\widehat{\beta}_{\tau(t), R}^{U,j}$ be the $j$-th order statistic of $\widehat{\beta}_{i, \tau(t), R}^U$. The trimmed statistic for the unconditional betas reads as:
+\begin{align}
+\widehat{Z \beta}_{T,N,R} = \frac{\mathcal{N}}{\sqrt{T - R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left(\mathbbm{1} \left\{ \widehat{\beta}_{i, \tau(t), R} \leq \widehat{\beta}_{\tau(t), R}^{L,p(1)} \right\} - \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t), R}^{U, p(\mathcal{N}-1)} \leq \widehat{\beta}_{i, \tau(t), R} \right\} \right).
+\end{align}
+
+In the sequel, we need the assumptions below.
+\begin{assumption}
+\label{ass:b1}
+For $i = 1, ..., N_{\tau(t)}$, $E \vert r_{M,t}\epsilon_{i,t} \vert^{2(4+\delta)} < C$ for $\delta > 0$ \textcolor{red}{Add explanation}
+\end{assumption}
+\begin{assumption}
+\label{ass:b2}
+For $i = 1, ..., N_{\tau(t)}$, $r_{t,i}$ and $r_{M,t}$ are strictly stationary and strong mixing with size $-4(4 + \delta) / \delta$, for the same $\delta$ as in B1. \textcolor{red}{Add explanation}
+\end{assumption}
+
+\begin{proposition}
+\label{prop:trimerror}
+If Assumption \ref{ass:b1} and \ref{ass:b2} hold,
+\begin{enumerate}[(i)]
+\item 
+$\begin{aligned}
+    \Pr \left( \lim \inf_{R \rightarrow \infty} \left( \widehat{\beta}_{i,\tau(t),R} + \widehat{c}^L_{LIL,i,\tau(t),R} \right) \leq \beta_{i,\tau(t)} \leq \lim \sup_{R \rightarrow \infty} \left( \widehat{\beta}_{i,\tau(t),R} + \widehat{c}^U_{LIL,i,\tau(t),R} \right) \right) = 1.
+\end{aligned}$ 
+\item
+$\begin{aligned}
+    \frac{\textcolor{red}{\mathcal{N}}}{\sqrt{T - R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \Bigg( & \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t),\textcolor{red}{R}}^{p(1)} \leq \beta_{i,\tau(t)} \right\} \mathbbm{1} \left\{ \widehat{\beta}_{i,\tau(t),R} \leq \widehat{\beta}_{\tau(t),R}^{L,p(1)} \right\} \\
+    - & \mathbbm{1} \left\{ \widehat{\beta}_{i,\tau(t)} \leq \widehat{\beta}_{\tau(t),\textcolor{red}{R}}^{p(\mathcal{N}-1)} \right\}\mathbbm{1} \left\{ \widehat{\beta}_{\tau(t),R}^{U,p(\mathcal{N}-1)} \leq \widehat{\beta}_{i,\tau(t),R} \right\} \Bigg) = o_{a.s.}(1) \notag
+\end{aligned}$ 
+\end{enumerate}
+\end{proposition}
+
+We now establish the conditional beta counterpart of Proposition \ref{prop:trimerror}. Individual stock returns are generated by:
+\begin{align}
+r_{i,t} = \alpha_{i,\tau(t)} + \left( \beta_{0,i,\tau(t)} + \beta_{1,i,\tau(t)}^{\top} W_{i,\tau(t-1)} \right) r_{M,t} + u_{i,t},
+\end{align}
+where $W_{i,\tau(t-1)}$ contains both common macroeconomic and stock specific variables. As before, we let $\alpha_{i,\tau(t)}$, $\beta_{0,i,\tau(t)}$ and $\beta_{1,i,\tau(t)}$ depend on $\tau(t)$, since what we denote as stock $i$ may vary across time, as stocks enter and exit. Because most macroeconomic variables are not available on a daily basis, we allow the variables in the conditioning set to evolve at a lower frequency than stock returns. For each stock, we use rolling windows of $R$ observations to construct:
+\begin{align}
+\widehat{\theta}_{i,\tau(t),R} &= \left( \widehat{\beta}_{0,i,\tau(t),R}, \widehat{\beta}_{1,i,\tau(t),R} \right) \\
+&= \left( \frac{1}{R} \sum_{s=\tau(t)-R+1}^{\tau(t)} (X_{i,s} - \overline{X}_{i,R}) (X_{i,s} - \overline{X}_{i,R})^{\top} \right)^{-1} \left( \frac{1}{R} \sum_{s=\tau(t)-R+1}^{\tau(t)} (X_{i,s} - \overline{X}_{i,R}) (r_{M,s} - \overline{r}_{M,R}) \right) \notag
+\end{align}
+where $X_{i,s} = (1, r_{M,s}, W_{i,s} r_{M,s})^\top$, and for $k = 0, ..., R - 1$, $\overline{X}_{i,R}$ and $\overline{r}_{M,R}$ are averages over the rolling window, and
+\begin{align}
+W_{i,s} = \textcolor{red}{define}.
+\end{align}
+We can define the composite estimator:
+\begin{align}
+\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) &= \widehat{\beta}_{0,i,\tau(t),R} + \widehat{\beta}_{1,i,\tau(t),R}^\top W_{i,\tau(t)}
+\end{align}
+and its unobserved counterpart:
+\begin{align}
+\beta_{i,\tau(t)} (W_{i,\tau(t)}) &= \beta_{0,i,\tau(t)} + \beta_{1,i,\tau(t)}^\top W_{i,\tau(t)}
+\end{align}
+so that
+\begin{align}
+\widehat{\beta}_{i,\tau(t)} (W_{i,\tau(t)}) - \widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) = (\beta_{0,i} - \widehat{\beta}_{0,i,\tau(t),R}) + (\beta_{1,i} - \widehat{\beta}_{1,i,\tau(t),R}) W_{i,\tau(t)}.
+\end{align}
+Clearly, when the conditioning set $W_{i,\tau(t)}$ contains common (e.g., macroeconomic) factors, then $W_{i,\tau(t)}$ as defined in (15) exhibits strong cross-sectional correlation as in Assumption \ref{ass:strongdep}. Now,
+\begin{align}
+\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) = \widehat{\beta}_{0,i,\tau(t),R} + \widehat{\beta}_{1,i,\tau(t),R}^\top W_{i,\tau(t)}
+\end{align}
+and
+\begin{align}
+\beta_{i,\tau(t)} (W_{i,\tau(t)}) - \widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) = (\beta_{0,i} - \widehat{\beta}_{0,i,\tau(t),R}) + (\beta_{1,i} - \widehat{\beta}_{1,i,\tau(t),R}) W_{i,\tau(t)}.
+\end{align}
+For simplicity, suppose $W_{i,\tau(t)}$ is a scalar. Furthermore, we consider the case in which $W_{i,\tau(t)} = W_{\tau(t)}$, that is the conditioning variable is a common factor. This case implies strong cross sectional correlation. Let $\widehat{\sigma}^2_{R,\beta_{0,i},\tau(t)}$ and $\widehat{\sigma}^2_{R,\beta_{1,i},\tau(t)}$ be the (possibly HAC) estimators of $\text{avar}(\sqrt{R}(\beta_{0,i} - \widehat{\beta}_{0,i,\tau(t),R}))$ and of $\text{avar}\left(\sqrt{R}(\beta_{1,i} - \widehat{\beta}_{1,i,\tau(t),R})\right)$ respectively, and let
+\begin{align}
+\widehat{c}_{LIL,i,\tau(t),R} (W_{\tau(t)}) &= \widehat{\sigma}_{R,\beta_{0},i,\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}} + \widehat{\sigma}_{R,\beta_{1,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}} \lvert W_{\tau(t)} \rvert,
+\end{align}
+and for $j = 1, \ldots, \mathcal{N}$, let $I^{(j)}_{t,T,R}(W_{\tau(t)}) = \mathbbm{1} \left\{ \widehat{\beta}^{p(j-1)}_{i,\tau(t),R} (W_{\tau(t)}) \leq \widehat{\beta}_{i,\tau(t),R} (W_{\tau(t)}) \leq \widehat{\beta}^{p(j)}_{i,\tau(t),R} (W_{\tau(t)}) \right\}$,
+and define
+\begin{align}
+\widehat{\beta}^{L}_{i,\tau(t),R} (W_{\tau(t)}) &= \widehat{\beta}_{i,\tau(t),R} (W_{\tau(t)}) I^{(j)}_{i,T,R} (W_{\tau(t)}) - \sup_{i \ s.t \ I^{(j)}_{i,T,R}(W_{\tau(t)}) = 1} \widehat{c}_{LIL,i,\tau(t),R} (W_{\tau(t)}) \\
+&= \widehat{\beta}_{i,\tau(t),R} (W_{\tau(t)}) I^{(j)}_{i,T,R} (W_{\tau(t)}) - \widehat{c}_{LIL,j,\tau(t),R} (W_{\tau(t)}) \notag
+\end{align}
+and similarly, \textcolor{red}{sign error}
+\begin{align}
+\widehat{\beta}^{U}_{i,\tau(t),R} (W_{\tau(t)}) &= \widehat{\beta}_{i,\tau(t),R} (W_{\tau(t)}) I^{(j)}_{i,T,R} (W_{\tau(t)}) - \widehat{c}_{LIL,j,\tau(t),R} (W_{\tau(t)}) \notag
+\end{align}
+Finally, let $\widehat{\beta}^{L,p(j)}_{\tau(t),R} (W_{i,\tau(t)})$ and $\widehat{\beta}^{U,p(j)}_{\tau(t),R} (W_{i,\tau(t)})$ be the $j N_{\tau(t)} / \mathcal{N}$-th order statistics of $\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) - \widehat{c}_{LIL,j,\tau(t),R} (W_{i,\tau(t)})$ and of $\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) + \widehat{c}_{LIL,j,\tau(t),R} (W_{i,\tau(t)})$ respectively.
+
+\textcolor{red}{Keep only one part}
+\begin{align}
+\widehat{c}_{LIL,\beta_{j,i},\tau(t),R}^L &= - \widehat{\sigma}_{R,\beta_{j,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}}
+\end{align}
+\begin{align}
+\widehat{c}_{LIL,\beta_{j,i},\tau(t),R}^U &= \widehat{\sigma}_{R,\beta_{j,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}}
+\end{align}
+and let
+\begin{align}
+\widehat{c}_{LIL,\beta,\tau(t),R}^U (W_{\tau(t)}) &= \sup_{i \leq N_\tau(t)} \widehat{\sigma}_{R,\beta_{0},i,\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}} + \sup_{i \leq N_\tau(t)} \widehat{\sigma}_{R,\beta_{1,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}} \lvert W_{\tau(t)} \rvert,
+\end{align}
+and $\widehat{c}_{LIL,\beta,\tau(t),R}^L (W_{i,\tau(t)}) = - \widehat{c}_{LIL,\beta,\tau(t),R}^U (W_{i,\tau(t)})$. Finally, let $\widehat{\beta}^{L,p(j)}_{\tau(t),R} (W_{i,\tau(t)})$ and $\widehat{\beta}^{U,p(j)}_{\tau(t),R} (W_{i,\tau(t)})$ be the $j N_{\tau(t)} / \mathcal{N}$-th order statistics of $\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) + \widehat{c}_{LIL,\beta,\tau(t),R}^L (W_{i,\tau(t)})$ and of $\widehat{\beta}_{i,\tau(t),R} (W_{i,\tau(t)}) + \widehat{c}_{LIL,\beta,\tau(t),R}^U (W_{i,\tau(t)})$ respectively. Note that almost surely,
+\begin{align}
+\widehat{c}^{U}_{LIL,\beta,\tau(t),R} (W_{i,\tau(t)}) &\geq \sup_{i \leq N_{\tau(t)}} \widehat{\sigma}_{R,\beta_{0,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}}
+\end{align}
+and
+\begin{align}
+\widehat{c}^{U}_{LIL,\beta,\tau(t),R} (W_{i,\tau(t)}) &\leq - \sup_{i \leq N_{\tau(t)}} \widehat{\sigma}_{R,\beta_{0,i},\tau(t)} \sqrt{\frac{2 \ln \ln R}{R}}
+\end{align}
+
+We then construct the statistic:
+\begin{align}
+\widehat{Z \beta_\omega}_{T,N,R} = \frac{\mathcal{N}}{\sqrt{T - R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} & \left(\mathbbm{1} \left\{ \widehat{\beta}_{i, \tau(t), R} (W_{i,\tau(t)}) \leq \widehat{\beta}_{\tau(t), R}^{L,p(1)} (W_{i,\tau(t)}) \right\} \right. \\
+& \left. - \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t), R}^{U, p(\mathcal{N}-1)} (W_{i,\tau(t)}) \leq \widehat{\beta}_{i, \tau(t), R}(W_{i,\tau(t)})  \right\} \right) \notag
+\end{align}
+
+We need strengthen Assumption \ref{ass:b1} and \ref{ass:b2} above, as
+\begin{assumption}
+\label{ass:b3}
+For $i = 1, ..., N_{\tau(t)}$, and $X_{i,s} = (1, r_{M,s}, W_{i,s} r_{M,s})$, all element of $X_{i,s}$ have $2(4 + \delta)$ bounded moment, for $\delta > 0$ \textcolor{red}{Add explanation}
+\end{assumption}
+\begin{assumption}
+\label{ass:b4}
+For $i = 1, ..., N_{\tau(t)}$, and $X_{i,s} = (1, r_{M,s}, W_{i,s} r_{M,s})$, $r_{i,s}$, $W_{i,s}r_{M,s}$ and $r_{M,s}$ are strictly stationary and strong mixing with size $-4(4 + \delta) / \delta$, for the same $\delta$ as in \ref{ass:b1}. \textcolor{red}{Add explanation}
+\end{assumption}
+
+\begin{proposition}
+If Assumption \ref{ass:b3} and \ref{ass:b4} hold, then conditionally on $W_{i,\tau(t)}$,
+\begin{enumerate}[(i)]
+\item 
+$\begin{aligned}
+    \Pr \Big( \lim \Big( &\widehat{\beta}_{0,i,\tau(t),R} + \widehat{\beta}_{1,i,\tau(t),R}W_{i,\tau(t)} + \widehat{c}_{LIL,\beta_{0,i},\tau(t),R}^L + \widehat{c}_{LIL,\beta_{1,i},\tau(t),R}^L \lvert W_{i,\tau(t)} \rvert \\
+    \leq &\beta_{i,\tau(t)} ( W_{i,\tau(t)} ) \leq \\
+    \lim \Big( &\widehat{\beta}_{0,i,\tau(t),R} + \widehat{\beta}_{1,i,\tau(t),R}W_{i,\tau(t)} + \widehat{c}_{LIL,\beta_{0,i},\tau(t),R}^U + \widehat{c}_{LIL,\beta_{1,i},\tau(t),R}^U \lvert W_{i,\tau(t)} \rvert \Big) \Big) = 1.
+\end{aligned}$ 
+\item
+$\begin{aligned}
+    \frac{\textcolor{red}{\mathcal{N}}}{\sqrt{T - R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \Bigg( & \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t),\textcolor{red}{R}}^{p(1)} ( W_{i,\tau(t)} ) \leq \beta_{i,\tau(t)} ( W_{i,\tau(t)} ) \right\} \\
+    & \mathbbm{1} \left\{ \widehat{\beta}_{i,\tau(t),R} ( W_{i,\tau(t)} ) \leq \widehat{\beta}_{\tau(t),R}^{L,p(1)} ( W_{i,\tau(t)} ) \right\} \notag \\
+    - & \mathbbm{1} \left\{ \widehat{\beta}_{i,\tau(t)} ( W_{i,\tau(t)} ) \leq \widehat{\beta}_{\tau(t),\textcolor{red}{R}}^{p(\mathcal{N}-1)} ( W_{i,\tau(t)} ) \right\} \notag \\
+    & \mathbbm{1} \left\{ \widehat{\beta}_{\tau(t),R}^{U,p(\mathcal{N}-1)} ( W_{i,\tau(t)} ) \leq \widehat{\beta}_{i,\tau(t),R} ( W_{i,\tau(t)} ) \right\} \Bigg) = o_{a.s.}(1) \notag
+\end{aligned}$ 
+\end{enumerate}
+\end{proposition}
+Note that the bounds become less and less sharp as the dimensionality of the conditioning set increases.
+
+We now establish that the statements in Corollary \ref{cor:error} apply when sorting over unconditional and conditional betas. This requires an additional assumption:
+\begin{assumption}
+\label{ass:b5}
+Let $\beta^{j}_{i,\tau(t)}$ and $\beta^{j}_{i,\tau(t)} (W_{i,\tau(t)})$ denote the $j$-th cross-sectional order statistic of $\beta_{i,\tau(t)}$ and $\beta_{i,\tau(t)} (W_{i,\tau(t)})$ respectively, for $i = 1, \dots, N_{\tau(t)}$. Then: \textcolor{red}{Add explanation}
+\begin{align}
+\inf_{i \leq T} \inf_{j,j^\prime} \left|\beta^{j}_{i,\tau(t-1)} - \beta^{j^\prime}_{i,\tau(t-1)}\right| \geq C \frac{\left|j - j^\prime\right|}{N^{1+\epsilon}},
+\end{align}
+and conditionally on $W_{i,\tau(t)}$,
+\begin{align}
+\inf_{i \leq T} \inf_{j,j^\prime} \left|\beta^{j}_{i,\tau(t-1)} (W_{i,\tau(t)}) - \beta^{j^\prime}_{i,\tau(t-1)} (W_{i,\tau(t)}) \right| \geq C (W_{i,\tau(t)}) \frac{\left|j - j^\prime\right|}{N^{1+\epsilon}},
+\end{align}
+\end{assumption}
+
+\begin{enumerate}[(i)]
+    \item 
+    $\begin{aligned}
+        \Pr \left( \lim \inf_{R \rightarrow \infty} \left( \widehat{\beta}_{i,\tau(t),R} + \widehat{c}^L_{LIL,i,\tau(t),R} \right) \leq \beta_{i,\tau(t)} \leq \lim \sup_{R \rightarrow \infty} \left( \widehat{\beta}_{i,\tau(t),R} + \widehat{c}^U_{LIL,i,\tau(t),R} \right) \right) = 1.
+    \end{aligned}$ 
+\end{enumerate}
+
+
+\begin{theorem}
+Let Assumptions \ref{ass:b1} (\ref{ass:b3}), \ref{ass:b2} (\ref{ass:b4}), \ref{ass:exogenous}, \ref{ass:b5} hold. Under $H_0$, as $T$, $R$, $N \rightarrow \infty$ and $(T - R)/R \rightarrow \pi > 0$,
+\begin{enumerate}[(i)]
+\item \label{theorem 5 part i}
+\begin{align}
+    \widehat{Z \beta}_{T,N,R} \xrightarrow{d} N (0, \Omega_\beta),
+\end{align}
+where:
+\begin{align}
+    \Omega_\beta = V_{1,\beta} + V_{\beta^{q(1)}} + V_{\beta^{q(\mathcal{N})}} + \text{covs},
+\end{align}
+$V_{1,\beta}$, $V_{\beta^{q(1)}}$, $V_{\beta^{q(\mathcal{N})}}$ and covs are defined as in Corollary \ref{cor:error}, with $\widehat{S}_{i,\tau(t),R}$, $\widehat{S}_{\tau(t),R}^{q(j)}$, $S_{\tau(t)}^{q(j)}$ replaced by $\widehat{\beta}_{i,\tau(t),R}$, $\widehat{\beta}_{\tau(t),R}^{q(j)}$, $\beta_{\tau(t)}^{q(j)}$.
+\item 
+\begin{align}
+    \widehat{Z \beta_\omega}_{T,N,R} \xrightarrow{d} N (0, \Omega_{\beta_\omega}),
+\end{align} 
+where:
+\begin{align}
+    \Omega_{\beta_\omega} = V_{1,\beta_\omega} + V_{\beta_\omega^{q(1)}} + V_{\beta_\omega^{q(\mathcal{N})}} + \text{covs},
+\end{align}
+$V_{1,\beta_\omega}$, $V_{\beta_\omega^{q(1)}}$, $V_{\beta_\omega^{q(\mathcal{N})}}$ and covs as in part \ref{theorem 5 part i}, with $\widehat{\beta}_{i,\tau(t),R}$, $\widehat{\beta}_{\tau(t),R}^{q(j)}$, $\beta_{\tau(t)}^{q(j)}$ replaced by $\widehat{\beta}_{i,\tau(t),R}(W_{i,\tau(t)})$, $\widehat{\beta}_{\tau(t),R}^{q(j)}(W_{i,\tau(t)})$, $\beta_{\tau(t)}^{q(j)}(W_{i,\tau(t)})$.
+\end{enumerate}
+Under $H_A$ there exists $\delta > 0$ such that:
+\begin{align}
+\lim_{T,N,R \rightarrow \infty} \Pr\left( \frac{1}{\sqrt{T - R}} \left| \widehat{Z\beta}_{T, N, R} \right| > \delta \right) = 1.
+\end{align}
+\begin{align}
+\lim_{T,N,R \rightarrow \infty} \Pr\left( \frac{1}{\sqrt{T - R}} \left| \widehat{Z\beta_{\omega}}_{T, N, R} \right| > \delta \right) = 1.
+\end{align}
+\end{theorem}
+
+Finally, the construction of the subsampled critical values is based on:
+\begin{align}
+    \widehat{Z \beta}_{T_\delta,N,R_\delta}^{(k)} &= \frac{\mathcal{N}}{\sqrt{T_\delta}} \sum_{t=1+R_\delta+k}^{\textcolor{red}{1}+R_\delta+k+T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathbbm{1}\left\{ \widehat{\beta}_{i,\tau(t),R_\delta}\leq \widehat{\beta}_{\tau(t) ,R_\delta}^{L_\delta, p(1)}\right\} \right. \\
+    & \hspace{5.2cm}\left.- \mathbbm{1}\left\{ \widehat{\beta}_{\tau(t), R_\delta}^{U_\delta, p(\mathcal{N}-1)} \leq \widehat{\beta}_{i,\tau(t), R_\delta} \right\} \right). \notag
+\end{align}
+where $\widehat{\beta}_{i,\tau(t), R_\delta}$ is constructed using rolling windows of $R_\delta = (R/T)T^\delta$ observations. Then, provided that $\widehat{\beta}^{q(j)}_{\tau(t), R_\delta}$ satisfies Assumption \ref{ass:subsampling}, the statement in Theorem \ref{th:subsampling} applies. The subsample conditional beta follows by replacing $\widehat{\beta}_{i,\tau(t), R_\delta}$, $\widehat{\beta}^{L_\delta,p(1)}_{\tau(t),R_\delta}$, $\widehat{\beta}^{U_\delta,p(1)}_{\tau(t),R_\delta}$ with $\widehat{\beta}_{i,\tau(t), R_\delta} (W_{i,\tau(t)})$, $\widehat{\beta}^{L_\delta,p(1)}_{\tau(t),R_\delta} (W_{i,\tau(t)})$, $\widehat{\beta}^{U_\delta,p(1)}_{\tau(t),R_\delta} (W_{i,\tau(t)})$

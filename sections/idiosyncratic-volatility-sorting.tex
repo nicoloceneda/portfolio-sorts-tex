@@ -1,0 +1,250 @@
+%=========================================
+% EMPIRICAL EXAMPLE
+%=========================================
+
+\section{Sorting by Idiosyncratic Volatility}
+\label{Sorting by Idiosyncratic Volatility}
+
+In the first part of this section, we simulate stock returns to quantify the contamination error and the information loss error, both in the presence and in the absence of trimming. In particular, we consider portfolio sorts based on idiosyncratic volatility following \cite{ang2006cross}. The idiosyncratic volatility computed from historical data is taken to be the true unobservable sorting variable, while the idiosyncratic volatility computed from simulated data is taken to be the sorting variable estimated with measurement error. In the second part of this section, we simulate stock returns to verify that the trimming procedure leads to tests for equalities of returns across percentiles which have correct asymptotic size and unit power. %In the third section, we apply our methodology to reproduce part of the analysis performed by \cite{ang2006cross}. Their study of portfolios sorted according to idiosyncratic volatility is justified by the fact that, if market volatility is a missing component of systematic risk (as they establish), then standard models of systematic risk, such as the CAPM or the Fama-French three-factor model, should misprice portfolios sorted by idiosyncratic volatility because these models do not include factor loadings quantifying the exposure to market volatility risk. 
+
+\subsection{Data}
+
+We use data from the CRSP U.S. Stock database, which contains end-of-day prices on equity securities listed on U.S stock exchanges. Of the whole universe, we retain only ordinary common shares (share codes 10 or 11), traded on the New York Stock Exchange, the American Stock Exchange and the Nasdaq Stock Market (exchange codes 1,2,3). In addition, we retrieve daily data for the three Fama French factors (market, size, and value), along with the risk free rate, from Kenneth French's web site at Dartmouth. We consider the time span from January 1963 to December 2023\footnote{Data availability: for Nyse from December 31, 1925; for Nyse Market from July 2, 1962; for Nasdaq from December 14, 1972; for Arca from March 8, 2006; for the Fama-French factors from July 1, 1926.}, during which the average number of days in a month is 21, and the number of listed stocks varies from a minimum of 1956 to a maxium of 7465. Figure \ref{img:num_stocks} shows the number of common stocks present in the CRSP U.S. stock database over time. Our universe consists of $15\, 354$ trading days and $26\, 085$ stocks.\footnote{For the sake of computational efficiency, in section \ref{Simulations for Hypothesis Testing}, we use a sample of 15 years (January 2009 - December 2023) and 2000 stocks.} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/data/num_stocks.pdf}
+\caption{Number of common stocks in the CRSP U.S. stock database.}
+\label{img:num_stocks}
+\end{figure}
+
+\subsection{Simulations for Classification Errors}
+
+\textbf{True sorting variable:} First, we compute the idiosyncratic volatility of each stock at each rebalancing date. More precisely, at each rebalancing date $\tau(t) \geq R$ (i.e. every 21 days), we regress the excess return of each stock over the Fama French factors using data of the past $R$ days, and discarding stocks with more than 5\% of datapoints missing (these stocks can be reconsidered at the next rebalancing date). Consistently with the literature, we set $R$ to be equal to a multiple $E$ of the average number of trading days in a month, $R=21 E$ for $E \in \{1,6,12\}$, thus using an estimation period of one month, half a year, and one year. Thus, we estimate:
+\begin{align}
+\label{reg_estim}
+    r_{i,t}^e = \alpha_{i,\tau(t)} + \beta_{i, \tau(t)}^{MKT} MKT_{t} + \beta_{i, \tau(t)}^{SMB} SMB_{t} + \beta_{i, \tau(t)}^{HML} HML_{t} + \epsilon_{i,t}
+\end{align}
+for $i=1, \dots, N_{\tau(t)}$ and $t \in (\tau(t)-R, \tau(t)]$, and where $r_{i,t}^e = r_{i,t} - r_t^f$. Finally, we compute the idiosyncratic volatility of each stock relative to the FF-3 model as the sample standard deviation of the fitted residuals:\footnote{We indicate fitted or estimated values with "$\sim$".}
+\begin{align}
+\label{std_estim}
+    \widetilde{\sigma}_{i, \tau(t)} = \sqrt{\frac{1}{R - 4} \sum_{t=\tau(t)-R+1}^{\tau(t)} \widetilde{\epsilon}_{i, t}^2}
+\end{align}
+In the remainder of this section, we set $S_{i,\tau(t)} \equiv \widetilde{\sigma}_{i, \tau(t)}$, i.e. $\widetilde{\sigma}_{i, \tau(t)}$ is taken to be the true unobservable sorting variable for stock $i$ at the rebalancing date $\tau(t)$. Figure \ref{img:vol_vol} shows the standard deviation of the sorting variable when the stocks are sorted into 10 portfolios.\footnote{On each rebalancing date, we sorted the stocks into 10 portfoloios according to the values of the sorting variable; then, we computed the standard deviation of the sorting variable for each portfolio and rebalancing date; finally, we took the average across the rebalancing dates.} This highlights the importance of a trimming variable that accounts for the standard error of the sorting variable.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/estim/126-10/vol_vol.pdf}
+\caption{Average standard deviation of the sorting variable across time ($\mathcal{N}=10, E=6$).}
+\label{img:vol_vol}
+\end{figure}
+
+\textbf{Estimated sorting variable:} Next, we simulate the excess returns of the stocks and we recompute the idiosyncratic volatilities at each rebalancing date. More precisely, for each simulation $s=1,\dots,500$, at each rebalancing date $\tau(t) \geq R$, we simulate the excess returns of each stock over the past $R$ days, using the historical values of the Fama-French factors, the estimated coefficients from regression \eqref{reg_estim}, and drawing the innovations from a normal distribution with mean zero and standard deviation equal to the one computed from equation \eqref{std_estim}:
+\begin{align*}
+   r_{i,t,s}^e = \widetilde{\alpha}_{i,\tau(t)} + \widetilde{\beta}_{i,\tau(t)}^{MKT} MKT_{t} + \widetilde{\beta}_{i,\tau(t)}^{SMB} SMB_{t} + \widetilde{\beta}_{i,\tau(t)}^{HML} HML_{t} + \epsilon_{i,t,s}
+\end{align*}
+for $i=1, \dots, N_{\tau(t)}$ and $t \in (\tau(t)-R, \tau(t)]$, where $\epsilon_{i,t,s} \sim N(0, \widetilde{\sigma}_{i, \tau(t)}^2)$. Then, for each stock we re-estimate regression \eqref{reg_estim}, using the simulated excess returns $r_{i,t,s}^e$ in place of the historical ones $r_{i,t}^e$. Finally, we re-compute the idiosyncratic volatility $\widetilde{\sigma}_{i,\tau(t),s}$ using equation \eqref{std_estim} and the fitted residuals from the re-estimated regression $\widetilde{e}_{i,t,s}$ in place of the historical ones $\widetilde{e}_{i,t}$. In the remainder of this section, we set $\widehat{S}_{i,\tau(t),R,s} \equiv \widetilde{\sigma}_{i,\tau(t),s}$, i.e. $\widetilde{\sigma}_{i,\tau(t),s}$ is taken to be the sorting variable estimated with measurement error. 
+
+\textbf{Untrimmed portfolios:} Next, we sort the stocks into untrimmed and trimmed portfolios at each rebalancing date. More precisely, for the untrimmed portfolios, at each rebalancing date $\tau(t) \geq R$, we sort the $N_{\tau(t)}$ stocks according to the values of $S_{i,\tau(t)}$ and $\widehat{S}_{i,\tau(t),R,s}$ and we allocate them to $\mathcal{N} \in \{5, 10\}$ groups to obtain the untrimmed portfolios defined by the true unobservable sorting variable and the sorting variable estimated with measurement error, respectively. Thus, for the latter, we allocate the stocks according to the following conditions:
+\begin{align*}
+\text{Portfolio $j=1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)} \right\} \\
+\text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \\
+\text{Portfolio $j=\mathcal{N}$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i, \tau(t),R,s} \right\} 
+\end{align*}
+and similarly for the former, where $S_{i, \tau(t)}$ and $S_{\tau(t)}^{p(j)}$ are substituted to $\widehat{S}_{i, \tau(t),R,s}$ and $\widehat{S}_{\tau(t),R,s}^{p(j)}$. 
+
+\textbf{Trimmed portfolios:} In order to define the trimmed portfolios, at each rebalancing date $\tau(t) \geq R$, first we compute the almost sure bound for the error using the law of iterated logarithms:
+\begin{align*}
+c_{i,\tau(t),R,s} = \sqrt{2 R \ln \left( \ln \left(  R\right) \right)} \ \frac{\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right)}{\sqrt{R}}
+\end{align*}
+for $i=1, \dots, N_{\tau(t)}$. We compute the standard deviation of the estimated sorting variables $\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right)$ using bootstrapping. In particular, for each iteration of bootstrapping $b = 1, \dots, 100$, and for each stock $i$ on the given rebalancing date $\tau(t)$, we re-sample with replacement the residuals $\widetilde{e}_{i,t,s}$ that we used to compute $\widehat{S}_{i,\tau(t),R,s}$, and we calculate their standard deviation using equation \eqref{std_estim}, thus obtaining a bootstrapped estimated sorting variable $\widehat{S}_{i,\tau(t),R,s,b}$. Finally, we compute the standard deviation of the 100 bootstrapped estimated sorting variables:
+\begin{align*}
+\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right) = \sqrt{ \frac{1}{99} \sum_{b=1}^{100} \left( \widehat{S}_{i,\tau(t),R,s,b} - \frac{1}{100} \sum_{b=1}^{100} \widehat{S}_{i,\tau(t),R,s,b} \right)^2 }
+\end{align*}
+We proceed to compute the bounds of the trimmed portfolios. Recall that, for the $1$-st (resp. $\mathcal{N}$-th) portfolio, we only need "adjust" the sorting variables by subtracting (resp. adding) to the estimated sorting variables the respective almost-sure bounds for the error. Indeed, the lower bound (resp. upper bound) of the portfolio is unchanged. Instead, for portfolios $j=2,\dots,\mathcal{N}-1$, we need to "adjust" once adding and once subtracting the almost-sure bounds for the error. Thus, first we compute the adjusted sorting variables:
+\begin{align}
+    \text{Portfolio $j=1$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{1,L} = \widehat{S}_{i,\tau(t),R,s} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)} \right\} c_{i,\tau(t),R,s} \label{sims - bound trimmed bottom}\\
+    \text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{j,U} = \widehat{S}_{i,\tau(t),R,s} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} <\widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} c_{i,\tau(t),R,s} \\
+    & \quad \widehat{S}_{i,\tau(t),R,s}^{j,L} = \widehat{S}_{i,\tau(t),R,s} - \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} c_{i,\tau(t),R,s} \\
+    \text{Portfolio $j=\mathcal{N}$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{\mathcal{N},U} = \widehat{S}_{i,\tau(t),R,s} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\} c_{i,\tau(t),R,s} \label{sims - conditions trimmed top}
+\end{align}
+Then, we compute the $jN_{\tau(t)}/\mathcal{N}$-th order statistics $\widehat{S}_{\tau(t),R,s}^{p(j),U}$ and $\widehat{S}_{\tau(t),R,s}^{p(j),L}$ of $\widehat{S}_{i,\tau(t),R,s}^{j,U}$ and $\widehat{S}_{i,\tau(t),R,s}^{j,L}$ respectively. Finally, we allocate the stocks according to the following conditions:
+\begin{align*}
+\text{Portfolio $j=1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1),L} \right\} \\
+\text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1),U} < \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j),L} \right\} \\
+\text{Portfolio $j=\mathcal{N}$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1),U} < \widehat{S}_{i, \tau(t),R,s} \right\} 
+\end{align*}
+Figure \ref{img:port_size} shows the average size of the trimmed and untrimmed portfolios across simulations.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-errors/252-10/port_size_quant_trim.pdf}
+    \caption{Left plot: average size of portfolios across simulations and time; Right plot: average quantity trimmed across simulations ($\mathcal{N}=10, E=12$).}
+    \label{img:port_size}
+\end{figure}
+
+\textbf{Classification errors:} Next, we compute the contamination error and the information loss error for the untrimmed and trimmed extreme portfolios. More precisely, at each rebalancing date $\tau(t) \geq R$, we measure the contamination error for the $1$-st (resp. $\mathcal{N}$-th) untrimmed portfolio determined by $\widehat{S}_{i,\tau(t),R,s}$ as the number of stocks in this portfolio that are included in each of the $2$-nd to $\mathcal{N}$-th (resp. $1$-st to $(\mathcal{N}-1)$-th) untrimmed portfolios determined by $S_{i,\tau(t)}$, taken as a percentage of the size of the former. Thus, the contamination error in the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $j=2,\ldots, \mathcal{N}$ (resp. $j=1,\ldots, \mathcal{N}-1$) is given by:
+\begin{align*}
+\begin{aligned}
+\text{Cont. in}\\[-11pt]
+\text{$1$ due to $j$} 
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t) }^{p(j-1)} < S_{i,\tau(t)} \leq S_{\tau(t) }^{p(j)} \right\} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)}\right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s}\leq \widehat{S}_{\tau(t),R,s}^{p(1)}\right\}} \\
+\begin{aligned}
+\text{Cont. in}\\[-11pt]
+\text{$\mathcal{N}$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t) }^{p(j-1)} < S_{i,\tau(t)} \leq S_{\tau(t) }^{p(j)} \right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\}}
+\end{align*}
+Similarly, we measure the information loss error for the $1$-st (resp. $\mathcal{N}$-th) untrimmed portfolio determined by $S_{i,\tau(t)}$ as the number of stocks in this portfolio that are included in each of the $2$-nd to $\mathcal{N}$-th (resp. $1$-st to $(\mathcal{N}-1)$-th) untrimmed portfolios determined by $\widehat{S}_{i,\tau(t),R,s}$, taken as a percentage of the size of the former. Thus, the information loss error in the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $j=2,\ldots, \mathcal{N}$ (resp. $j=1,\ldots, \mathcal{N}-1$) is computed as:
+\begin{align*}
+\begin{aligned}
+\text{Info. loss in}\\[-11pt]
+\text{$1$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\}} \\
+\begin{aligned}
+\text{Inf. loss in}\\[-11pt]
+\text{$\mathcal{N}$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}
+\end{align*}
+Finally, we take the average of these values across simulations and time. A similar reasoning applies to the trimmed portfolios. Tables \ref{tab:errors-untrim-252-10} and \ref{tab:errors-trim-252-10} shows the contamination error and the information loss error without and with trimming, respectively. Note that the cells that show the errors for the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $1$ (resp. $\mathcal{N}$) are showing the percentage of stocks correclty allocated. Two observations are in order. First, as expected, the two types of classification errors decrease as we move away from the extreme portfolios. Second, we can see how the trimming procedure correctly reduces the classification errors. 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-trim.tex} 
+
+\noindent
+Image \ref{img:cont-compare} shows the contamination error for different number of portfolios and estimation periods. The dashed line shows how the error is reduced when trimming is applied. Notice how a longer estimation period reduces the classification error across the board.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-errors/compare/cont-compare.pdf}
+    \caption{Contamination error with and without trimming for different number of portfolios and estimation periods.}
+    \label{img:cont-compare}
+\end{figure}
+
+
+\subsection{Simulations for Hypothesis Testing}
+\label{Simulations for Hypothesis Testing}
+
+\textbf{Return processes:} First, we compute the idiosyncratic volatility of each stock over its entire lifespan. More precisely, we regress the excess return of each stock over the Fama French factors using data of its entire time series from date $\underline{T}_i$ to date $\overline{T}_i$, and discarding stocks with a lifespan shorter than 252 trading days. 
+Thus, we estimate:
+\begin{align}
+\label{reg_estim_bal}
+r_{i,t}^e = \alpha_{i} + \beta_{i}^{MKT} MKT_{t} + \beta_{i}^{SMB} SMB_{t} + \beta_{i}^{HML} HML_{t} + \epsilon_{i,t}
+\end{align}
+for $i=1, \dots, N$ and $t \in [\underline{T}_i, \overline{T}_{i}]$, and where $r_{i,t}^e = r_{i,t} - r_t^f$. Notice that, differently from regression \eqref{reg_estim}, regression \eqref{reg_estim_bal} has constant coefficients. Next, we compute the idiosyncratic volatility of each stock relative to the FF-3 model as the sample standard deviation of the fitted residuals:
+\begin{align}
+\label{std_estim_bal}
+\widetilde{\sigma}_{i} = \sqrt{\frac{1}{T_i - 4} \sum_{t=\underline{T}_i}^{\overline{T}_{i}} \widetilde{\epsilon}_{i, t}^2}
+\end{align}
+Figure \ref{img:vol_dist} shows the empirical distribution of the historical idiosyncratic volatilities just estimated, which resambles a log-normal distribution.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/estim/bal/vol_dist.pdf}
+\caption{Empirical distribution of the sorting variable estimated on the whole sample.}
+\label{img:vol_dist}
+\end{figure}
+
+Next, we simulate the excess returns of the stocks under the null and the alternative hypothesis. More precisely, for each simulation $s=1, \dots, 500$, we simulate the excess returns of each stock over their entire life span as follows:
+\begin{align*}
+    r_{i,t,s}^e = \alpha_{i,s} + \beta_{i,s}^{MKT} MKT_t + \beta_{i,s}^{SMB} SMB_t + \beta_{i,s}^{HML} HML_t + \epsilon_{i,t,s}
+\end{align*}
+where we impose $\beta_{i,s}^{MKT} \sim N(1.0, 0.2)$, $\beta_{i,s}^{SMB} \sim N(0.8, 0.2)$, and $\beta_{i,s}^{HML} \sim N(0.8, 0.2)$. This ensures that stocks returns are positively correlated as they are exposed to common systematic factors, as per assumption \refAssPart{ass:mixing, iv}. We impose $\alpha_{i,s}$ and the distribution of $\epsilon_{i,t,s}$ depending on whether we are running simulations under the null or the alternative hypothesis, and on whether we assume that there is weak or strong cross-sectional correlation of the sorting variables. Let:
+\begin{align*}
+    \widetilde{\sigma}_{i,s} \sim \ln N \left( \frac{1}{N} \sum_{i=1}^N \widetilde{\sigma}_i, \frac{1}{N} \sum_{i=1}^N \left( \widetilde{\sigma}_i - \frac{1}{N} \sum_{i=1}^N \widetilde{\sigma}_i \right)^2 \right)
+\end{align*}
+\begin{itemize}
+    \item Under the null hypothesis \eqref{H0}:
+    \begin{align*}
+        \alpha_{i,s} = 0.0002
+    \end{align*}
+    \item Under the alternative hypothesis \eqref{HA}:
+    \begin{align*}
+        \alpha_{i,s} &= 
+        0.0002 +
+        \begin{cases}
+            + M & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(1)} \right\} \\
+            - M m & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(1)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(2)} \right\} \\
+            + 0 & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(2)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(\mathcal{N}-2)} \right\} \\
+            + M m & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(\mathcal{N}-2)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(\mathcal{N}-1)} \right\} \\
+            - M & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(\mathcal{N}-1)} < \widetilde{\sigma}_{i,s} \right\} \\
+        \end{cases}
+    \end{align*}
+    where we $M$ and $m$ are some positive constants, and where $\widetilde{\sigma}_s^{p(j)}$ denotes the $jN_{\tau(t)}/\mathcal{N}$-th order statistic of $\widetilde{\sigma}_{i,s}$.
+    \item If assumption \refAssPart{ass:mixing, v} holds, i.e. there is weak cross-sectional correlation of the sorting variable:
+    \begin{align*}
+        \epsilon_{i,t,s} \sim N \left( 0, \widetilde{\sigma}_{i,s}^2 \right)
+    \end{align*}
+    \item If assumption \ref{ass:strongdep} holds, i.e. there is strong cross-sectional correlation of the sorting variable:
+    \begin{align*}
+        \epsilon_{i,t,s} \sim N \left( 0, \widetilde{\sigma}_{i,s}^2 v_t^2 \right) \quad \text{where} \quad v_t \sim \ln N \left(0, 0.6^2 \right)
+    \end{align*}
+\end{itemize}
+First, note that these simulations give rise to a balanced panel. Second, note that, under the null hypothesis, the stocks offer the same expected return, which we arbitrarily set equal to 2bp per day. Instead, under the alternative hypothesis, stocks with low idiosyncratic volatility offer higher expected returns than those with high idiosyncratic volatility, in accordance with the findings in \cite{ang2006cross}. We achieve this by increasing the alpha of the bottom portfolio by a "magnitude" coefficient $M$, while decreasing the alpha of the top portfolio by $M$. To introduce contamination error, we decrease the alpha of the 2-nd portfolio by the product of the magnitude coefficient $M$ times a multiplier $m$, while we increase the alpha of the $\mathcal{N}-1$-th portfolio by $M m$. Given that we are interested in whether the returns of the bottom and top portfolios are statistically different, and given that the contamination error is strongest between adjacent portfolios, we do not alterate the alpha of the middle portfolio(s). This setup ensures that stocks that belong to the 2nd/$\mathcal{N}-1$-th portfolio and are incorrecly allocated to the 1st/$\mathcal{N}$-th portfolio (due to estimation error) reduce the power of the test-statistic. Third, note that, under the assumption of weak cross-sectional correlation of the sorting variable, the stocks have a standard deviation equal to $\widetilde{\sigma}_{i,s}$. Instead, under the assumption of strong cross-sectional correlation of the sorting variable the stocks have a standard deviation equal to the product of $\widetilde{\sigma}_{i,s}$ times a common factor $v_t$. We arbitrarily set the standard deviation of $v_t$ equal to 0.6. This structure introduces strong cross-sectional dependence between the sorting variables. 
+
+\textbf{Subsampling scheme:} For these simulations, we set $T=15\,120$ days (60 years) and $R=63$ days (3 months). This yields a ratio $\frac{T-R}{R} = 239$. To mantain the same the speed of growth of $T-R$ relative to $R$ in the subsampling cheme, we set $T_\delta = 5\,040$ days (20 years) and $R_\delta = 21$ days (1 month). We thus obtain 480 overlapping windows in the subsampling scheme. 
+
+We now outline the steps to compute the test statistic $\widehat{Z}_{T,N,R,s}$, the subsampled counterpart $\widehat{Z}_{B,N,R_\delta,s}^{(k)}$, and the size and power of the subsampling procedure. First, we recompute the idiosyncratic volatility of each stock at each rebalancing date. More precisely, for each stock we estimate %regression \eqref{reg_estim}, using the simulated excess returns $\widetilde{r}_{i,t,s}^e$ in place of the historical ones $r_{i,t}^e$, and 
+the standard deviation of the excess returns using data for the past $R$ days. %Finally, we re-compute the idiosyncratic volatility $\widetilde{\sigma}_{i,\tau(t),s}$ using equation \eqref{std_estim} and the fitted residuals from the re-estimated regression in place of the historical ones $\widehat{e}_{i,t}$. 
+In the remainder of this section, $\widehat{S}_{i,\tau(t),R,s} \equiv \widetilde{\sigma}_{i,\tau(t),s}$, i.e. $\widetilde{\sigma}_{i,\tau(t),s}$ is taken to be the sorting variable estimated with measurement error.  
+
+
+Next, we sort the stocks into trimmed portfolios at each rebalancing date, following the same steps outlined in the previous section in equations \eqref{sims - bound trimmed bottom} - \eqref{sims - conditions trimmed top}. Namely, at the last business day of each month, we sort the $N$ stocks according to the values of $\widehat{S}_{i,\tau(t),R,s}$, we allocate them into $\mathcal{N}$ portfolios, and we compute the confidence interval around the true unobservable ordered statistics to trim the observations. 
+
+Finally, we compute the test statistic. More precisely, given the composition of the $1$-st and the $\mathcal{N}$-th trimmed portfolios at each rebalancing date, we compute the equally weighted average return of the stocks in these portfolios for each day until the next rebalancing date (i.e. we compute the average daily return of the portfolios over the month which starts the day after the rebalancing). Then we take the difference, thus obtaining the time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolio, where the two are dynamically updated. Lastly, we compute the test statistic as the average of this difference multiplied by the square root of the number of observations.  
+\begin{align*}
+    \widehat{Z}_{T,N,R,s} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t,s}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s}\leq \widehat{S}_{\tau(t),R,s}^{L, p(1)} \right\} - \mathds{1}\left\{  \widehat{S}_{\tau(t),R,s}^{U, p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s}\right\} \right), \notag
+\end{align*}
+where $R$ in the square root and in the starting value of the summation should more accurately be the number of days until the first rebalancing date.
+
+Next, we implement the subsampling procedure. We proceed as outlined above to recompute the idiosyncratic volatility of the stocks, sort them into trimmed portfolios at each rebalancing date, and obtain a time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolios. The only difference is the facts that we now use an estimation period of $R_{\tau(t), \delta}$ days as opposed to $R$. 
+
+Lastly, we compute the statistic for windows of $T_\delta$ days. More precisely, we start from the day after the first rebalancing $t = R_{\tau(t),\delta} + 1$, and consider a window of $T_\delta$ observations, iteratively shifting it by one day, thus considering a total of $K=T-T_\delta-R_{\tau(t),\delta} + 1$ overlapping subsamples. For each subsample, we compute the test statistic $\widehat{Z}_{T_\delta,N,R_\delta}^{(k)}$ as the average of the return difference multiplied by the square root of the number of observations. 
+\begin{align*}
+    \widehat{Z}_{T_\delta,N,R_\delta,s}^{(k)} &=\frac{\mathcal{N}}{\sqrt{T_\delta}}\sum_{t=R_{\tau(t), \delta}+1}^{T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t,s}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R_{\tau(t), \delta},s}\leq \widehat{S}_{\tau(t),R_{\tau(t), \delta},s}^{L, p(1)} \right\} -\mathds{1}\left\{  \widehat{S}_{\tau(t),R_{\tau(t), \delta},s}^{U, p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R_{\tau(t), \delta},s}\right\} \right), 
+\end{align*}
+Thus, we obtain an empirical distribution of $K$ test statistics, of which we compute the $5\%$ and $95\%$ critical values, $c_{B,K,\alpha/2,s}$ and $c_{B,K,1-\alpha/2,s}$. 
+
+As a final step, we compute the percentage number of times across simulations that $\widehat{Z}_{T,N,R}$ falls within and outside the critical values:
+\begin{align*}
+    \frac{\sum_{s=1}^{500} \mathds{1} \left\{ c_{B,K,\alpha/2,s} \leq \widehat{Z}_{T,N,R,s} \leq c_{B,K,1-\alpha/2,s} \right\}}{500} 
+\end{align*}
+\begin{align*}
+    \frac{\sum_{s=1}^{500} \mathds{1} \left\{ \widehat{Z}_{T,N,R,s} \leq c_{B,K,\alpha/2,s} \right\} + \mathds{1} \left\{ c_{B,K,1-\alpha/2,s} \leq \widehat{Z}_{T,N,R,s} \right\}}{500} 
+\end{align*}
+
+Table \ref{tab:simul_tests} shows the size of the test for different number of portfolios and both under the assumption of weak and strong correlation of the sorting variable. Appendix \ref{sec:Simulations for Hypothesis Testing} provides further details.
+\input{../../portfolio-sorts/tables/simul-tests/simul_tests.tex} 
+
+
+%\subsection{Pricing Idiosyncratic Volatility in the Cross-Section}
+
+%\cite{ang2006cross} define idiosyncratic volatility using the model in equations \eqref{reg_estim} and \eqref{std_estim}. They concentrate most of their analisys on a trading strategy that involves an estimation period and a rebalancing frequency of one month. More precisely, at each rebalancing date, they sort stocks into five value-weighted portfolios, based on the isiosyncratic volatility computed using daily returns over the past month, and hold them  for one month, at the end of which they are rebalanced. Instead, in our replication, we adopt a longer estimation period of one year, as shorter estimation periods lead to significant classification errors that may require to discard all stocks from a given trimmed portfolio. In this section, we use the sample period from July 1963 to December 2000 to be consistent with the original paper. 
+
+%Tables \ref{tab:ang-untrim-252-5} and \ref{tab:ang-trim-252-5} shows the key statistics reported by \cite{ang2006cross} for the portfolios sorted on idiosyncratic volatility, without and with trimming, respectively. The first two rows show the mean and standard deviation of the monthly return of the value weighted portfolios. We compute the return of the untrimmed portfolio $j=1, \dots, \mathcal{N}$ over the month running from rebalancing day $\tau(t)$ until the next rebalancing day as follows:
+%\begin{align*}
+%    r_{j, \tau(t) \rightarrow \tau(t) + \mathcal{T}} = \left( \sum_{ i \in \mathcal{J} } w_{i,\tau(t)} \prod_{t=\tau(t)}^{\tau(t) + \mathcal{T}} \left( 1 + r_{i,t} \right) \right) - 1
+%\end{align*}
+%where $\mathcal{J} \equiv \left\{ i \ \big\vert \ 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)} \right\} \right\}$.
+%An analogous calculation holds for the trimmed portfolios except that $\widehat{S}_{\tau(t),R}^{p(j-1),U}$ and $\widehat{S}_{\tau(t),R}^{p(j),L}$ are substituted to $\widehat{S}_{\tau(t),R}^{p(j-1)}$ and $\widehat{S}_{\tau(t),R}^{p(j)}$. The third and fourth rows show Jensen's alpha of the value weighted portfolios for the Fama-French model and the CAPM. For the Fama French-model, we compute the alpha of the untrimmed portfolio $j=1, \dots, \mathcal{N}$ as follows:
+%\begin{align*}
+%    r_{j,t}^e = \alpha_{i} + \beta_{j}^{MKT} MKT_{t} + \beta_{j}^{SMB} SMB_{t} + \beta_{j}^{HML} HML_{t} + \epsilon_{j,t}
+%\end{align*}
+%for $t \in [0, T]$, and where $r_{j,t}^e = r_{j,t} - r_t^f$. A similar calculation holds for the CAPM and for the trimmed portfolios. We report the \cite{newey1986simple} t-statistic in brakets. 
+
+%\input{../../portfolio-sorts/tables/ang/252-5/ang-untrim.tex}
+
+%\input{../../portfolio-sorts/tables/ang/252-5/ang-trim.tex}
+
+%For the untrimmed portfolios, the average return increase from 1.04\% per month for the first quintile (low volatility) to 1.18\% per month for the second quintile, then it drops sharply to 0.27\% for the fifth quintile (high volatility). The difference in average returns between the fifth and the first portfolio (high volatility minus low volatility) is -0.77\% but the difference in Fama-French and CAPM alphas is 0\%. For the trimmed portfolio, the average return displays a similar behavior, increasing in the first two portfolios, and decreasing thereafter. However, the difference between the top and bottom average returns is more pronounced. The alphas remain 0\%. Image \ref{img:port_value} shows the average return of the trimmed portfolios for different number of portfolios and estimation periods. 
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/ang/compare/ang-compare.pdf}
+%    \caption{Average return of the portfolios.}
+%    \label{img:port_value}
+%\end{figure}
+
+%\input{../../portfolio-sorts/tables/ang/21-5/ang-untrim.tex}
+
+%\input{../../portfolio-sorts/tables/ang/21-5/ang-trim.tex}

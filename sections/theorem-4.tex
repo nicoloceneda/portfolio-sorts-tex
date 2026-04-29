@@ -1,0 +1,17 @@
+\begin{theorem}
+\label{th:subsampling}
+
+Let either assumptions \ref{ass:mixing},\ref{ass:exogenous},\ref{ass:crosssec}-\ref{ass:subsampling}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:subsampling} hold. \hl{Verify proof}
+
+\begin{enumerate}[(i)]
+\item Under $H_{0}$, $\lim_{T \rightarrow \infty }\frac{R_\delta}{T_\delta}=\lim_{T \rightarrow \infty }\frac{R}{T}$ and $\frac{T_\delta}{T}\rightarrow 0$ and $\lim_{T \rightarrow \infty }\frac{R}{T-R}=\lim_{T \rightarrow \infty }\frac{R_\delta}{T_\delta-R_\delta}=\pi$, with $0 \leq \pi <\infty$, as $T,N,R,T_\delta,K,R_\delta\rightarrow \infty$:
+\begin{align*}
+    \lim_{T,N,R\rightarrow \infty }\Pr \left( c_{T_\delta,K,\alpha }\leq \widehat{Z}_{T,N,R}\leq c_{T_\delta,K,(1-\alpha )}\right) = \alpha.
+\end{align*}
+
+\item Under $H_{A}$, if $\lim_{T \rightarrow \infty }\frac{R_\delta}{T^\delta}=\lim_{T \rightarrow \infty }\frac{R}{T}$ and $\frac{T_\delta}{T} \rightarrow 0$, as $T,N,R,T_\delta,K,R_\delta \rightarrow \infty$:
+\begin{align*}
+    \lim_{T,N,R\rightarrow \infty }\Pr \left( \left( \widehat{Z}_{T,N,R}<c_{T_\delta,K,\alpha }\right) \cup \left( c_{T_\delta,K,(1-\alpha )} < \widehat{Z}_{T,N,R}\right) \right) = 1.
+\end{align*}
+\end{enumerate}
+\end{theorem}

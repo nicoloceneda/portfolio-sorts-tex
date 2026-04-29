@@ -1,0 +1,229 @@
+%=========================================
+% Setup
+%=========================================
+
+% Document class (with font size and paper size)
+\documentclass[11pt, a4paper]{article}
+
+% Language
+\usepackage[english]{babel}
+
+% Font
+\usepackage{newpxtext}
+\usepackage{newpxmath}
+
+% Margins
+\usepackage[margin=2.5cm]{geometry}
+
+% Line spacing
+\usepackage[doublespacing]{setspace}
+
+% Text justification
+\usepackage{ragged2e}
+
+% Footnotes (with anchoring to bottom)
+\usepackage[bottom]{footmisc}
+\setlength{\footnotemargin}{0.8em}
+
+% Author and affiliation
+\usepackage{authblk}
+
+% Colors (with predefined colors)
+\usepackage[dvipsnames]{xcolor}
+
+% Highlighting
+\usepackage{soul}
+
+% Lists (with short labels, bullets, and circles)
+\usepackage[shortlabels]{enumitem}
+\setlist[itemize,1]{label=$\bullet$}
+\setlist[itemize,2]{label=$\circ$}
+
+% Images
+\usepackage{graphicx}
+\usepackage{float}
+
+% Tables
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+% Captions (with label and whole footnote fonts)
+\usepackage[labelfont=bf, font=footnotesize]{caption}
+\usepackage{subcaption}
+
+% Mathematics
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{mathtools}
+\usepackage{dsfont}
+
+% Environments
+\newtheorem{assumption}{Assumption}
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+
+\newenvironment{propositionB}
+  {\begingroup\renewcommand{\theproposition}{B}\begin{proposition}}
+  {\end{proposition}\addtocounter{proposition}{-1}\endgroup}
+
+\newenvironment{namedtheorem}[1]
+  {\begingroup\renewcommand{\thetheorem}{#1}\begin{theorem}}
+  {\end{theorem}\addtocounter{theorem}{-1}\endgroup}
+
+\newenvironment{propositionBprime}
+  {\begingroup\renewcommand{\theproposition}{B$'$}\begin{proposition}}
+  {\end{proposition}\addtocounter{proposition}{-1}\endgroup}
+
+\newenvironment{namedassumption}[1]
+  {\begingroup\renewcommand{\theassumption}{#1}\begin{assumption}}
+  {\end{assumption}\addtocounter{assumption}{-1}\endgroup}
+
+% Line breaks in equations and Urls
+\allowdisplaybreaks
+\def\UrlBreaks{\do\/\do-\do.}
+
+% Coloured boxes
+\usepackage[most]{tcolorbox}
+\newtcolorbox{authorcomment}[1][]{
+  colback=blue!8,
+  colframe=blue!45!black,
+  boxrule=0.5pt,
+  arc=2mm,
+  left=2mm,
+  right=2mm,
+  top=1mm,
+  bottom=1mm,
+  before skip=8pt,
+  after skip=8pt,
+  title=#1
+}
+
+% Hyperlinks (with color for citations and links)
+\usepackage[colorlinks=true, citecolor=BrickRed, linkcolor=BrickRed]{hyperref}
+
+% Links (with entire reference clickable and no abbreviation)
+\usepackage[nameinlink, noabbrev]{cleveref}
+
+% Urls
+\usepackage{url}
+
+% Citations with round parenthesis
+\usepackage{natbib}
+\setcitestyle{round}
+
+% References
+\usepackage{xstring}
+\newcommand{\refAssPart}[1]{%
+  \StrBefore{#1}{,}[\assumptionlabel]%
+  \hyperref[#1]{\ref*{\assumptionlabel}.\ref*{#1}}%
+}
+
+\newcommand{\refAssRange}[2]{%
+  \StrBefore{#1}{,}[\assumptionlabel]%
+  \hyperref[#1]{\ref*{\assumptionlabel}.\ref*{#1}--\ref*{#2}}%
+}
+
+% Old and new proof dividers
+\newcommand{\labeldivider}[2]{%
+  \par\noindent
+  \hbox to \linewidth{%
+    \leaders\hrule height 0.6pt\hfill
+    \colorbox{#2}{\strut\bfseries\quad #1\quad}%
+    \leaders\hrule height 0.6pt\hfill
+  }%
+  \par
+}
+
+% Shortcuts you asked for
+\newcommand{\OldProofDivider}{\labeldivider{OLD PROOF}{red!20}}
+\newcommand{\NewProofDivider}{\labeldivider{NEW PROOF}{green!20}}
+\newcommand{\SolidDivider}{\noindent\rule{\linewidth}{0.6pt}}
+
+%=========================================
+% Title page
+%=========================================
+
+% Title
+
+\title{\LARGE\bf The Econometrics of Portfolio Sorts
+\thanks{We thank Nour Meddahi, Olivier Scaillet, and the participants of the seminars at Imperial College Business School and Stanford Graduate School of Business.}}
+\date{\today}
+
+% Authors
+\author[1]{Nicolo Ceneda}
+\author[2]{Valentina Corradi}
+\author[1]{Walter Distaso}
+\affil[1]{\it\small Department of Finance, Imperial College London}
+\affil[2]{\it\small Department of Economics, New York University Abu Dhabi}
+
+%=========================================
+% Begin document
+%=========================================
+
+\begin{document}
+
+%=========================================
+% Title
+%=========================================
+
+\maketitle
+
+\begin{abstract}
+    Portfolio sorting is a common practice used to uncover systematic cross sectional relationships between expected returns and stock characteristics, where the null hypothesis is that the expected return over low and high percentiles is the same. In this paper, we study the effect of sorting errors on the test outcome. First, when the sorting variable is observable, a source of error arises due to the discrepancy between the order statistics and the true quantiles. Second, when the sorting variable is unobservable, the ordered statistics need to be estimated and two additional types of errors can occur: a contamination error (including in a portfolio stocks that should be excluded), and an information loss error (discarding from a portfolio stocks that should be included). For the estimated sorting variables, we suggest an adaptive trimming that ensures that tests for mean equality have the right asymptotic size and unit power
+\end{abstract}
+
+\vspace{0.5cm}
+\noindent \small{\textbf{Keywords:} Cross-section of stock returns, Portfolio sorting, Factor models} \\
+\noindent \small{\textbf{JEL:} C12, C13, C18, C21}
+
+%=========================================
+% Content
+%=========================================
+
+\clearpage
+
+\input{../sections/main}
+%\input{../sections/set-up}
+%\input{../sections/sorting-without-error}
+%\input{../sections/sorting-with-error}
+%\input{../sections/subsampling}
+%\input{../sections/empirical-example}
+
+%=========================================
+% Appendix
+%=========================================
+
+\clearpage
+\appendix
+
+\begin{center}
+	{\Large\bf Appendix}
+\end{center}
+
+\renewcommand{\theequation}{A.\arabic{equation}}
+\setcounter{equation}{0}
+
+\input{../sections/appendix}
+%\input{../sections/corollary-1}
+%\input{../sections/theorem-4}
+%\input{../sections/empirical-example-cont}
+
+
+%=========================================
+% References
+%=========================================
+
+\clearpage
+\bibliographystyle{abbrvnat}
+\bibliography{bibliography.bib}
+
+%=========================================
+% End document
+%=========================================
+
+\end{document}

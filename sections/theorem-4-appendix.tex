@@ -1,0 +1,31 @@
+%=========================================
+% PROOF OF THEOREM 4
+%=========================================
+
+\section{Proof of Theorem 4}
+\label{Proof of th:subsampling}
+
+\subsection{Part (i)}
+
+Let:
+\begin{align*}
+    Z_{T_\delta,N}^{(k)} &= \frac{\mathcal{N}}{\sqrt{T_\delta - \mathcal{T}}} \sum_{t=1+\mathcal{T}+k}^{1+\mathcal{T}+k+T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1}\left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} - \mathds{1}\left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right). 
+\end{align*}
+By the same argument as in the proof of theorem \ref{th:feasible}, given \hl{$\frac{c_{N,R_\delta}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$}, we have that for any $k$:
+\begin{align*}
+    \widehat{Z}_{T_\delta,N,R_\delta}^{(k)} &=Z_{T_\delta,N}^{(k)} +\frac{\mathcal{N}m_{1}}{\sqrt{T_\delta-R_\delta}}\sum_{t=1+R_\delta+k}^{1+R_\delta+k+T_\delta}\left( \widehat{S}_{\tau(t),R_\delta}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -\frac{\mathcal{N}m_{\mathcal{N}}}{\sqrt{T_\delta-R_\delta}}\sum_{t=1+R_\delta+k}^{1+R_\delta+k+}\left( \widehat{S}_{\tau(t),R_\delta}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) + o_p(1) \\
+    &= Z_{T_\delta,N}^{(k)} + \left( I_{T_\delta,N,R_\delta}^{(k)}-II_{T_\delta,N,R_\delta}^{(k)}\right) +o_{p}(1).
+\end{align*}
+Given assumption \ref{ass:sups}, and using the results from theorem \ref{th:observable}, under $H_{0}$, for each $k$, $Z_{T_\delta,N}^{(k)}\overset{d}{\rightarrow }N(0,V)$ as $T_\delta,N\rightarrow \infty $, where $V$ is defined in theorem \ref{th:observable}. By the same argument as in the proof of corollary \ref{cor:error}:
+\begin{align*}
+I_{T_\delta,N,R_\delta}^{(k)}-II_{T_\delta,N,R_\delta}^{(k)} &= \frac{\mathcal{N}m_{1}}{\sqrt{T_\delta-R_\delta}}\sum_{t=1+R_\delta+k}^{1+R_\delta+k+T_\delta}\left( \widehat{S}_{\tau(t),R_\delta}^{q(1)}-S_{\tau(t)}^{q(1)}\right) -\frac{\mathcal{N}m_{\mathcal{N}}}{\sqrt{T_\delta-R_\delta}}\sum_{t=1+R_\delta+k}^{1+R_\delta+k+}\left( \widehat{S}_{\tau(t),R_\delta}^{q(\mathcal{N}-1)}-S_{\tau(t)}^{q(\mathcal{N}-1)}\right) +o_{p}(1).
+\end{align*}
+Recalling that $R_\delta=\lfloor R T_\delta/T \rfloor$, under both hypotheses: \hl{I think this is not H0 and H1, it's weak and strong correlation. Moreover, why is the variance always equal to the one we have in the case of weak cross-sectional correlation?}
+\begin{align*}
+I_{T_\delta,N,R_\delta}^{(k)}-II_{T_\delta,N,R_\delta}^{(k)} \overset{d}{\rightarrow }N\left( 0,V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+ covs \right) ,\text{ for }T_\delta,N,R_\delta\rightarrow \infty.
+\end{align*}
+Hence, for each $k$, $\widehat{Z}_{T_\delta,N,R_\delta}^{(k)}$ has the same limiting distribution as $\widehat{Z}_{T,N,R}$. Finally, given that $T_\delta/(T-R)\rightarrow 0,$ and the number of subsampled statistics $K\rightarrow \infty ,$ the statement follows from Corollary 3.2 in \cite{politis1992general}. 
+
+\subsection{Part (ii)}
+
+The statement follows as the subsampled statistic diverges at rate $\sqrt{T_\delta-R_\delta}$ while the statistic diverges at rate $\sqrt{T-R}.$

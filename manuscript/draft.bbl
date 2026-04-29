@@ -1,0 +1,163 @@
+\begin{thebibliography}{25}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Amaya et~al.(2015)Amaya, Christoffersen, Jacobs, and
+  Vasquez]{amaya2015does}
+D.~Amaya, P.~Christoffersen, K.~Jacobs, and A.~Vasquez.
+\newblock Does realized skewness predict the cross-section of equity returns?
+\newblock \emph{Journal of Financial Economics}, 118\penalty0 (1):\penalty0
+  135--167, 2015.
+
+\bibitem[Ang et~al.(2006)Ang, Hodrick, Xing, and Zhang]{ang2006cross}
+A.~Ang, R.~J. Hodrick, Y.~Xing, and X.~Zhang.
+\newblock The cross-section of volatility and expected returns.
+\newblock \emph{The Journal of Finance}, 61\penalty0 (1):\penalty0 259--299,
+  2006.
+
+\bibitem[Black et~al.(1972)Black, Jensen, and Scholes]{black1972capital}
+F.~Black, M.~C. Jensen, and M.~Scholes.
+\newblock The capital asset pricing model: Some empirical tests.
+\newblock In M.~C. Jensen, editor, \emph{Studies in the Theory of Capital
+  Markets}, pages 79--121. Praeger, New York, 1972.
+
+\bibitem[Cattaneo et~al.(2020)Cattaneo, Crump, Farrell, and
+  Schaumburg]{cattaneo2020characteristic}
+M.~D. Cattaneo, R.~K. Crump, M.~H. Farrell, and E.~Schaumburg.
+\newblock Characteristic-sorted portfolios: Estimation and inference.
+\newblock \emph{Review of Economics and Statistics}, 102\penalty0 (3):\penalty0
+  531--551, 2020.
+
+\bibitem[Cattaneo et~al.(2022)Cattaneo, Crump, and Wang]{cattaneo2022beta}
+M.~D. Cattaneo, R.~K. Crump, and W.~Wang.
+\newblock Beta-sorted portfolios.
+\newblock \emph{arXiv preprint arXiv:2208.10974}, 2022.
+
+\bibitem[Cederburg and O'Doherthy(2016)]{cederburg2016does}
+S.~Cederburg and M.~S. O'Doherthy.
+\newblock Does it pay to bet against beta? on the conditional performance of
+  the beta anomaly.
+\newblock \emph{The Journal of finance}, 71\penalty0 (2):\penalty0 737--774,
+  2016.
+
+\bibitem[Corradi(1999)]{corradi1999deciding}
+V.~Corradi.
+\newblock Deciding between i (0) and i (1) via flil-based bounds.
+\newblock \emph{Econometric Theory}, 15\penalty0 (5):\penalty0 643--663, 1999.
+
+\bibitem[Eberlein(1986)]{eberlein1986strong}
+E.~Eberlein.
+\newblock On strong invariance principles under dependence assumptions.
+\newblock \emph{The Annals of Probability}, pages 260--270, 1986.
+
+\bibitem[Fama and French(1992)]{fama1992cross}
+E.~F. Fama and K.~R. French.
+\newblock The cross-section of expected stock returns.
+\newblock \emph{the Journal of Finance}, 47\penalty0 (2):\penalty0 427--465,
+  1992.
+
+\bibitem[Fama and French(1993)]{fama1993common}
+E.~F. Fama and K.~R. French.
+\newblock Common risk factors in the returns on stocks and bonds.
+\newblock \emph{Journal of financial economics}, 33\penalty0 (1):\penalty0
+  3--56, 1993.
+
+\bibitem[Fama and French(2006)]{fama2006value}
+E.~F. Fama and K.~R. French.
+\newblock The value premium and the capm.
+\newblock \emph{The Journal of Finance}, 61\penalty0 (5):\penalty0 2163--2185,
+  2006.
+
+\bibitem[Fama and MacBeth(1973)]{fama1973risk}
+E.~F. Fama and J.~D. MacBeth.
+\newblock Risk, return, and equilibrium: Empirical tests.
+\newblock \emph{Journal of political economy}, 81\penalty0 (3):\penalty0
+  607--636, 1973.
+
+\bibitem[Frazzini and Pedersen(2014)]{frazzini2014betting}
+A.~Frazzini and L.~H. Pedersen.
+\newblock Betting against beta.
+\newblock \emph{Journal of financial economics}, 111\penalty0 (1):\penalty0
+  1--25, 2014.
+
+\bibitem[Gon{\c{c}}alves(2011)]{gonccalves2011moving}
+S.~Gon{\c{c}}alves.
+\newblock The moving blocks bootstrap for panel linear regression models with
+  individual fixed effects.
+\newblock \emph{Econometric Theory}, 27\penalty0 (5):\penalty0 1048--1082,
+  2011.
+
+\bibitem[Harvey and Siddique(2000)]{harvey2000conditional}
+C.~R. Harvey and A.~Siddique.
+\newblock Conditional skewness in asset pricing tests.
+\newblock \emph{The Journal of finance}, 55\penalty0 (3):\penalty0 1263--1295,
+  2000.
+
+\bibitem[Jegadeesh and Titman(1993)]{jegadeesh1993returns}
+N.~Jegadeesh and S.~Titman.
+\newblock Returns to buying winners and selling losers: Implications for stock
+  market efficiency.
+\newblock \emph{The Journal of finance}, 48\penalty0 (1):\penalty0 65--91,
+  1993.
+
+\bibitem[Liang(2000)]{liang2000portfolio}
+B.~Liang.
+\newblock Portfolio formation, measurement errors, and beta shifts: A random
+  sampling approach.
+\newblock \emph{Journal of Financial Research}, 23\penalty0 (3):\penalty0
+  261--284, 2000.
+
+\bibitem[Lintner(1965)]{lintner1965valuation}
+J.~Lintner.
+\newblock The valuation of risk assets and the selection of risky investments
+  in stock portfolios and capital budgets.
+\newblock \emph{The Review of Economics and Statistics}, 47\penalty0
+  (1):\penalty0 13--37, 1965.
+
+\bibitem[Lo and MacKinlay(1988)]{lo1988stock}
+A.~W. Lo and A.~C. MacKinlay.
+\newblock Stock market prices do not follow random walks: Evidence from a
+  simple specification test.
+\newblock \emph{The review of financial studies}, 1\penalty0 (1):\penalty0
+  41--66, 1988.
+
+\bibitem[Lopez~de Prado and Zoonekynd(2024)]{lopez2024has}
+M.~Lopez~de Prado and V.~Zoonekynd.
+\newblock Why has factor investing failed?: The role of specification errors.
+\newblock \emph{The Role of Specification Errors (January 17, 2024)}, 2024.
+
+\bibitem[Politis et~al.(1997)Politis, Romano, and Wolf]{politis1997subsampling}
+D.~N. Politis, J.~P. Romano, and M.~Wolf.
+\newblock Subsampling for heteroskedastic time series.
+\newblock \emph{Journal of Econometrics}, 81\penalty0 (2):\penalty0 281--317,
+  1997.
+
+\bibitem[Reiss(2012)]{reiss2012approximate}
+R.-D. Reiss.
+\newblock \emph{Approximate distributions of order statistics: with
+  applications to nonparametric statistics}.
+\newblock Springer science \& business media, 2012.
+
+\bibitem[Rio et~al.(2017)]{rio2017asymptotic}
+E.~Rio et~al.
+\newblock \emph{Asymptotic theory of weakly dependent random processes},
+  volume~80.
+\newblock Springer, 2017.
+
+\bibitem[Shanken(1990)]{shanken1990intertemporal}
+J.~Shanken.
+\newblock Intertemporal asset pricing: An empirical investigation.
+\newblock \emph{Journal of Econometrics}, 45\penalty0 (1-2):\penalty0 99--120,
+  1990.
+
+\bibitem[Sharpe(1964)]{sharpe1964capital}
+W.~F. Sharpe.
+\newblock Capital asset prices: A theory of market equilibrium under conditions
+  of risk.
+\newblock \emph{The Journal of Finance}, 19\penalty0 (3):\penalty0 425--442,
+  1964.
+
+\end{thebibliography}

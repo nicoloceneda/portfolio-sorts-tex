@@ -1,0 +1,190 @@
+%=========================================
+% PROOF OF LEMMA 2
+%=========================================
+
+\section{Proof of \cref{lem:condbetas}}
+\label{Proof of lem:condbetas}
+
+{\small We first need to show that Assumption \ref{ass:sups} is satisfied
+with }$\widehat{S}_{i,\lfloor t/\tau \rfloor ,R}${\small \ and }$%
+S_{i,\lfloor t/\tau \rfloor }${\small \ replaced by }$\widehat{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}${\small \ and }$\beta _{i,\lfloor t/\tau
+\rfloor }${\small \ respectively. This would allows us to rely on the same
+argument used in the proof of Lemma \ref{lem:trimerror}. For notational
+simplicity, suppose that }$W_{i,\lfloor t/\tau \rfloor }${\small \ is a
+scalar. Note that:%
+\begin{equation*}
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}-\beta _{i,\lfloor t/\tau
+\rfloor }=\left( \widehat{\beta }_{0,i,\lfloor t/\tau \rfloor ,R}-\beta
+_{0,i}\right) +\left( \widehat{\beta }_{1,i,\lfloor t/\tau \rfloor ,R}-\beta
+_{1,i}\right) W_{i,\lfloor t/\tau \rfloor },
+\end{equation*}%
+leading to:%
+\begin{eqnarray*}
+&&\mathrm{E}\left( \widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}-\beta
+_{i,\lfloor t/\tau \rfloor }\right) ^{2} \\
+&=&\mathrm{E}\left( \widehat{\beta }_{0,i,\lfloor t/\tau \rfloor ,R}-\beta
+_{0,i}\right) ^{2}+\mathrm{E}\left( \left( \widehat{\beta }_{1,i,\lfloor
+t/\tau \rfloor ,R}-\beta _{1,i}\right) ^{2}W_{i,\lfloor t/\tau \rfloor
+}^{2}\right) +2\mathrm{E}\left( \left( \widehat{\beta }_{0,i,\lfloor t/\tau
+\rfloor ,R}-\beta _{0,i}\right) \left( \widehat{\beta }_{1,i,\lfloor t/\tau
+\rfloor ,R}-\beta _{1,i}\right) W_{i,\lfloor t/\tau \rfloor }\right) .
+\end{eqnarray*}%
+By Assumption~\ref{ass:condbetas} part (ii), $\mathrm{E}\left( W_{i,\lfloor
+t/\tau \rfloor }^{4}\right) \leq C.$ Hence, to show that Assumption \ref%
+{ass:sups} is satisfied, it is enough to show that, for $j=0,1$, $\mathrm{E}%
+\left( \widehat{\beta }_{j,i,\lfloor t/\tau \rfloor ,R}-\beta _{j,i}\right)
+^{4}\leq CR^{-2\varepsilon }$ for some constant }$0<C<\infty $ and some $%
+\varepsilon >0$ arbitrarily small.
+
+{\small We start from $\beta _{i,1}$:%
+\begin{eqnarray*}
+&&\sqrt{\frac{R}{2\ln \ln R}}\left( \widehat{\beta }_{1,i,\lfloor t/\tau
+\rfloor ,R}-\beta _{1,i}\right) \\
+&=&\frac{\sqrt{\frac{2\ln \ln R}{R}}\sum_{j=t-R+1}^{t}\left( W_{i,j}r_{M,j}-%
+\overline{W_{i}r_{M}}\right) \epsilon _{i,j}}{\frac{1}{R}\sum_{j=t-R+1}^{t}%
+\left( W_{i,j}r_{M,j}-\overline{W_{i}r_{M}}\right) ^{2}}=\frac{\sqrt{\frac{%
+2\ln \ln R}{R}}\sum_{j=t-R+1}^{t}\left( W_{i,j}r_{M,j}-\overline{W_{i}r_{M}}%
+\right) \epsilon _{i,j}}{\mathrm{var}\left( W_{i,t}r_{M,t}\right)
++o_{a.s.}(1)}.
+\end{eqnarray*}%
+Given Assumptions~\ref{ass:condbetas}, parts (i)-(ii) and \ref{ass:mixing},
+parts (i)-(ii), by the law of the iterated logarithm, for each $i$: 
+\begin{equation*}
+\lim \sup_{R\leq t\leq T,R,T\rightarrow \infty }\sqrt{\frac{2\ln \ln R}{R}}%
+\sum_{j=t-R+1}^{t}\left( W_{i,j}r_{M,j}-\overline{W_{i}r_{M}}\right)
+\epsilon _{i,j}=\sqrt{\mathrm{var}\left( W_{i,t}r_{M,t}\epsilon
+_{i,t}\right) }
+\end{equation*}%
+almost surely. Therefore $\mathrm{E}\left( \widehat{\beta }_{j,i,\lfloor
+t/\tau \rfloor }-\beta _{j,i}\right) ^{4}\leq CR^{-2\varepsilon }$ for each $%
+\varepsilon >0$, and so Assumption \ref{ass:sups}(i) is satisfied. Define
+the composite estimator:%
+\begin{equation*}
+\widetilde{\beta }_{i,\lfloor t/\tau \rfloor ,R}=\widetilde{\beta }_{0,i,R}+%
+\widetilde{\beta }_{1,i,R}W_{i,\lfloor t/\tau \rfloor },
+\end{equation*}%
+where $\widetilde{\beta }_{0,i,R}$ (resp. $\widetilde{\beta }_{1,i,R}$) is
+an estimator of $\beta _{0,i}$ (resp. $\beta _{1,i}$) based on the first $R$
+observations available for stock }$i,$ i.e. the first{\small \ }$R$ days in $%
+T_{i}=\left[ \overline{t}_{i}-\underline{t}_{i}\right] ${\small $.$
+Trivially: 
+\begin{equation*}
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}-\beta _{i,\lfloor t/\tau
+\rfloor }=\left( \widehat{\beta }_{i,\lfloor t/\tau \rfloor }-\widetilde{%
+\beta }_{i,\lfloor t/\tau \rfloor ,R}\right) +\left( \widetilde{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}-\beta _{i,\lfloor t/\tau \rfloor }\right) ,
+\end{equation*}%
+and note that because Assumption \ref{ass:condbetas}(ii), }$\left( 
+\widetilde{\beta }_{i,\lfloor t/\tau \rfloor ,R}-\beta _{i,\lfloor t/\tau
+\rfloor }\right) $ satisfies Assumption {\small \ref{ass:sups}(ii). %
+%\end{document}
+Now,%
+\begin{eqnarray*}
+&&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}\left( r_{i,t}1\left\{ 
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq \widehat{\beta }_{\lfloor
+t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}-c_{N,R,\beta
+}}\right\} 1\left\{ \beta _{i,\lfloor t/\tau \rfloor }>\beta _{\lfloor
+t/\tau \rfloor }^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}}\right\} \right) \\
+&=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}\left( r_{i,t}1\left\{ 
+\widehat{\beta }_{i,\lfloor t/\tau \rfloor ,R}\leq \beta _{\lfloor t/\tau
+\rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}-c_{N,R,\beta }}\right\}
+1\left\{ \beta _{i,\lfloor t/\tau \rfloor }>\beta _{\lfloor t/\tau \rfloor
+,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}}\right\} \right) \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}\left( r_{i,t}1\left\{
+\beta _{i,\lfloor t/\tau \rfloor }>\beta _{\lfloor t/\tau \rfloor
+,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}}\right\} \right. \\
+&&\phantom{+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{%
+\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}\left(
+\right.}\left. \left( 1\left\{ \widehat{\beta }_{i,\lfloor t/\tau \rfloor
+,R}\leq \widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}-c_{N,R,\beta }}\right\} -1\left\{ \widehat{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}\leq \beta _{\lfloor t/\tau \rfloor
+,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}-c_{N,R,\beta }}\right\} \right)
+\right) \\
+&=&I_{T,N,R}+II_{T,N,R}.
+\end{eqnarray*}%
+The first term can be bounded as follows: 
+\begin{eqnarray*}
+&&\left\vert I_{T,N,R}\right\vert \\
+&=&\left\vert \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+n_{\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}1\left\{ \beta _{i,\lfloor t/\tau \rfloor }-\widehat{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}\geq \beta _{\lfloor t/\tau \rfloor
+,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}}-\beta _{\lfloor t/\tau \rfloor
+,R}^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}-c_{N,R}}\right\} \right\vert \\
+&\leq &\left\vert \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+n_{\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}1\left\{ \beta _{i,\lfloor t/\tau \rfloor }-\widehat{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}\geq \underline{\sigma }_{\beta }\frac{%
+c_{N,R,\beta }}{N^{1+\varepsilon }}\right\} \right\vert \\
+&=&\left\vert \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+n_{\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}1\left\{ \beta _{i,\lfloor t/\tau \rfloor }-\widetilde{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}\geq \underline{\sigma }_{\beta }\frac{%
+c_{N,R,\beta }}{N^{1+\varepsilon }}+\left( \widehat{\beta }_{i,\lfloor
+t/\tau \rfloor ,R}-\widetilde{\beta }_{i,\lfloor t/\tau \rfloor ,R}\right)
+\right\} \right\vert \\
+&\leq &\left\vert \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+n_{\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}1\left\{ \beta _{i,\lfloor t/\tau \rfloor }-\widetilde{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}\geq \underline{\sigma }_{\beta }\frac{%
+c_{N,R,\beta }}{N^{1+\varepsilon }}+\sup_{R\leq t\leq T}\left\vert \widehat{%
+\beta }_{i,\lfloor t/\tau \rfloor ,R}-\widetilde{\beta }_{i,\lfloor t/\tau
+\rfloor ,R}\right\vert \right\} \right\vert
+\end{eqnarray*}%
+By the law of the iterated logarithm, as }$R,T,N\rightarrow \infty ${\small 
+\begin{eqnarray*}
+&&\lim \sup_{R\leq t\leq T,R,T\rightarrow \infty }\left\vert \widehat{\beta }%
+_{i,\lfloor t/\tau \rfloor ,R}-\widetilde{\beta }_{i,\lfloor t/\tau \rfloor
+,R}\right\vert \\
+&=&\lim \sup_{R\leq t\leq T,R,T\rightarrow \infty }\left\vert \widehat{\beta 
+}_{0,i,\lfloor t/\tau \rfloor ,R}-\widetilde{\beta }_{0,i,R}\right\vert
++\lim \sup_{R\leq t\leq T}\left\vert \widehat{\beta }_{1,i,\lfloor t/\tau
+\rfloor ,R}-\widetilde{\beta }_{1,i,R}\right\vert \sup_{R\leq t\leq
+T}\left\vert W_{i,t}\right\vert \\
+&=&\sigma _{0,i}\sqrt{2\ln \ln R/R}+\sigma _{1,i}\sqrt{2\ln \ln R/R}%
+\sup_{R\leq t\leq T}\left\vert W_{i,t}\right\vert ,
+\end{eqnarray*}%
+where $\sigma _{q,i}^{2}=\lim_{T,R}\mathrm{var}\left( \sqrt{R}\left( 
+\widehat{\beta }_{q,i,\lfloor t/\tau \rfloor ,R}-\widetilde{\beta }%
+_{q,i,R}\right) \right) $, for $q=0,1$. Given Assumption (\ref{ass:condbetas}%
+) part (ii), for each $\varepsilon >0$:%
+\begin{equation*}
+\frac{\sigma _{0}\sqrt{2\ln \ln R/R}+\sigma _{1}\sqrt{2\ln \ln R/R}%
+\sup_{R\leq t\leq T}\left\vert W_{i,t}\right\vert }{\overline{\sigma }%
+_{\beta }N^{1+\varepsilon }R^{-1/2+\varepsilon }}\overset{p}{\rightarrow }0.
+\end{equation*}%
+Hence:%
+\begin{equation*}
+\left\vert I_{T,N,R}\right\vert \leq \left\vert \frac{\mathcal{N}}{\sqrt{T-R}%
+}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor
+t/\tau \rfloor }}r_{i,t}1\left\{ \beta _{i,\lfloor t/\tau \rfloor }-%
+\widetilde{\beta }_{i,\lfloor t/\tau \rfloor ,R}\geq \overline{\sigma }%
+_{\beta }R^{-1/2+\varepsilon }\right\} \right\vert
+\end{equation*}%
+and, by the same argument used in the proof of \ref{lem:trimerror}, $%
+I_{T,N,R}=o_{p}(1)$. }
+
+{\small Finally, again by the same argument used in the proof of \ref%
+{lem:trimerror}: 
+\begin{equation*}
+II_{T,N,R}=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor
+t/\tau \rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}m_{1,\beta }\left( 
+\widehat{\beta }_{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}-\beta _{\lfloor t/\tau \rfloor }^{n_{\lfloor t/\tau \rfloor }/%
+\mathcal{N}}\right) ,
+\end{equation*}%
+where:}%
+\begin{equation*}
+m_{1,\beta }=p\lim_{T,N,R\rightarrow \infty }\frac{\mathcal{N}/\left( 
+\mathcal{N}-1\right) }{T-R}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor }}r_{i,t}1\left\{ \beta
+_{i,\lfloor t/\tau \rfloor }>\beta _{\lfloor t/\tau \rfloor ,R}^{n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}\right\} f_{\beta }\left( \beta _{\lfloor
+t/\tau \rfloor }^{n_{\lfloor t/\tau \rfloor }/\mathcal{N}-c_{N,R}}\right) .
+\end{equation*}%
+{\small \ }

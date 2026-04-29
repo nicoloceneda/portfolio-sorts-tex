@@ -1,0 +1,85 @@
+%=========================================
+% PROOF OF COROLLARY 1
+%=========================================
+
+\section{Proof of Corollary 1}
+\label{Proof of cor:error}
+
+\subsection{Part (i)}
+
+For the first quantile,
+\begin{align*}
+\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) &= \frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)}\right) +o_{p}(1),
+\end{align*}
+where $\widehat{S}_{\tau(t),R}^{q(1)}$ and $S_{\tau(t)}^{q(1)}$ are the estimators of the first quantile based on the estimated and true sorting variable, i.e.
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{q(1)}=\arg\min_{x}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq x\right\} \right)\left( \widehat{S}_{i,\tau(t),R}-x\right).
+\end{align*}
+\begin{align*}
+S_{\tau(t)}^{q(1)}=\arg\min_{x}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ S_{i,\tau(t)}\leq x\right\} \right)\left( S_{i,\tau(t)}-x\right).
+\end{align*}
+Via an expansion of the pseudo score of $\widehat{S}_{\tau(t),R}^{q(1)}$ around the true quantile $S^{q(1)}$,
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}
+&=\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq S^{q(1)}\right\} \right) \text{\hl{NEW:Not correct}} \\
+&=\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right) \\
+&+\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \mathds{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq S^{q(1)}\right\} -\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right) \text{\hl{NEW:Sign error}} \\
+&=\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right) \\
+&+\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\Bigg( \Big( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)} -\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right)\right\} -F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) \Big) \\
+&\hspace{1.7cm} -\Big( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} - F\left( S^{q(1)}\right) \Big) \Bigg) \\
+&+\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) -F\left( S^{q(1)}\right) \right) \\
+&=I_{\tau(t),N_{\tau(t)}}+II_{\tau(t),N_{\tau(t)},R}+III_{\tau(t),N_{\tau(t)},R}.
+\end{align*}
+and note that $I_{\tau(t),N_{\tau(t)}}=S_{\tau(t)}^{q(1)}-S^{q(1)}$ \hl{Not sure why this holds} and that
+\begin{equation*}
+III_{\tau(t),N_{\tau(t)},R}=\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}f\left( S^{q(1)}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right).
+\end{equation*}
+Moreover, given assumption \ref{ass:sups}, because of stochastic equicontinuity,
+\begin{equation*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}III_{\tau(t),N_{\tau(t)},R}=o_{p}(I_{\tau(t),N_{\tau(t)},R} + II_{\tau(t),N_{\tau(t)},R}). \text{\hl{This doesn't look right}}
+\end{equation*}
+
+\hl{Where did $II_{\tau(t),N_{\tau(t)},R}$ disappear} Hence,
+\begin{align*}
+\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)}\right)
+=\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}f\left( S^{q(1)}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) +o_{p}(1).
+\end{align*}
+\hl{Here we have $\widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)}$ but the LHS of the previous equation is $\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}$}
+
+As before, we consider estimation error only for the first quantile. If $(T-R)/R\rightarrow 0,$
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \left( \widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)} \right) - \left( S_{\tau(t),R}^{p(1)}-S^{q(1)} \right) \right) \\
+&=O_{p}\left( \sqrt{\frac{T-R}{R}}\right) =o_{p}(1),
+\end{align*}
+because,
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)}\right)
+=O_{p}\left( \sqrt{\frac{T-R}{R}}\right). \text{\hl{Check}}
+\end{align*}
+and, under assumption \refAssPart{ass:mixing, v},
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( S_{\tau(t),R}^{p(1)}-S^{q(1)}\right)
+=O_{p}\left( N^{-(1-\rho)/2} \sqrt{\frac{T-R}{R}}\right). \text{\hl{Check}}
+\end{align*}
+or, under assumption \ref{ass:strongdep},
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( S_{\tau(t),R}^{p(1)}-S^{q(1)}\right)
+=O_{p}\left( \sqrt{\frac{P}{T-R}}\right). \text{\hl{what is $P$?}}
+\end{align*}
+The statement in (\ref{No-PEE}) follows.
+
+If instead $(T-R)/R\rightarrow \pi >0$, under assumption \refAssPart{ass:mixing, v}, \hl{Before we had $(\widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)}) - ( S_{\tau(t),R}^{p(1)}-S^{q(1)})$ now we have $(\widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)} ) - ( S_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)})$}
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \left( \widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)} \right) - \left( S_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)} \right) \right) =o_{p}(1),
+\end{align*}
+and so that $\widehat{Z}_{T,N,T}-Z_{T,N}=o_p(1)$ and $Z_{T,N}$
+converges in distribution to a normal variable with mean zero and variance equal to $V_{S^{q(1)}}$. Instead, under assumption \ref{ass:strongdep},
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \left( \widehat{S}_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)} \right) - \left( S_{\tau(t),R}^{p(1)}-S^{q(1)}_{\tau(t)} \right) \right)
+\end{align*}
+converges in distribution and it also contributes to the asymptotic variance.
+
+\subsection{Part (ii)}
+
+It follows immediately from Theorem~\ref{th:feasible}, part (ii).

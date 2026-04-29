@@ -1,0 +1,314 @@
+%=========================================
+% PROOF OF THEOREM 3
+%=========================================
+
+\section{Proof of Theorem 3}
+\label{Proof of th:feasible}
+
+\subsection{Parts (i)}
+
+Given definition \ref{def: Ztilde}, and because of lemma \ref{lem:trimerror}:
+\begin{align*}
+&\widehat{Z}_{T,N,R} \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathbbm{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathbbm{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} +  \mathbbm{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} \leq S_{i,\tau(t)} \right\} \right) \\
+&- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathbbm{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R}\right\} \left( \mathbbm{1} \left\{ S_{i,\tau(t)} \leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} + \mathbbm{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} \right) \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathbbm{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathbbm{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} \\
+&- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathbbm{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R}\right\} \mathbbm{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} + o_{a.s.}(1)
+\end{align*}
+Adding and subtracting:
+\begin{align*}
+&\widehat{Z}_{T,N,R} \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathbbm{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathbbm{1}\left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+&\hspace{5.2cm} \left. -\mathbbm{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \mathbbm{1}\left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} \right) \\
+&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathbbm{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \\
+&\hspace{5.cm} \left( \mathbbm{1}\left\{ S_{i,\tau(t)}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} -\mathbbm{1}\left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+&-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathbbm{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \\
+&\hspace{5.2cm} \left( \mathbbm{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} -\mathbbm{1}\left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} \right) \\
+&= I_{T,N,R}+II_{T,N,R}+III_{T,N,R}.
+\end{align*} \hl{Checked until here}
+
+{\small We begin to study $II_{T,N,R}.$ Letting }$\widehat{u}_{\lfloor
+t/\tau \rfloor ,R}^{N_{\tau(t)}/\mathcal{N}}=\widehat{S}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}-S_{\tau(t)}^{p(1)}$%
+\begin{eqnarray*}
+&&II_{T,N,R}=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+N_{\tau(t)}}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}\left( 1\left\{ \widehat{S}_{i,\tau(t),R}\leq 
+\widehat{S}_{\tau(t),R}^{L,N_{\tau(t)}/%
+\mathcal{N}}\right\} \right.  \\
+&&\phantom{\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor
+t/\tau \rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left(
+\right.}\left. \left( 1\left\{ S_{i,\tau(t)}\leq \widehat{S}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}\right\} -1\left\{ S_{i,\tau(t)}\leq S_{\lfloor t/\tau
+\rfloor }^{N_{\tau(t)}/\mathcal{N}}\right\} \right) \right) 
+\\
+&=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( 1\left\{ 
+\widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{L,N_{\tau(t)}/\mathcal{N}}\right\} \right.  \\
+&&\phantom{\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor
+t/\tau \rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left(
+\right.}\left. \left( 1\left\{ S_{i,\tau(t)}\leq S_{\lfloor
+t/\tau \rfloor }^{N_{\tau(t)}/\mathcal{N}}+\widehat{u}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}\right\} -1\left\{ S_{i,\tau(t)}\leq S_{\lfloor t/\tau
+\rfloor }^{N_{\tau(t)}/\mathcal{N}}\right\} \right) \right) 
+\\
+&=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( 1\left\{ 
+\widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{L,N_{\tau(t)}/\mathcal{N}}\right\} \right.  \\
+&&\phantom{\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor
+t/\tau \rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left(
+\right.}\left( \left( 1\left\{ S_{i,\tau(t)}\leq S_{\lfloor
+t/\tau \rfloor }^{N_{\tau(t)}/\mathcal{N}}+\widehat{u}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}\right\} -F\left( S_{\tau(t)}^{N_{\tau(t)}/%
+\mathcal{N}}+\widehat{u}_{\tau(t),R}^{n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}\right) \right) \right.  \\
+&&\left. -\left( 1\left\{ S_{i,\tau(t)}\leq S_{\lfloor
+t/\tau \rfloor }^{N_{\tau(t)}/\mathcal{N}}\right\} -F\left(
+S_{\tau(t)}^{p(1)}\right)
+\right) \right)  \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( 1\left\{ 
+\widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{L,N_{\tau(t)}/\mathcal{N}}\right\} \right.  \\
+&&\left. \left( F\left( S_{\tau(t)}^{n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}+\widehat{u}_{\tau(t),R}^{n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}\right) -F\left( S_{\lfloor t/\tau \rfloor
+}^{N_{\tau(t)}/\mathcal{N}}\right) \right) \right)  \\
+&=&\mu _{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \left(
+1\left\{ S_{i,\tau(t)}\leq S_{\lfloor t/\tau \rfloor
+}^{N_{\tau(t)}/\mathcal{N}}+\widehat{u}_{\lfloor t/\tau
+\rfloor ,R}^{N_{\tau(t)}/\mathcal{N}}\right\} -F\left(
+S_{\tau(t)}^{p(1)}+%
+\widehat{u}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}\right) \right) \right.  \\
+&&\left. -\left( 1\left\{ S_{i,\tau(t)}\leq S_{\lfloor
+t/\tau \rfloor }^{N_{\tau(t)}/\mathcal{N}}\right\} -F\left(
+S_{\tau(t)}^{p(1)}\right)
+\right) \right)  \\
+&&+\mu _{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( F\left(
+S_{\tau(t)}^{p(1)}+%
+\widehat{u}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}\right) -F\left( S_{\tau(t)}^{n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}\right) \right) +o_{p}(1) \\
+&=&\mu _{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}-S_{\tau(t)}^{N_{\tau(t)}/\mathcal{N}%
+}\right) +o_{p}(1),
+\end{eqnarray*}%
+where the last inequality follows from stochastic equicontinuity, and $\mu
+_{1}=\mathrm{E}\left( r_{i,t}1\left\{ S_{i,\tau(t)}\leq
+S_{\tau(t)}^{q_{1}}\right\} \right) $ is defined as in the
+statement of the Theorem. Since, $III_{T,N,R}$ can be treated by the same
+argument as $II_{T,N,R},$ it follows that%
+\begin{eqnarray}
+&&\widehat{Z}_{T,N,R}  \notag \\
+&=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( 1\left\{ 
+\widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{L,(\mathcal{N}-1)N_{\tau(t)}/\mathcal{N}%
+}\right\} 1\left\{ S_{i,\tau(t)}\leq S_{\lfloor t/\tau
+\rfloor }^{N_{\tau(t)}/\mathcal{N}}\right\} \right.   \notag
+\\
+&&\phantom{+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{%
+\tau(t)}}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}\left( \right.}\left. -1\left\{ \widehat{S}_{i,\lfloor t/\tau
+\rfloor ,R}\geq \widehat{S}_{\tau(t),R}^{U,(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}\right\} 1\left\{ S_{i,\lfloor
+t/\tau \rfloor }\geq S_{\tau(t)}^{(\mathcal{N}-1)n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}\right\} \right)   \notag \\
+&&+\mu _{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}%
+_{\tau(t),R}^{N_{\tau(t)}/\mathcal{N}%
+}-S_{\tau(t)}^{N_{\tau(t)}/\mathcal{N}%
+}\right) -\mu _{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}%
+\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}-S_{\tau(t)}^{(%
+\mathcal{N}-1)N_{\tau(t)}/\mathcal{N}}\right)   \notag \\
+&=&Z_{T,N}+\mu _{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( 
+\widehat{S}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}-S_{\tau(t)}^{N_{\tau(t)}/%
+\mathcal{N}}\right)   \notag \\
+&&-\mu _{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( 
+\widehat{S}_{\tau(t),R}^{(\mathcal{N}-1)n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}-S_{\tau(t)}^{(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}\right)   \notag \\
+&&-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( 1\left\{ 
+\widehat{S}_{\tau(t),R}^{L,(\mathcal{N}-1)n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}\leq \widehat{S}_{i,\tau(t),R}\leq 
+\widehat{S}_{\tau(t),R}^{(\mathcal{N}-1)n_{\lfloor t/\tau
+\rfloor }/\mathcal{N}}\right\} 1\left\{ S_{i,\tau(t)}\leq
+S_{\tau(t)}^{N_{\tau(t)}/\mathcal{N}%
+}\right\} \right.   \notag \\
+&&-\left. 1\left\{ \widehat{S}_{\tau(t),R}^{(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}\leq \widehat{S}_{i,\lfloor
+t/\tau \rfloor ,R}\leq \widehat{S}_{\tau(t),R}^{U,(\mathcal{N%
+}-1)N_{\tau(t)}/\mathcal{N}}\right\} 1\left\{ S_{i,\lfloor
+t/\tau \rfloor }\leq S_{\tau(t)}^{n_{\lfloor t/\tau \rfloor
+}/\mathcal{N}}\right\} \right)   \label{Z}
+\end{eqnarray}
+Recall that, $\widehat{S}_{\tau(t),R}^{(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}-\widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{L,(\mathcal{N}-1)N_{\tau(t)}/\mathcal{N}}=c_{%
+\mathcal{N},\tau(t),R}^{U},$ where $c_{\mathcal{N},\lfloor
+t/\tau \rfloor ,R}^{U}=\sup_{i\text{.s.t. }I_{i,T,R}^{(\mathcal{N}%
+)}=1}c_{i,\tau(t),R}^{U}.$ We now show that the last term on
+the RHS of the last equality in (\ref{Z}) is $o_{p}(1).$ The term reads as%
+\begin{eqnarray}
+&&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}1\left\{ 
+\widehat{S}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}-c_{1,\tau(t),R}^{U}\leq \widehat{S}_{i,\lfloor
+t/\tau \rfloor ,R}\leq \widehat{S}_{\tau(t),R}^{n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}\right\} \right.   \notag \\
+&&\phantom{+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{%
+\tau(t)}}\sum_{i=1}^{n_{\lfloor t/\tau \rfloor
+}}r_{i,t}\left( \right.}\left. -r_{i,t}1\left\{ \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{(\mathcal{N}-1)N_{\tau(t)}/\mathcal{N}-}\leq 
+\widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{(\mathcal{N}-1)N_{\tau(t)}/\mathcal{N}}+c_{%
+\mathcal{N},\tau(t),R}^{U}\right\} \right) ,  \label{BTNR}
+\end{eqnarray}%
+Let%
+\begin{equation*}
+C_{1,\tau(t),R}=\left\{ i:1\left\{ \widehat{S}_{\lfloor
+t/\tau \rfloor ,R}^{N_{\tau(t)}/\mathcal{N}}-c_{1,\lfloor
+t/\tau \rfloor ,R}^{U}\leq \widehat{S}_{i,\tau(t),R}\leq 
+\widehat{S}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}\right\} =1\right\} ,
+\end{equation*}%
+that is $C_{1,\tau(t),R}$ is the set of all stocks for which 
+$\widehat{S}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}-c_{1,\left\lfloor t/\tau \right\rfloor ,R}^{U}\leq \widehat{S}%
+_{i,\tau(t),R}\leq \widehat{S}_{\lfloor t/\tau \rfloor
+,R}^{N_{\tau(t)}/\mathcal{N}}.$
+
+\noindent Given, Assumption (\ref{ass:crosssec}), the cardinality of $%
+C_{1,\tau(t),R}$ is $O_{a.s.}\left( n_{\lfloor t/\tau
+\rfloor ,R}^{1+\varepsilon }c_{\mathcal{N},\lfloor t/\tau \rfloor
+,R}^{U}\right) .$ Define $C_{\mathcal{N}-1,\tau(t),R}$
+analogously. Thus,%
+\begin{eqnarray}
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}1\left\{ 
+\widehat{S}_{\tau(t),R}^{N_{\tau(t)}/%
+\mathcal{N}}-c_{1,\tau(t),R}^{U}\leq \widehat{S}_{i,\lfloor
+t/\tau \rfloor ,R}\leq \widehat{S}_{\tau(t),R}^{n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}\right\} \right.   \notag \\
+&&\left. -r_{i,t}1\left\{ \widehat{S}_{\tau(t),R}^{(\mathcal{%
+N}-1)N_{\tau(t)}/(\mathcal{N}-1)}\leq \widehat{S}_{i,\lfloor
+t/\tau \rfloor ,R}\leq \widehat{S}_{\tau(t),R}^{(\mathcal{N}%
+-1)N_{\tau(t)}/\mathcal{N}}+c_{\mathcal{N},\lfloor t/\tau
+\rfloor ,R}^{U}\right\} \right)   \notag \\
+&=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i\in C_{1,\tau(t),R}}^{{}}\left( r_{i,t}-\mu
+_{i}\right) -\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{%
+N_{\tau(t)}}\sum_{i\in C_{\mathcal{N}-1,\lfloor t/\tau
+\rfloor ,R}}^{{}}\left( r_{i,t}-\mu _{i}\right)   \notag \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i\in C_{1,\tau(t),R}}^{{}}\mu _{i}-\frac{%
+\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}%
+\sum_{i\in C_{\mathcal{N}-1,\tau(t),R}}^{{}}\mu _{i}  \notag
+\\
+&=&O_{p}\left( \frac{n_{\tau(t),R}^{1+\varepsilon }\left(
+c_{1,\tau(t),R}^{U}+c_{\mathcal{N},\lfloor t/\tau \rfloor
+,R}^{U}\right) }{\inf_{t}N_{\tau(t)}}\right)   \notag \\
+&&+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{n_{\lfloor t/\tau
+\rfloor }}\sum_{i\in C_{1,\tau(t),R}}^{{}}\mu _{i}-\frac{%
+\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}%
+\sum_{i\in C_{\mathcal{N}-1,\tau(t),R}}^{{}}\mu _{i},
+\label{BTNR2}
+\end{eqnarray}%
+and the last term on the RHS of (\ref{BTNR2}) is zero under $H_{0}$ and of
+order $\sqrt{T-R}\frac{n_{\tau(t),R}^{1+\varepsilon }\left(
+c_{1,\tau(t),R}^{U}+c_{\mathcal{N},\lfloor t/\tau \rfloor
+,R}^{U}\right) }{\inf_{t}N_{\tau(t)}}$ under $H_{A}.$ Them 
+{\small both the statement in (i) and in (ii) then follow.}
+
+\subsection{Part (ii)}
+
+Under $H_{A},$%
+\begin{eqnarray*}
+\widehat{Z}_{T,N,R} &=&Z_{T,N,R}+m_{1}\left( \widehat{S}_{\lfloor t/\tau
+\rfloor ,R}^{N_{\tau(t)}/\mathcal{N}}-S_{\lfloor t/\tau
+\rfloor }^{N_{\tau(t)}/\mathcal{N}}\right) -m_{\mathcal{N}%
+}\left( \widehat{S}_{\tau(t),R}^{(\mathcal{N-}1)n_{\lfloor
+t/\tau \rfloor }/\mathcal{N}}-S_{\tau(t)}^{(\mathcal{N-}%
+1)N_{\tau(t)}/\mathcal{N}}\right)  \\
+&&+O_{a.s.}\left( \sqrt{T-R}\frac{n_{\lfloor t/\tau \rfloor
+,R}^{1+\varepsilon }\left( c_{1,\tau(t),R}^{U}+c_{\mathcal{N}%
+,\tau(t),R}^{U}\right) }{\inf_{t}N_{\tau(t)}}%
+\right) .
+\end{eqnarray*}%
+Since $Z_{T,N,R}$ diverges at rate $\sqrt{T-R},$ $\widehat{Z}_{T,N,R}$ will
+diverge at least at rate $\sqrt{T-R}.$
+
+\section{Proof of Corollary 1}
+\label{Proof of cor:error}
+
+Let $q(1)=1/\mathcal{N}$,
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} m_{1}\left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)}\right) \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} m_{1}\left( \widehat{S}_{\tau(t),R}^{\left \lfloor p(1) \right \rfloor }- S_{\tau(t)}^{\left\lfloor p(1)\right\rfloor }\right) +o_{p}(1) \conditionaltext{\textcolor{red}{\text{Understand step}}} \\
+&=\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} m_{1} \left( \widehat{S}_{\tau(t),R}^{q(1)} - \widetilde{S}_{\tau(t)}^{q(1)} \right) +o_{p}(1), 
+\end{align*}
+where $\widehat{S}_{\tau(t),R}^{q(1)}$ and $\widetilde{S}_{\tau(t)}^{q(1)}$ are the unconditional estimator of the $q(1)$ quantile based on the estimated and the true sorting variable, % See definition of quantile regression (check function)
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{q(1)} = \arg \min_{S} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( q(1) - \mathbbm{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq S \right\} \right) \left( \widehat{S}_{i,\tau(t),R}- S \right), % \label{haS1} 
+\end{align*}
+\begin{align*}
+\widetilde{S}_{\tau(t)}^{q(1)}=\arg \min_{S}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( q(1) - \mathbbm{1} \left\{ S_{i,\tau(t)} \leq S \right\} \right) \left( S_{i,\tau(t)}-S\right). 
+\end{align*}
+Note that the $o_{p}(1)$ on the RHS of the last line in the first equation comes from the fact that, given assumption \crefdefpart{ass:exogenous, i},\footnote{Notice that the unconditional estimator of a quantile is based on a continuum of observations, while an order statistic is based on a finite number $N$ of observations. So the difference between a continuous measure and a discrete one based on $N$ observations would go to the quantile at the speed $1/N$.}
+\begin{align*}
+\sup_{t\geq R}\left\vert \widehat{S}_{\tau(t),R}^{\left\lfloor p(1)\right\rfloor }-\widehat{S}_{\tau(t),R}^{q(1)}\right\vert =O_{p}\left( \frac{1}{N}\right),
+\end{align*}
+\begin{align*}
+\sup_{t\geq R}\left\vert S_{\tau(t)}^{\left\lfloor p(1)\right\rfloor }-\widetilde{S}_{\tau(t)}^{q(1)}\right\vert =O_{p}\left( \frac{1}{N} \right).
+\end{align*}
+
+Let $S^{q(1)}$ be the true unconditional $q(1)$ quantile of $S_{i,\tau(t)}$, which does not depend on time, given assumption \crefdefpart{ass:mixing, i}. By Taylor expanding the pseudo score of $\widehat{S}_{\tau(t),R}^{q(1)}$ around $S^{q(1)}$, up to a term of smaller probability order, 
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)} &= \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( q(1)-\mathbbm{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq S^{q(1)}\right\} \right) \conditionaltext{\textcolor{red}{\text{Minus missing? Taylor expand derivative}}} \\
+&= \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( q(1)-\mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right)  \\
+& +\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \mathbbm{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq S^{q(1)}\right\} - \mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right) \conditionaltext{\textcolor{red}{\text{or signs inverted}}} \\
+&= \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} \left( q(1)-\mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right) \\
+& +\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} \Big( \Big( \mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t) }\right) \right\} \\
+& \hspace{2cm} -F \left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) \Big) \\
+& \hspace{2cm} - \Big( \mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} -\underbrace{F\left( S^{q(1)}\right) }_{q(1)} \Big) \Big)  \\
+& +\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \Big( F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) -\underbrace{F\left( S^{q(1)}\right) }_{q(1)} \Big)  \\
+&= I_{T,N} + II_{T,N} + III_{T,N}
+\end{align*}
+Notice that 
+\begin{align*}
+I_{T,N}=\left( \widetilde{S}_{\tau(t)}^{q(1)}-S^{q(1)}\right) \left( 1+o_{p}(1)\right) \conditionaltext{\textcolor{green}{Why?}}
+\end{align*}
+and that 
+\begin{align*}
+III_{T,N}=\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}f\left(S^{q(1)}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) +o_{p}(1) \conditionaltext{\textcolor{green}{\text{Sign inverted}}}
+\end{align*}
+Moreover, given assumption \ref{ass:sups}, because of stochastic equicontinuity, \conditionaltext{\textcolor{green}{Why assumption 5?}}
+\begin{align*}
+\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} II_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( \mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t) }\right) \right\} \right. \\
+& \hspace{5cm} \left. -F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) \right) \\
+& + \frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \Big( F\left( S^{q(1)}\right) - \mathbbm{1} \left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \Big) \\
+&= o_{p}\left( I_{T,N} + III_{T,N} \right). \conditionaltext{\textcolor{green}{o_p(1)+o_p(1); Two pieces missing}}
+\end{align*}
+Thus,
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \widehat{S}_{\tau(t),R}^{q(1)}-\widetilde{S}_{\tau(t)}^{q(1)}\right)  \\
+&= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}\right) -\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}m_{1}\left( \widetilde{S}_{\tau(t)}^{q(1)}-S^{q(1)}\right) \\
+&= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}m_{1} f\left(S^{q(1)}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) +o_{p}(1), \textcolor{green}{\text{Understand}}
+\end{align*}
+and so from theorem \ref{th:feasible} it follows that:
+\begin{align*}
+\widehat{Z}_{N,T,R}-Z_{N,T} &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{n_{\tau(t)}} m_{1}f\left( S^{q(1)}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \\
+& - \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{n_{\tau(t)}} m_{\mathcal{N}}f\left( S^{q(\mathcal{N})}\right) \left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) 
+%\label{SER}
+\end{align*}
+If assumption \crefdefpart{ass:mixing, v} and \crefdefpart{ass:sups, iii}\conditionaltext{\textcolor{green}{needed?}}and/or $(T-R)/R\rightarrow 0$, the term on the RHS of the last equation is $o_{p}(1)$, \conditionaltext{\textcolor{green}{Why?}}and the statement in (\ref{No-PEE}) holds. If instead assumption \ref{ass:strongdep} holds and $(T-R)/R\rightarrow \pi$, where $0 < \pi < \infty$, then the term on the RHS of the last equation converges in distribution to a normal distribution with zero mean,\conditionaltext{\textcolor{green}{Why?}}and the statement in (\ref{PEE}) follows. 

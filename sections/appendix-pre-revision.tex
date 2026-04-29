@@ -1,0 +1,453 @@
+%=========================================
+% PROOF OF THEOREM 1
+%=========================================
+
+\section{Proof of Theorem 1}
+\label{Proof of th:observable}
+
+\subsection{Part (i)}
+
+Rewriting the test statistic in definition \ref{def: Zeta}:
+\begin{align*}
+Z_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} - \mathds{1}\left\{ S^{q(\mathcal{N}-1)} < S_{i,\tau(t) }\right\} \right) \\
+& + \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} - \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} \right) \\
+&- \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t} \left( \mathds{1} \left\{ S_{\tau(t) }^{p(\mathcal{N} - 1)} < S_{i,\tau(t) } \right\} - \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) } \right\} \right) \\
+&= I_{T,N} + II_{T,N} + III_{T,N}.
+\end{align*}
+First, under the null hypothesis in equation \eqref{H0} and given assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem (see \cite{rio2017asymptotic}, Theorem 4.2):
+\begin{align*}
+I_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t} \mathds{1}\left\{ S_{i,\tau(t) } \leq S^{q(1)}\right\} -\mu^{q(1)}\right) \\
+& - \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) }\right\} -\mu^{q(\mathcal{N})}\right) \\
+& \overset{d}{\rightarrow} N \left( 0, V \right).
+\end{align*}
+Second, rewriting $II_{T,N}$: 
+\begin{align*}
+II_{T,N} &=\frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} -F\left( S_{\tau(t) }^{p(1)}\right) \right) - \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} -F\left( S^{q(1)} \right) \right) \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( F\left( S_{\tau(t) }^{p(1)}\right) -F\left( S^{q(1)} \right) \right) \\
+&= II_{T,N}^{A} + II_{T,N}^{B},
+\end{align*}
+where $F\left( x \right)$ denotes the CDF of $S_{i,\tau(t) }$ evaluated at $x$. First, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. Moreover, let $f(x)$ denote the PDF of $S_{i,\tau(t) }$ evaluated at $x$. By a first-order expansion around $S^{q(1)}$ and given assumption \refAssPart{ass:mixing, v}:
+\begin{align*}
+II_{T,N}^{B} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t}f\left( S^{q(1)} \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right)  \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} f\left( S^{q(1)} \right) - \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right) \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= \mathrm{E}\left( r_{i,t} f \left( S^{q(1)} \right) \right) \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T} \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} f\left( S^{q(1)} \right) - \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right) \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= O_{p} \left( N^{-(1-\rho)/2} \right) + o_{p}(1) \text{\hl{Check}} \\
+&=o_{p}(1).
+\end{align*} 
+
+Third, using similar arguments as above, also $III_{T,N}=o_{p}(1)$. 
+
+\subsection{Part (ii)}
+
+Under the alternative hypothesis in equation \eqref{HA}, $Z_{T,N}$ is the sum of $T-\mathcal{T}$ non-zero differences divided by $\sqrt{T-\mathcal{T}}$ and diverges at the rate $\sqrt{T-\mathcal{T}}$. Dividing by $\sqrt{T-\mathcal{T}}$ the result follows.
+
+
+
+%=========================================
+% PROOF OF THEOREM 2
+%=========================================
+
+\section{Proof of Theorem 2}
+\label{Proof of th:strongdep}
+
+As in theorem \ref{th:observable}, $Z_{T.N}=I_{T,N}+II_{T,N}+III_{T,N}$. First, under the null hypothesis \ref{H0} and given assumption \refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem, $I_{T,N}\overset{d}{\rightarrow } N\left( 0,V\right)$. Second, $II_{T,N}=II_{T,N}^{A}+II_{T,N}^{B}$. In particular, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. On the other hand, under assumption \ref{ass:strongdep} in place of \refAssPart{ass:mixing, v}, $\rho =1$ and $II_{T,N}^{B}$ is no longer $o_{p}(1)$, since var $\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) $ is bounded away from zero. In fact, given assumptions \refAssPart{ass:mixing, i} and \ref{ass:strongdep},
+\begin{align*}
+II_{T,N}^{B}=\mathrm{E}\left( r_{i,t} f\left( S^{q(1)}\right) \right) \frac{\mathcal{N}}{\sqrt{T - \mathcal{T}}} \sum_{t=\mathcal{T}+1}^{T}\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) 
+\end{align*}
+satisfies a central limit theorem and the statement follows. Finally, $III_{T,N}$ can be treated analogously.
+
+\subsection{Part (ii)}
+
+Analogous reasoning to that in theorem \ref{th:observable}.
+
+
+%=========================================
+% LEMMA 1
+%=========================================
+
+\section{Lemma 1}
+
+We first derive lemma \ref{lem:trimerror}, which will be used in the derivation of theorem \ref{th:feasible} and corollary \ref{cor:error}.
+
+\begin{lemma}
+\label{lem:trimerror} 
+Let assumptions \ref{ass:mixing}, \ref{ass:exogenous}, \ref{ass:crosssec}, \ref{ass:sups}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t) }} r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t) } \right\} \right. \\
+&\hspace{3.9cm} \left. - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t) } \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}\right\} \right) = o_{a.s.}(1).
+\end{align*}
+\end{lemma}
+\hl{Note that our trimming rule ensures that the contamination error is asymptotically negligible. [Where shown?]} \hl{Moreover, as shown in the proof of lemma} \ref{lem:trimerror}\hl{, the effect of trimming is that: [Not shown in proof]}
+\begin{align}
+	\label{cont}
+	&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t) }} r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)}\right\} \right) = o_{p}(1).
+\end{align}
+Without trimming (i.e. replacing $\widehat{S}_{\tau(t),R}^{p(1),L}$ with $\widehat{S}_{\tau(t),R}^{p(1)}$), the expression in \ref{cont} is no longer $o_p(1)$, hence producing a bias in the estimator of the average return of the first portfolio. An analogous reasoning holds for the $\mathcal{N}$-th portfolio.
+
+%=========================================
+% PROOF OF LEMMA 1
+%=========================================
+
+\section{Proof of Lemma 1}
+\label{Proof of lem:trimerror}
+
+Let $c_{j,\tau(t) ,R}=\sup_{i\text{.s.t. }I_{i,T,R}^{(j)}=1}c_{i,\tau(t) ,R}$. We begin with the case in which we \hl{include in the first portfolio a stock that should instead belong to another portfolio. [This is not what equation says because second term has a hat]} From equation \eqref{almostsurebounds}:
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t) ,R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t) } \right\}  \\
+=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ S_{i,\tau(t) }+\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t) }\right) \leq \widehat{S}_{\tau(t) ,R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t) ,R}^{p(1)} < S_{i,\tau(t) } \right\}  \\
+\leq &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ S_{i,\tau(t) }\leq \widehat{S}_{\tau(t),R}^{p(1),L}+c_{1,\tau(t),R} \right\} \mathds{1} \left\{ \widehat{S}_{\tau(t) ,R}^{p(1)} < S_{i,\tau(t) } \right\}  \\
+= &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ 0 < -c_{1,\tau(t),R} + c_{1,\tau(t),R} \right\}  \\
+&= o_{a.s.}(1)
+\end{align*} 
+An analogous result holds for the last portfolio.
+
+
+
+%=========================================
+% PROOF OF THEOREM 3
+%=========================================
+
+\section{Proof of Theorem 3}
+\label{Proof of th:feasible}
+
+\subsection{Part (i)}
+
+Rewriting the test statistic in definition \ref{def: Ztilde}, and because of lemma \ref{lem:trimerror}:
+\begin{align*}
+    \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)} \right\} \right) \\
+    &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} \\
+    &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} + o_{a.s.}(1) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+    &-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} -\mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &=I_{T,N,R}+II_{T,N,R}+III_{T,N,R}.
+\end{align*}
+%Let:
+%\begin{align*}
+%    N_{1,\tau(t)} = \sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq S_{\tau(t)}^{p(1)} \right\} 
+%\end{align*}
+%\begin{align*}
+%    N_{\mathcal{N},\tau(t)} = \sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} 
+%\end{align*}
+%and
+%\begin{align*}
+%    C_{1,\tau(t)} = \left\{ i: \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq S_{\tau(t)}^{p(1)} \right\} = 1 \right\}
+%\end{align*}
+%\begin{align*}
+%    C_{\mathcal{N},\tau(t)} = \left\{ i: \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} = 1 \right\}
+%\end{align*}
+%Rewriting $I_{T,N,R}$:
+%\begin{align*}
+%    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+%    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+%\end{align*}
+
+Let $\widehat{u}_{\tau(t),R}^{p(1)}=\widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}$. Rewriting $II_{T,N,R}$:
+\begin{align*}
+    II_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) \right) \right. \\
+    &\hspace{7.3cm}- \left. \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} -F\left(S_{\tau(t)}^{p(1)}\right)\right) \right) \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) -F\left( S_{\tau(t)}^{p(1)}\right) \right) \\
+    &= II_{T,N,R}^A + II_{T,N,R}^B.
+\end{align*}
+$II_{T,N,R}^A = o_p(1)$ because of stochastic equicontinuity. Moreover, rewriting $II_{T,N,R}^B$:
+\begin{align*}
+    II_{T,N,R}^B &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right)\\
+    &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
+    &+ \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right. \\
+    &\hspace{3.3cm}- \left. E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
+    &= m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) + o_p(1)
+\end{align*}
+where $m_1 = E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right)$. \hl{Verify definition of $m_1$}
+Using similar arguments as above for $III_{T,N,R}$, it follows that:
+\begin{align*}
+    \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &+m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) \\
+    &=Z_{T,N} - \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
+    &+m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right)
+\end{align*}
+%\hl{Add explanation of this step}
+%\begin{align}
+%\widehat{Z}_{T,N,R} &= Z_{T,N}+ m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) - m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) \notag \\
+%&-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1),L}\leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \label{Z} \\
+%&\hspace{4.2cm}-\left. \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}\leq \widehat{S}_{i,\tau(t),R}\leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{N_{\tau(t)}/\mathcal{N}}\right\} \right) \notag
+%\end{align}
+%\begin{align*}
+    %&\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \\
+    %&=\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} - \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right) \\
+    %&=\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} - \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right) \\
+%\end{align*}
+Recall that, $\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),L}=c_{\mathcal{N},\tau(t),R}$, where \hl{$c_{\mathcal{N},\tau(t),R}=\sup_{i\text{.s.t. }I_{i,T,R}^{(\mathcal{N})}=1}c_{i,\tau(t),R}$}. We now show that the last term on the RHS of the last equality in (\ref{Z}) is $o_{p}(1).$ The term reads as:
+\begin{align*}
+    &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right. \notag \\
+    &\hspace{3.4cm} \left. -r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}+c_{\mathcal{N},\tau(t),R} \right\} \right). \label{BTNR}
+\end{align*}
+Let $C_{1,\tau(t),R}$ be the set of all stocks for which $\widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t) ,R}^{U}\leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}$:
+\begin{align*}
+    C_{1,\tau(t),R}=\left\{ i:\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} =1\right\} ,
+\end{align*}
+
+\noindent Given assumption \ref{ass:crosssec}, the cardinality of $C_{1,\tau(t),R}$ is $O_{a.s.}\left( N_{\tau(t)}^{1+\varepsilon }c_{1,\tau(t),R} \right)$. Define $C_{\mathcal{N},\tau(t),R}$ analogously. Thus:
+\begin{align}
+    &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right. \notag \\
+    &\hspace{3.4cm} \left. -r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}+c_{\mathcal{N},\tau(t),R} \right\} \right) \notag \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \left( r_{i,t}-\mu_{i}\right) -\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i\in C_{\mathcal{N}-1,\tau(t),R}} \left( r_{i,t} - \mu_{i} \right) \notag \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \mu_{i}-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{\mathcal{N}-1,\tau(t),R}} \mu_{i}  \notag \\
+    &=O_p \left( \frac{N_{\tau(t),R}^{1+\varepsilon }\left( c_{1,\tau(t),R} + c_{\mathcal{N},\tau(t),R} \right) }{\inf_{t}N_{\tau(t)}}\right) \notag \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \mu_{i} - \frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i \in C_{\mathcal{N}-1,\tau(t),R}} \mu_{i}, %\label{BTNR2}
+\end{align}
+and the last term on the RHS of %(\ref{BTNR2}) 
+is zero under $H_0$ and of order $\sqrt{T-R}\frac{N_{\tau(t)}^{1+\varepsilon }\left(c_{1,\tau(t),R} + c_{\mathcal{N},\tau(t),R} \right) }{\inf_t N_{\tau(t)}}$ under $H_A$. Then both the statement in (i) and in (ii) follow.
+
+\subsection{Part (ii)}
+
+\noindent (iii) Under $H_{A},$%
+\begin{align*}
+\widehat{Z}_{T,N,R} &=Z_{T,N,R}+m_{1}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\left( \widehat{S}_{\tau(t),R}^{(\mathcal{N-}1)N_{\tau(t)}/\mathcal{N}}-S_{\tau(t)}^{(\mathcal{N-} 1)N_{\tau(t)}/\mathcal{N}}\right)  \\
+&+O_{a.s.}\left( \sqrt{T-R}\frac{n_{\tau(t),R}^{1+\varepsilon }\left( c_{1,\tau(t),R}^{U}+c_{\mathcal{N},\tau(t),R}^{U}\right) }{\inf_{t}N_{\tau(t)}}\right).
+\end{align*}
+Since $Z_{T,N,R}$ diverges at rate $\sqrt{T-R},$ $\widehat{Z}_{T,N,R}$ will diverge at least at rate $\sqrt{T-R}.$
+
+
+%=========================================
+% PROOF OF THEOREM 4
+%=========================================
+
+\section{Proof of Theorem 4}
+\label{Proof of th:subsampling}
+
+\subsection{Part (i)}
+
+Let: 
+\begin{align*}
+Z_{B,N}^{(k)}=\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta \textcolor{red}{+1}+k+B}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathbbm{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} - \mathbbm{1} \left\{ S_{\tau(t) }^{p(\mathcal{N}-1)} \leq S_{i,\tau(t) } \right\} \right).
+\end{align*}
+By the same argument as in the proof of theorem %\ref{th:feasible}
+, given $\frac{c_{N,R_\delta}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$, we have that for any $k$:
+\begin{align*}
+\widehat{Z}_{B,N,R_\delta}^{(k)} &= Z_{B,N}^{(k)} \\
+& +\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{1} \left( \widehat{S}_{\tau(t),R_\delta}^{p(1)\textcolor{red}{-c_{N,R}}}-S_{\tau(t)}^{p(1)\textcolor{red}{-c_{N,R}}}\right) \\
+& -\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{\mathcal{N}} \left( \widehat{S}_{\tau(t),R_\delta}^{p(\mathcal{N}-1)\textcolor{red}{-c_{N,R}}}-S_{\tau(t)}^{p(\mathcal{N}-1)\textcolor{red}{-c_{N,R}}}\right) +o_{p}(1) \\
+&= Z_{B,N}^{(k)}+\left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) +o_{p}(1).
+\end{align*}
+Given assumption %\crefdefpart{ass:sups, i}
+, and using the results from theorem %\ref{th:observable}
+, under $H_{0}$, for each $k$, $Z_{B,N}^{(k)}\overset{d}{\rightarrow }N(0,V_{1})$ as $B,N\rightarrow \infty $, where $V_{1}$ is defined in theorem %\ref{th:observable}
+. By the same argument as in the proof of theorem %\ref{th:feasible}:
+\begin{align*}
+& \left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) \\
+&= \frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{1} \left( \widehat{S}_{\tau(t), R_\delta}^{q(1)}-S_{\tau(t) }^{q(1)}\right) -\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{\mathcal{N}} \left(\widehat{S}_{\tau(t) ,R_\delta}^{q(\mathcal{N}\textcolor{red}{-1})}-S_{\tau(t) }^{q(\mathcal{N}\textcolor{red}{-1})}\right) +o_{p}(1),
+\end{align*}
+Recalling that $R_\delta=(R/T)/T^{\delta}$, under both hypotheses: \textcolor{red}{Which hypotheses?; Why?}
+\begin{align*}
+\left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) \overset{d}{\rightarrow }N\left( 0,\left( V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+ covs \right) \right) ,\text{ for }B,N,R_\delta\rightarrow \infty.
+\end{align*}
+Hence, for each $k,$ $\widehat{Z}_{B,N,R_\delta}^{(k)}$ has the same limiting distribution as $\widehat{Z}_{T,N,R}.$ 
+
+Given assumption %\crefdefpart{ass:mixing, i} 
+and %\crefdefpart{ass:mixing, v}
+, and given that $B/(T-R)\rightarrow 0,$ and the number of subsampled statistics $K\rightarrow \infty ,$ the statement follows from Corollary 3.2 in \cite{politis1992general}. 
+
+\subsection{Part (ii)}
+
+The statement follows as the subsampled statistic diverges at rate $\sqrt{B}$ while the statistic diverges at rate $\sqrt{T-R}.$
+
+%=========================================
+% PROOF OF PROPOSITION B
+%=========================================
+
+\section{Proof of Proposition B}
+
+\subsection{Part (i)}
+
+Under Assumption B1 and B2, by the Law of the Iterated
+Logarithm for ergodic strong mixing process, $i=1,...,N_{\tau(t)},$ and each
+$t=R,...,T,$%
+\begin{equation*}
+\lim \sup_{R\rightarrow \infty }\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon
+_{i,j}=v_{i,\tau(t)}
+\end{equation*}%
+and a.s.%
+\begin{equation*}
+\lim \inf_{R\rightarrow \infty }\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon
+_{i,j}=-v_{i,\tau(t)}
+\end{equation*}%
+where 
+\begin{equation*}
+v_{i,\tau(t)}^{2}=\mathrm{avar}\left( \frac{1}{\sqrt{R}}\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\mathrm{E}\left( r_{M,j}\right) \right)
+\epsilon _{i,j}\right)
+\end{equation*}%
+Also, Assumptions B1 and B2 ensure that for all $i=1,...,N_{\tau(t)},$ and
+each $t=R,...,T,$ $\widehat{A}_{i,R,\tau(t)}^{-1}-A_{i,\tau(t)}^{-1}=o_{a.s.}%
+(1),$ where $\widehat{A}_{i,R,\tau(t)}$ was defined in \eqref{betahat}. Hence,%
+\begin{eqnarray*}
+&&\sqrt{\frac{R}{2R\ln \ln R}}\left( \widehat{\beta }_{i,\tau(t),R}-\beta _{i,\tau(t)}\right) \\
+&=&A_{i,\tau(t)}^{-1}\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon _{i,j} \\
+&&+\left( \widehat{A}_{i,R,\tau(t)}^{-1}-A_{i,\tau(t)}^{-1}\right) \frac{1}{\sqrt{%
+2R\ln \ln R}}\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon
+_{i,j} \\
+&=&A_{i,\tau(t)}^{-1}\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\overline{r}_{M,R}\right) \epsilon
+_{i,j}+o_{a.s.}(1) \\
+&=&A_{i,\tau(t)}^{-1}\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{j=\tau(t)-R+1}^{\tau(t)}\left( r_{M,j}-\mathrm{E}\left( r_{M,j}\right) \right)
+\epsilon _{i,j}+o_{a.s.}(1).
+\end{eqnarray*}%
+Hence, a.s.%
+\begin{equation*}
+\lim \sup_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( \widehat{%
+\beta }_{i,\tau(t),R}-\beta _{i,\tau(t)}\right) =\sqrt{A_{i,\tau(t)}^{-1}v_{i,\tau(t)}^{2}A_{i,\tau(t)}^{-1}}=\sigma _{i,\tau(t)}
+\end{equation*}%
+and analogously, a.s.%
+\begin{equation*}
+\lim \inf_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( \widehat{%
+\beta }_{i,\tau(t),R}-\beta _{i,\tau(t)}\right) =-\sqrt{A_{i,\tau(t)}^{-1}v_{i,\tau(t)}^{2}A_{i,\tau(t)}^{-1}}=-\sigma _{i,\tau(t)}
+\end{equation*}
+
+It then follows from Lemma 2.1 in Corradi (1999), that for all $%
+i=1,...,N_{\tau(t)},$\ and each $t=R,...,T,$ $%
+\widehat{v}_{i,R,\tau(t)}^{2}-v_{i,\tau(t)}^{2}=o_{a.s.}(1),$ and thus $\widehat{\sigma }%
+_{R,i,\tau(t)}^{2}-\sigma _{R,i}^{2}=o_{a.s.}(1).$
+Hence,%
+\begin{equation*}
+\frac{\widehat{c}_{LIL,i,\tau(t),R}^{L}}{%
+c_{LIL,i,R}^{L}}\overset{a.s.}{\rightarrow }1,
+\end{equation*}%
+and so the statement in the Lemma follows.
+
+\subsection{Part (ii)}
+
+Given part (i), by the same argument as in Lemma~\ref{lem:trimerror} replacing $%
+c_{i,\tau(t),R}^{L}$ and $c_{i,\tau(t),R}^{U} $ with $\widehat{c}_{LIL,i,\tau(t),R}^{L}$
+and $\widehat{c}_{LIL,i,\tau(t),R}^{U}$
+respectively.\medskip
+
+%=========================================
+% PROOF OF PROPOSITION B'
+%=========================================
+
+\section{Proof of Proposition B'}
+
+\subsection{Part (i)}
+
+Given B1' and B2', $\frac{1}{\sqrt{2R\ln \ln R}}%
+\sum_{s=\tau(t)-R+1}^{\tau(t)}\left( X_{i,s}-\overline{X}_{R}\right) u_{i,t}$ satisfies a
+LIL, and so for $j=0,1,$ a.s.%
+\begin{equation*}
+\lim \sup_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( \widehat{%
+\beta }_{i,j,\tau(t),R}-\beta _{j,i,\tau(t)}\right) =\sigma _{\beta _{j},i,\tau(t)}
+\end{equation*}%
+and analogously for the liminf. Then, conditionally on $W_{i,\tau(t)},$ a.s.,%
+\begin{eqnarray*}
+&&\lim \sup_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( 
+\widehat{\beta }_{i,\tau(t),R}\left(
+W_{i,\tau(t)}\right) -\beta _{i,\tau(t)}\left( W_{i,\tau(t)}\right)
+\right) \\
+&\leq &\sigma _{\beta _{0},i,\tau(t)}+\sigma
+_{\beta _{1},i,\tau(t)}\left\vert
+W_{i,\tau(t)}\right\vert
+\end{eqnarray*}%
+\begin{eqnarray*}
+&&\lim \inf_{R\rightarrow \infty }\sqrt{\frac{R}{2R\ln \ln R}}\left( 
+\widehat{\beta }_{i,\tau(t),R}\left(
+W_{i,\tau(t)}\right) -\beta _{i,\tau(t)}\left( W_{i,\tau(t)}\right)
+\right) \\
+&\geq &-\sigma _{\beta _{0},i,\tau(t)}-\sigma
+_{\beta _{1},i,\tau(t)}\left\vert
+W_{i,\tau(t)}\right\vert
+\end{eqnarray*}%
+Finally, since for $j=0,1$ $\widehat{\sigma }_{R,\beta _{j,i},\tau(t)}^{2}=\sigma _{\beta _{j},i,\tau(t)}^{2}$ the statement follows.
+
+\subsection{Part (ii)}
+
+By the same argument as in Lemma~\ref{lem:trimerror}, replacing $c_{i,\tau(t),R}^{L}$ and $c_{i,\tau(t),R}^{U}$ with $\pm
+\sigma _{\beta _{0},i,\tau(t)}\pm \sigma _{\beta
+_{1},i,\tau(t)}\left\vert W_{i,\tau(t)}\right\vert .$
+
+%=========================================
+% PROOF OF THEOREM B1
+%=========================================
+
+\section{Proof of Theorem B1}
+
+\subsection{Parts (i) and (ii)}
+
+Given Propositions B(i) and B'(i), Assumption~\ref{ass:sups} is satisfied with $c_{\tau(t),R}^{U}=\sup_{i\leq
+N_{\tau(t)}}\sigma _{i,\tau(t)}%
+\sqrt{\frac{2\ln \ln R}{R}},$ $c_{\tau(t),R}^{L}=-c_{\tau(t),R}^{U}$ for the unconditional case, and with 
+\begin{equation*}
+c_{\tau(t),R}^{U}=\sup_{i\leq N_{\tau(t)}}\sigma _{\beta _{0},i,\tau(t)}%
+\sqrt{\frac{2\ln \ln R}{R}}+\sup_{i\leq N_{\tau(t)}}
+\sigma _{\beta _{1},i,\tau(t)}\sqrt{\frac{2\ln
+\ln R}{R}}\left\vert W_{i,\tau(t)}\right\vert
+\end{equation*}%
+and $c_{\tau(t),R}^{L}=-c_{\tau(t),R}^{U}$ for the conditional case. Also, note that for both the unconditional and the conditional case, $\frac{N_{\tau(t)}^{1+\varepsilon
+}c_{\tau(t),R}^{U}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$ a.s. Given this, and given Propositions B(ii)
+and B'(ii), the statement in Lemma~\ref{lem:trimerror} follows. Then the
+statements in (i) and (ii) follow the same argument as in Theorem~\ref{th:feasible} and in Corollary~\ref{cor:error}.
+
+\subsection{Part (iii)}
+ 
+By the same argument as in part (iii) of Theorem~\ref{th:feasible}.
+
+%=========================================
+% SIMULATIONS
+%=========================================
+
+\section{Simulations for Classification Errors}
+\label{app:Simulations for Classification Errors}
+
+\subsection{True (Unobservable) Sorting Variable}
+\label{app:True (Unobservable) Sorting Variable}
+
+Tables \ref{tab:estim-beta-252-10}-\ref{tab:estim-beta-1260-5} show summary statistics for the market beta, for different values of $E$, when stocks are sorted into $\mathcal{N}$ portfolios. Across these tables, two patterns stand out. First, as $E$ increases, and hence the estimation window $R=21E$ becomes longer, the portfolio distributions become markedly tighter and less skewed, especially in the tails: for $\mathcal{N}=10$, the standard deviation falls from $0.27$ to $0.12$ in P1 and from $0.35$ to $0.22$ in P10 when moving from $E=12$ to $E=60$, while the corresponding tail ranges shrink from $[-2.32,0.13]$ to $[0.12,0.26]$ in P1 and from $[0.35,4.12]$ to $[0.22,2.68]$ in P10. This is consistent with more precise beta estimates and therefore smaller classification errors. Second, reducing the number of portfolios from $\mathcal{N}=10$ to $\mathcal{N}=5$ pools adjacent deciles into broader groups, which smooths the cross-sectional pattern in means and medians and makes the extreme portfolios less isolated, but increases dispersion in the intermediate portfolios because each group spans a wider range of betas. Overall, larger $R$ reduces estimation noise, whereas smaller $\mathcal{N}$ trades off finer sorting for more aggregated portfolios.
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_252-10.tex} 
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_504-10.tex} 
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_1260-10.tex} 
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_252-5.tex} 
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_504-5.tex} 
+
+\input{../../portfolio-sorts/tables/estim_params/beta_summary_1260-5.tex} 
+
+\subsection{Classification Errors}
+\label{app:Classification Errors}
+
+Tables \ref{tab:errors-untrim-252-10}-\ref{tab:errors-trim-1260-5} show the contamination error and the information loss error without and with trimming, for different values of $E$, when stocks are sorted into $\mathcal{N}$ portfolios. Since larger $E$ corresponds to a larger estimation window $R$, the tables display a clear pattern: both contamination and information-loss errors fall as $R$ increases and as the number of portfolios is reduced from $\mathcal{N}=10$ to $\mathcal{N}=5$. In the untrimmed case, the overall error for the first portfolio declines from $32.92\%$ to $19.60\%$ when $\mathcal{N}=10$ and from $23.00\%$ to $12.38\%$ when $\mathcal{N}=5$ as $E$ rises from $12$ to $60$; the corresponding figures for the last portfolio fall from $24.83\%$ to $13.40\%$ and from $19.44\%$ to $10.38\%$, respectively. The same ranking is preserved in the trimmed tables. Moreover, as $E$ becomes larger, the remaining errors are increasingly concentrated in adjacent portfolios, while contamination from more distant portfolios becomes negligible; reducing $\mathcal{N}$ has a similar effect, because wider portfolio bins make the portfolio cutoffs less sensitive to beta-estimation noise.
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-trim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/504-10/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/504-10/errors-trim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/1260-10/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/1260-10/errors-trim.tex}
+
+\input{../../portfolio-sorts/tables/simul-errors/252-5/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-5/errors-trim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/504-5/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/504-5/errors-trim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/1260-5/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/1260-5/errors-trim.tex} 

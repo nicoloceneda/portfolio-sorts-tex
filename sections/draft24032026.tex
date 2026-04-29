@@ -1,0 +1,1012 @@
+%=========================================
+% INTRODUCTION
+%=========================================
+
+\section{Introduction}
+\label{Introduction}
+
+Portfolio sorting according to some stock characteristics is a standard practice in empirical asset pricing. The objective is generally to uncover some systematic cross sectional relationship between expected returns and stock characteristics. A special role is played by sorting according to betas \citep{fama1973risk}. Other well known examples of sorting variables are size and book to market value \citep{fama1993common}, momentum \citep{jegadeesh1993returns}, idiosyncratic volatility \citep{ang2006cross}, coskewness \citep{harvey2000conditional}, and realized skewness and kurtosis \citep{amaya2015does}. 
+
+The null hypothesis of interest is that the expected return over low and high quantiles is the same, against its negation. For example, the capital asset price model \citep{sharpe1964capital, lintner1965valuation} predicts a positive relation between expected returns and betas. Yet, there is some empirical evidence about a negative relation, so that a strategy based on selling (buying) high (low) betas stocks gives positive returns \citep{frazzini2014betting}. The literature has acknowledged problems arising with these tests. For example, \cite{fama1973risk}, when testing the CAPM find over rejection of the null hypothesis due to a positive bias on high percentiles and a negative on low percentiles. \cite{lo1988stock} point out over rejection due to possible correlation between the sorting variable and the regression residuals. As a remedy to this snoopy effect, authors such as \cite{liang2000portfolio} have suggested to randomly pick a subset of the sample for sorting variable estimation and use the rest of the sample for test statistic construction. \cite{cattaneo2022beta} study the statistical properties of beta-sorted portfolio and provide conditions ensuring consistency and asymptotic normality, along with uniform inference procedures allowing for uncertainty quantification and general hypothesis testing. \cite{lopez2024has} study the problem of specification errors -- namely, omitted variable bias and colliders -- on the performance of factor investing strategies, and propose ways to address those errors.
+
+Sorting can be done according to observable or unobservable characteristics. In the latter case the sorting variable needs to be estimated, and the measurement error leads to two types of classification errors when constructing the portfolios. First, we may include in a portfolio stocks that should be included in a lower or higher portfolio if we could observe the true sorting variable. Second, we may discard from a given portfolio stocks that should instead be included. The former can be seen as a contamination error, and the latter as an information loss error. Heuristically, if the expected return does not display a systematic pattern with the sorting variable, these two forms of misclassification should not affect the outcome of the test, while they should under the alternative hypothesis of a systematic pattern. In this paper, we formally investigate the effect of sorting errors on the test outcome. 
+
+Moreover, quantiles are not observable and are approximated by their corresponding order statistics, e.g. the $j$-th decile is approximated by the $jN/10$ smallest observations of the sorting variable. Hence, even when sorting according to an observable characteristic, a source of error may be given by the discrepancy between order statistics and quantile. We establish that such error is asymptotically negligible only when the sorting variable does not display strong cross sectional correlation. Otherwise, it contributes to the asymptotic variance. Hence, inference based on "naive" standard errors may be incorrect even in the no measurement error case.
+
+For the case of estimated sorting variables, we suggest an adaptive trimming rule to adjust test statistic by discarding a fraction of stocks just above and below each order statistic, and correct the measurement error. Needless to say, the larger is the fraction we discard, the smaller the chance of contamination error but the larger the information loss. \hl{The proposed trimming rule helps to bound the contamination error. In particular, we establish sufficient conditions under which the contamination error is asymptotically negligible.} In addition, we establish sufficient conditions for performing tests for equalities of returns across percentiles which have correct asymptotic size and unit power. The extra cost is that we also need to take into account the contribution to the asymptotic variance due to the difference between percentiles based on the estimated and the true sorting variable. Importantly, \hl{we show that the difference between the infeasible statistics, based on true sorting variable, and the trimmed statistics is asymptotically zero mean normal under the null but diverges to plus or minus infinity under the alternative.}
+
+Throughout the paper we consider a realistic environment in which returns are observed at a daily frequency, and new stocks can enter and other exit on any given day. This gives raise to an unbalanced panel. At every rebalancing date, we use a rolling windows of past returns to construct an estimate of the sorting variable for each stock and compute the relative order statistics. We use end of period returns over different percentile to construct the test. Hence, our testing procedure is genuinely out of sample.
+
+As a leading example, we consider sorting stocks according to their (estimated) idiosyncratic volatility. \hl{DISCUSS EMPIRICAL SECTION}
+
+The rest of the paper is organized as follows. Section \ref{Set-Up} describes the set-up. Section \ref{Sorting Without Measurement Error} considers the case of sorting without measurement error. Section \ref{Sorting With Measurement Error} considers the case of sorting with measurement error, introduces our trimming rule and establishes the asymptotic properties of the trimmed statistics. In particular, \hl{we show how percentiles measurement error contributes to the asymptotic variance}. As the latter is not always known in closed form, in Section \ref{Subsampling} we suggest how to construct asymptotically valid subsampling critical values, which properly mimic estimation error. Section \ref{Sorting by Idiosyncratic Volatility} studies the case of sorting according to idiosyncratic volatility. All proofs are gathered in the Appendix.
+
+
+%=========================================
+% SET-UP
+%=========================================
+
+\section{Set-Up}
+\label{Set-Up}
+
+We denote the time span by $T$, expressed in days, and the universe of stocks by $N$. Over time, stocks may cease to be traded because of defaults, mergers and acquisitions or de-listings, and in the meantime new stocks may start to be traded because of IPOs or re-listings. Therefore, we need to consider an unbalanced panel, with a different number of stocks present at each day. Let $T_{i}=\overline{T}_{i}-\underline{T}_{i}+1$ denote the lifespan of stock $i$, so that at any day $t$ we have $N_t=\sum_{i=1}^{N} \mathds{1} \left\{ \underline{T}_{i}\leq t\leq \overline{T}_{i}\right\} $ stocks. 
+
+The practice of sorting involves forming portfolios at the end of each rebalancing period, according to a sorting variable which can be either observable or unobservable. In the remainder of the paper, the number $\mathcal{N}$ of portfolios is fixed a priori, and does not change with the sample size. Popular choices in the literature are deciles, quintiles or terciles\footnote{\cite{cattaneo2020characteristic} develop a rule for finding the optimal number of portfolios, in terms of bias-variance tradeoff of the estimator of the mean return of a percentile portfolio. The higher the number of percentiles, the smaller the bias but the higher the variance (because of a smaller number of stocks present in the portfolio).}. Moreover, for simplicity and without loss of generality, we take the rebalancing period to be a month, which we assume to be made up of $\mathcal{T}$ days. At rebalancing day $\tau(t) = \mathcal{T} \lceil t/\mathcal{T} \rceil$ there are $N_{\tau(t)}=\sum_{i=1}^{N} \mathds{1} \left\{ \underline{T}_{i} \leq \tau(t) \leq \overline{T}_{i} \right\}$ stocks actively traded. Moreover, when the soting variable is unobservable, we use a window of observations of $R$ days to obtain an estimator. For simplicity, we assume $R$ to be a multiple of $\mathcal{T}$\footnote{This simplyfing assumption allows to write the first rebalancing date as $R$ as opposed to $\tau(R)$.}. In addition, we need to define the following variables:
+
+\begin{itemize}
+\item For $i = 1,\ldots, N_{\tau(t)}$, $S_{i,\tau(t)}$ (resp. $\widehat{S}_{i,\tau(t),R}$) is the observable (resp. estimated) sorting variable at the rebalancing day $\tau(t)$.
+
+\item For $j=1,\ldots,\mathcal{N}$, $S_{\tau(t)}^{p(j)}$ (resp. $\widehat{S}_{\tau(t),R}^{p(j)}$) is the $jN_{\tau(t)}/\mathcal{N}$-th order statistic of $S_{i,\tau(t)}$ (resp. $\widehat{S}_{i,\tau(t),R}$) approximating the true unobservable upper bound of the $j$-th portfolio.
+
+\item For $j=1,\ldots,\mathcal{N}$, $S_{\tau(t)}^{q(j)}$ is the $j100/\mathcal{N}$-th quantile of the sorting variable $S_{i,\tau(t)}$ (or $\widehat{S}_{i,\tau(t),R}$) determining the true unobservable upper bound of the $j$-th portfolio. 
+
+\item For $j=1,\ldots, \mathcal{N}$,
+\begin{align*}
+    \mu^{q(j)} =& \lim_{T,N\rightarrow \infty }\frac{\mathcal{N}}{T-\mathcal{T}} \sum_{t=\mathcal{T}+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \mathrm{E}\left( r_{i,t} \right) \mathds{1} \left\{ S_{\tau(t) }^{q(j-1)}<S_{i,\tau(t) }\leq S_{\tau(t) }^{q(j)}\right\} 
+\end{align*}
+is the expected return of the $j$-th quantile portfolio, where $r_{i,t}$ denotes the simple return of stock $i$ over the interval $[t, t+1]$\footnote{Note that if the sorting variable is estimated, we replace $\mathcal{T}$ with $R$. Moreover, the notation $\sum_{i=1}^{N_{\tau(t)}}$ indicates the sum over the $N_{\tau(t)}$ stocks traded at time $\tau(t)$, which are not necessarily the first $N_{\tau(t)}$ stocks in the panel.}.
+\end{itemize}
+The objective is to test the null hypothesis that returns are independent of the sorting variable, against its negation. Focusing on the bottom and top portfolios, the null and alternative hypotheses are:
+\begin{align}
+    H_{0} &:\mu^{q(1)}-\mu ^{q(\mathcal{N})}=0,  \label{H0} \\
+    H_{A} &:\mu^{q(1)}-\mu^{q(\mathcal{N})}\neq 0.  \label{HA}
+\end{align}
+
+
+%=========================================
+% SORTING WITHOUT ERROR
+%=========================================
+
+\section{Sorting Without Measurement Error}
+\label{Sorting Without Measurement Error}
+
+We begin by considering the case where the sorting variable is observable and the only source of error is the discrepancy between the order statistic and the unobservable quantile, i.e. there is no measurement error. This occurs, for example, when stocks are sorted according to size, or book to market ratio. At each rebalancing date $\tau(t) \geq 0$, we use the available $N_{\tau(t)}$ stocks to compute the order statistics $S_{\tau(t)}^{p(j)}$ for $j=1,\ldots, \mathcal{N}$. 
+
+\subsection{Asymptotic Results under Weak Correlation of the Sorting Variable}
+
+In the sequel, we need the following definition and assumptions. 
+
+\begin{definition}
+\label{def: Zeta}
+The test statistic based on the observable sorting variable is given by:
+\begin{align*}
+    Z_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T} }} \sum_{t=\mathcal{T} + 1}^{T} \frac{1}{ N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t}\left( \mathds{1} \left\{ S_{i,\tau(t)} \leq S_{\tau(t)}^{p(1)} \right\}  - \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1) } < S_{i,\tau(t)} \right\} \right).
+\end{align*}
+\end{definition}
+
+\noindent
+Notice that the test statistic is defined as the average return over time of the $1$-st quantile portfolio minus the average return over time of the $\mathcal{N}$-th quantile portfolio (where the composition of the portfolios changes at each rebalancing day), multiplied by the square root of the number of observations. This formulation allows to apply the central limit theorem on the time dimension to derive our results.
+
+\begin{assumption}
+\label{ass:mixing} $ $
+
+\begin{enumerate}[(i)]
+\item For $i=1,\ldots,N$ and $t \in T_i$, $r_{i,t}$ and $S_{i,\tau(t)}$ are strictly stationary and strong mixing with size $\alpha (k)=C\lambda ^{-k},$ $\lambda >\frac{4s}{s-2},$ $s>2$. \label{ass:mixing, i} 
+
+\item For $i=1,\ldots,N$ and $t \in T_i$, $\mathrm{E}\left( r_{i,t}^{2\kappa }\right) <\infty $ and $\mathrm{E}\left( S_{i,\tau(t)}^{2\kappa }\right) <\infty$, $\kappa >2$. \label{ass:mixing, iii}
+
+\item For $i,j=1,\ldots, N$ and $t\in T_{i}\cap T_{j}$, $\inf_{i,j}\mathrm{cov}\left(r_{i,t},r_{j,t}\right) \geq \varepsilon >0$. \label{ass:mixing, iv}
+
+\item For $t \in T$, $\frac{1}{N^\rho} \sum_{i=1}^N \left( S_{i,\tau(t)}-\mathrm{E}\left( S_{i,\tau(t)}\right) \right) = O_{p}(1)$,  $1/2\leq \rho <1$. \label{ass:mixing, v} 
+\end{enumerate}
+\end{assumption}
+
+\noindent
+Assumption \refAssPart{ass:mixing, i} is a distribution and memory condition. In particular, time stationarity of returns is assumed for simplicity and some forms of time heterogeneity could be introduced at the expense of extra conditions controlling its degree. The same conditions on the sorting variables implies that the quantile does not depend on time. The mixing condition on returns instead implies that degree of serial correlation decreases exponentially. The same conditions on the sorting variable ensure that the order statistics converge to the unobservable quantile. Assumption \refAssPart{ass:mixing, iii} is a moment condition. In particular, it imposes uniform bounds on the moments of order higher than four, and rules out time trends. Assumption \refAssPart{ass:mixing, iv} implies strong cross-sectional correlation among stock returns. In particular, stock returns are assumed to be positively correlated as they are exposed to common systematic factors (such as the market factor)\footnote{Notice that if the returns were uncorrelated (or correlated with just a finite number of stocks), then the test statistic would need to be multiplied also by $\sqrt{N_{\tau(t)}/\mathcal{N}}$.}. Assumption \refAssPart{ass:mixing, v} requires weak cross-sectional correlation of the sorting variable. In particular, we assume that the cross-sectional sum of the sorting variables satisfies the central limit theorem when adequately standardised by $N_{\tau(t)}^\rho$. When the sorting variables are cross-sectionally independent (or weakly dependent), the appropriate value is $\rho=1/2$ and the central limit theorem applies. This is equivalent to stating that none (or a small number) of covariances are non-zero. 
+
+% --------------------
+% this condition controls the speed of convergence of the order statistics to their true unobservable counterparts. Moreover, 
+
+% In particular, the stationarity conditions ensure that the expected return of the $j$-th quantile portfolio does not depend on the time span. 
+% The mixing conditions restrict the serial dependence of the time series of returns and sorting variables. 
+ 
+%In particular, the condition requires that the cross-sectional sum of the demeaned sorting variables is bounded in probability when appropriately standardised by $N_{\tau(t)}$, where the parameter $\rho$ reflects the degree of cross-sectional dependence.  which is ensured by a sufficient degree of sparsity (in particular, $\rho=1/2$ is the case of zero cross-sectional dependence). Notice that the equation follos from the CLT. If the sorting variables are independent then we have N iid random variables and we can do a CLT. If the variables have little cross-sectional dependence, then we can use both the time and the cross-sectional variation; otherwise only the time variation. 
+% --------------------
+\begin{assumption}
+\label{ass:exogenous} $ $
+
+\begin{enumerate}[(i)]
+\item $\inf_{t \leq T} \ 0< N_{\tau(t)}/N \leq 1.$ \label{ass:exogenous, i}
+
+\item $\inf_{i\leq N} \ R < T_{i}$. \label{ass:exogenous, ii}
+\end{enumerate}
+\end{assumption}
+
+\noindent
+Assumption \refAssPart{ass:exogenous, i} requires that a positive fraction of all stocks is traded at any time. Assumption \refAssPart{ass:exogenous, ii} imposes a lower bound on the lifetime of each stock.
+
+Theorem \ref{th:observable} studies the asymptotic behavior of the test statistic under assumption \refAssPart{ass:mixing, v} of weak cross-sectional correlation of the sorting variable.
+
+\begin{theorem}
+\label{th:observable} 
+
+Let assumptions \ref{ass:mixing} and \ref{ass:exogenous} hold.
+
+\begin{enumerate}[(i)]
+\item Under $H_{0}$: \label{th:observable, i} 
+\begin{align*}
+    Z_{T,N}\overset{d}{\rightarrow }N(0,V), 
+\end{align*}
+where: \hl{[Replaced $p$ with $q$ in equation for $V$]}
+\begin{align*}
+    V = \lim_{N,T\rightarrow \infty } \mathrm{var} \Bigg( \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \Big( &\mathds{1}\left\{ S_{i,\tau(t) } \leq S^{q(1)}\right\} - \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) }\right\} \Big) \Bigg).
+\end{align*}
+
+\item Under $H_{A},$ there exists some $\eta >0$ such that: \label{th:observable, ii} 
+\begin{align*}
+    \lim_{N,T\rightarrow \infty }\Pr \left( \frac{1}{\sqrt{T-\mathcal{T}}} \left\vert Z_{N,T} \right\vert>\eta \right) =1. 
+\end{align*}
+\end{enumerate}
+\end{theorem}
+
+\noindent
+The theorem states that under the assumption of weak cross-sectional correlation of the sorting variable the quantile estimation error $S_{\tau(t)}^{p(j)}-S^{q(j)}$ does not contribute to the limiting distribution. Indeed, $V$ is the variance obtained by replacing $S_{\tau(t)}^{p(1)}$ and $S_{\tau(t)}^{p(\mathcal{N}-1)}$ with $S^{q(1)}$ and $S^{q(\mathcal{N}-1)}$ in $Z_{T,N}$. Under the alternative hypothesis, the test statistic diverges at the rate $\sqrt{T}$. 
+
+\subsection{Asymptotic Results under Strong Correlation of the Sorting Variable}
+
+In the sequel, we need the following alternative assumption. 
+
+\begin{assumption}
+\label{ass:strongdep} 
+
+For $i,j=1, \ldots, N$ and all $t\in T_{i}\cap T_{j},$ $\inf_{i,j}\mathrm{cov}\left( S_{i,\tau(t)},S_{j,\tau(t)}\right) \geq \varepsilon >0$.
+\end{assumption}
+
+\noindent
+Assumption \ref{ass:strongdep} requires strong cross-sectional correlation of the sorting variable. This would occur if the sorting variables have a common factor component. The appropriate value is $\rho=1$ in assumption \refAssPart{ass:mixing, v} or, equivalently, we can state the all covariances are non-zero. 
+
+Theorem \ref{th:strongdep} studies the asymptotic behavior of the test statistic under assumption \ref{ass:strongdep} of strong cross-sectional correlation of the sorting variable.
+% --------------------
+% Sorting takes place using a factor that depends only on time; for example business cycle is the same for all stocks so there is perfect cross-correlation and we cannot use the cross-correcation because there is no variation. 
+% --------------------
+\begin{theorem}
+\label{th:strongdep} Let assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous} and \ref{ass:strongdep} hold.
+
+\begin{enumerate}[(i)]
+\item Under $H_{0}$:
+\begin{align*}
+    Z_{T,N} \overset{d}{\rightarrow }N(0,V^{\ast }),
+\end{align*}
+where: 
+\begin{align*}
+    V^{\ast } = \lim_{N,T\rightarrow \infty } \mathrm{var} \Bigg( &\frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \Big(\mathds{1}\left\{ S_{i,\tau(t) } \leq S^{q(1)}\right\} - \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) }\right\} \Big) \\
+    &+ \mathrm{E}\left( r_{i,t}\right) f \left( S^{q(1)}\right) \frac{\mathcal{N}}{\sqrt{T - \mathcal{T}}} \sum_{t=\mathcal{T}+ 1}^{T} \left( S_{\tau(t)}^{p(1)}-S^{q(1)}\right) \\
+    &- \mathrm{E}\left( r_{i,t}\right) f\left( S^{q(\mathcal{N}-1)}\right) \frac{\mathcal{N}}{\sqrt{T - \mathcal{T}}}\sum_{t=\mathcal{T}+ 1}^{T} \left( S_{\tau(t)}^{p(\mathcal{N}-1)} - S^{q(\mathcal{N}-1)} \right) \Bigg), \notag
+\end{align*}
+where $f\left( x \right) $ denotes the density of the sorting variable evaluated at $x$.
+
+\item Under $H_{A}$, there exist some $\eta >0$ such that: 
+\begin{align*}
+    \lim_{N,T\rightarrow \infty }\Pr \left( \frac{1}{\sqrt{T - \mathcal{T}}} \left\vert Z_{N,T} \right\vert > \eta \right) =1.
+\end{align*}
+\end{enumerate}
+\end{theorem}
+
+\noindent
+The theorem states that under the assumption of strong cross-sectional correlation of the sorting variable there is an additional term in the asymptotic covariance matrix. This is because the difference between the order statistic and the quantile is of order $1/\sqrt{T}$, rather than $1/(\sqrt{ {T}}N^{1-\rho })$ with $1/2\leq \rho <1$ as in the weak cross-sectional correlation case. Intuitively, since the sorting variables are highly correlated, we can use only the time dimension to estimate the quantile of the order statistics and the cross-sectional dimension no-longer contributes to the convergence. Thus, the error is no longer negligible.
+% --------------------
+% If we had weak convergence, 9 would go to zero as the terms in 9 goes to zero at $\sqrt{N}$. But if we have strong convergence the terms in 9 no longer go to zero.
+
+% The exponent $1-\rho$ comes from the fact that instead of $NT$ we should have divided by $NT^{1-\rho}$  
+% --------------------
+
+
+%=========================================
+% SORTING WITH ERROR
+%=========================================
+
+\section{Sorting With Measurement Error}
+\label{Sorting With Measurement Error}
+
+We now turn to the case where the sorting variable is not observable and needs to be estimated. In this case, the source of error is given both by the measurement error and the discrepancy between the order statistic and the unobservable quantile. This occurs, for example, when stocks are sorted according to beta, momentum, idiosyncratic volatility, coskewness, or realized skewness and kurtosis. At each rebalancing date $\tau(t) \geq R$, we use rolling windows of the previous $R$ observations to estimate $\widehat{S}_{i,\tau(t),R}$, and use the available $N_{\tau(t)}$ stocks to compute the estimated order statistics $\widehat{S}_{\tau(t),R}^{p(j)}$ for $j=1,\ldots, \mathcal{N}$.
+
+\subsection{Classification Errors}
+
+When forming the $j$-th quantile portfolio, we can make two possible classifiction errors. First, we can include in the $j$-th portfolio a stock which belongs to a different portfolio. This happens when for $j=2,\ldots, \mathcal{N}-1$,
+\begin{align*}
+	1 &=  \left( \mathds{1} \left\{ S_{i, \tau(t) } \leq S_{\tau(t) }^{p(j-1)} \right\} + \mathds{1} \left\{ S_{\tau(t)}^{p(j)} < S_{i,\tau(t) } \right\} \right) \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)}\right\}, 
+\end{align*}
+and for $j=1, \mathcal{N}$ respectively,
+\begin{align*}
+	1 = \mathds{1} \left\{ S_{\tau(t) }^{p(1)} < S_{i,\tau(t) } \right\} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\},
+\end{align*}
+\begin{align*}
+	1 = \mathds{1} \left\{ S_{i,\tau(t) } \leq S_{\tau(t) }^{p(\mathcal{N}-1)}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R} \right\}.
+\end{align*}
+This classification error can be seen as a contamination error, in the sense that stocks belonging to different portfolios contaminate the $j$-th one.
+
+Second, we can fail to include in the $j$-th portfolio a stock which belongs to it. This happens when for $j = 2, \ldots, \mathcal{N}-1$,
+\begin{align*}
+	1 &= \left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j-1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j)} < \widehat{S}_{i,\tau(t),R} \right\} \right) \mathds{1} \left\{ S_{\tau(t) }^{p(j-1)} < S_{i,\tau(t)} \leq S_{\tau(t) }^{p(j)}\right\},
+\end{align*}
+and for $j=1, \mathcal{N}$ respectively,
+\begin{align*}
+	1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\},
+\end{align*}
+\begin{align*}
+	1 = \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}.
+\end{align*}
+This classification error can be seen as an information loss error, in the sense that stocks belonging to the $j$-th portfolio are discarded from it.
+\begin{figure}[H]
+	\centering
+ 	\begin{subfigure}[b]{\textwidth}
+ 		\includegraphics[width=\textwidth]{../../portfolio-sorts/images/presentation/cont-info-errors-trim.pdf}
+ 	\end{subfigure}
+ 	\caption{Contamination error and information loss error for portfolio 1.}
+	\label{img:cont-info-errors-trim}
+\end{figure}
+
+We cannot jointly control both type of errors. Consider the example in figure \ref{img:cont-info-errors-trim}, which shows how eight stocks (represented by bubbles) are allocated to two portfolios according to their true but unobservable sorting variable (top plot) and the estimated one (center plot). Four of these stocks have been coloured to highlight how the estimation of the sorting variable can lead to classification errors. The sorting variable for uncoloured stocks is assumed to be perfectly estimated. Focusing on the first portfolio, we can see how we incorrectly included the red stock (classification error), while we failed to include the blue one (information loss error). We then trim away the stocks that are close to the boundary with the second portfolio, i.e. those marked with a chequered pattern (bottom plot). We can see how we can completely eliminate the contamination error (there are no stocks incorrectly included in the first portfolio), although this comes at the expense of a higher information loss error (as we now fail to include the green stock). If the objective is to test the hypotheses in equations \eqref{H0} and \eqref{HA}, and in general to compare mean returns across portfolios, then it is more important to control the probability of contamination error. 
+
+\subsection{Trimming Rule}
+
+Our aim is to establish an adaptive trimming rule which eliminates the contamination error while minimizing the information loss error. In doing so, we need to account for the fact that, if we do not trim away enough stocks, then we form contaminated portfolios; but if we trim away too many, then we entail a big loss of information. We might reduce the contamination error if, for a given portfolio $j$, we set the lower threshold above $\widehat{S}_{\tau(t),R}^{p(j-1)}$ and the upper threshold below $\widehat{S}_{\tau(t),R}^{p(j)}$. We look for almost sure lower and upper bounds for the errors, $c^L_{i,\tau(t),R}$ and $c^U_{i,\tau(t),R}$, such that for each $i=1,\dots,N_{\tau(t)}$ and each $\tau(t)$: 
+\begin{align}
+\label{almostsurebounds}
+	\mathrm{\Pr} \left( \lim \inf_{R \to \infty} \left( \widehat{S}_{i,\tau(t),R} + c^L_{i,\tau(t),R} \right) \leq S_{i,\tau(t)} \leq \lim \sup_{R \to \infty} \left( \widehat{S}_{i,\tau(t),R} + c^U_{i,\tau(t),R} \right) \right) = 1
+\end{align}
+where $c^L_{i,\tau(t),R} < 0$ and $c^U_{i,\tau(t),R} > 0$\footnote{If the sorting variable depends a common factor $F_{\tau(t)}$ (i.e. when the sorting variable displays strong cross-sectional correlation), the upper and lower bounds would also be $F_{\tau(t)}$-measurable functions, and they need to hold almost surely conditional on $F_{\tau(t)}$. In the sequel, for brevity, we suppress the possible dependence on $F_{\tau(t)}$ in the notation.
+}. Hereafter, we set $- c^L_{i,\tau(t),R} = c^U_{i,\tau(t),R} = c_{i,\tau(t),R}$. Now, at each rebalancing day $\tau(t) \geq R$, we define for $j=2,\dots,\mathcal{N}-1$, 
+\begin{align*}
+	\widehat{S}_{i,\tau(t),R}^{j,U} = \widehat{S}_{i,\tau(t),R} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} <\widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)} \right\} c_{i,\tau(t),R}
+\end{align*}
+\begin{align*}
+	\widehat{S}_{i,\tau(t),R}^{j,L} = \widehat{S}_{i,\tau(t),R} - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)} \right\} c_{i,\tau(t),R} 
+\end{align*}
+and for $j=1, \mathcal{N}$ respectively,
+\begin{align*}
+	\widehat{S}_{i,\tau(t),R}^{1,L} = \widehat{S}_{i,\tau(t),R} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} c_{i,\tau(t),R} 
+\end{align*}
+\begin{align*}
+	\widehat{S}_{i,\tau(t),R}^{\mathcal{N},U} = \widehat{S}_{i,\tau(t),R} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R} \right\} c_{i,\tau(t),R}
+\end{align*}
+and let $\widehat{S}_{\tau(t),R}^{p(j),U}$ and $\widehat{S}_{\tau(t),R}^{p(j),L}$ be the $jN_{\tau(t)}/\mathcal{N}$-th order statistics of $\widehat{S}_{i,\tau(t),R}^{j,U}$ and $\widehat{S}_{i,\tau(t),R}^{j,L}$ respectively. Thus, when constructing the $j$-th portfolio, our trimming rule requires that we replace $\widehat{S}_{\tau(t),R}^{p(j-1)}$ with $\widehat{S}_{\tau(t),R}^{p(j-1),U}$ and $\widehat{S}_{\tau(t),R}^{p(j)}$ with $\widehat{S}_{\tau(t),R}^{p(j),L}$. By doing so, at any rebalancing time $\tau(t)$, we trim from the $j$-th portfolio all stocks $i=1,\ldots,N_{\tau(t)}$ for which either: 
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{p(j-1)} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j-1),U},
+\end{align*}
+or: 
+\begin{align*}
+\widehat{S}_{\tau(t),R}^{p(j),L} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)}.
+\end{align*}
+Note that trimming varies across quantiles. Figure \ref{img:trimming} illustrates the trimming procedure for portfolio $j=2, \mathcal{N}-1$. An analogous reasosning holds for portfolios $j=1, \mathcal{N}$, except that in this case the trimming is one-sided.
+\begin{figure}[H]
+	\centering
+ 	\begin{subfigure}[b]{\textwidth}
+ 		\includegraphics[width=\textwidth]{../../portfolio-sorts/images/presentation/trimming.pdf}
+ 	\end{subfigure}
+ 	\caption{Trimming procedure.}
+	\label{img:trimming}
+\end{figure}
+
+\subsection{Asymptotic Results}
+
+We now define the feasible and trimmed counterpart of $Z_{T,N}$. Moreover, in order to properly control for sorting errors, we need two additional assumptions.
+
+\begin{definition}
+\label{def: Ztilde}
+	The feasible and trimmed counterpart of $Z_{T,N}$ is given by:
+	\begin{align*}
+		\widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} - \mathds{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \right).
+	\end{align*}
+\end{definition}
+
+\begin{assumption}
+\label{ass:crosssec} 
+For $\varepsilon \geq 0$ and all $i,i^{\prime }\in N_{\tau(t)}$, let $S_{\tau(t) }^{i}$ (resp. $S_{\tau(t) }^{i^{\prime }}$) denote the $i/N_{\tau(t) }$-th (resp. $i^{\prime }/N_{\tau(t) }$-th) cross-sectional order statistic such that:
+\begin{align*}
+0<\lim_{N\rightarrow \infty }i^{\prime }/N_{\tau(t) }\ \text{ and }\lim_{N\rightarrow \infty }i/N_{\tau(t) }<1. 
+\end{align*}
+We require that, almost surely there is a constant $c$ such that: 
+\begin{align*}
+\inf_{t\leq T}\inf_{i,i^{\prime }}\left\vert S_{\tau(t)}^{i}-S_{\tau(t) }^{i^{\prime }}\right\vert \geq c \frac{\left\vert i-i^{\prime }\right\vert }{N^{1+\varepsilon }}. 
+\end{align*}
+\end{assumption}
+
+\noindent
+Assumption \ref{ass:crosssec} requires that order statistics are sufficiently spread out. This is equivalent to requiring that the density of the sorting variable is bounded above zero everywhere in the interior of its support. In other words, the order statistics should not be excessively correlated (such as when they have a common factor and very small variance). Intuitively, if the order statistics are too close, the trimming procedure would need to exlude a lot of stocks to have some effect. In particular, if $S_{\tau(t)}^i$ were identically independently distributed, the assumption would hold with $\varepsilon =0$, as the distance between the order statistics is of order $1/N$. In making this assumption, we do not consider extreme order statistics, as the latter would cause problems in the estimation. See chapter 1 in \cite{reiss2012approximate} for further details.
+
+\begin{assumption}
+\label{ass:sups} 
+For $j=1,\dots, \mathcal{N}$, there exists $c^L_{j,\tau(t),R}$ and $c^U_{j,\tau(t),R}$ such that equation \eqref{almostsurebounds} holds. Moreover $c^L_{j,\tau(t),R} = - c^U_{j,\tau(t),R} = c_{j,\tau(t),R}$. \hl{Not defined because we dropped $c_{j,\tau(t),R} = \sup_{i \vert \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} <\widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)} \right\}} c_{i,\tau(t),R}$}
+\end{assumption}
+
+\noindent
+Assumption \ref{ass:sups} requires the existence of almost sure bounds. This is a quite high level assumption. However, whenever the estimated sorting variable is a (function of a) sample moment, the existence of an almost sure bound $c_{i,\tau(t),R}$ is guaranteed by the law of iterated logarithm (LIL), which gives bounds for the lim inf and lim sup of the estimation error. Note that the LIL applies under mild additional memory and moment conditions. \hl{[Add reference]}
+
+We proceed to study the effect of the measurement error in the sorting variable. To do so, we first derive lemma \ref{lem:trimerror}, which will be used in the derivation of theorem \ref{th:feasible} and corollary \ref{cor:error}. \hl{We should show that the trimming rule removes contamination while minimising information loss. [Not shown?]}
+% ---------------------
+%Lemma \ref{lem:trimerror} \hl{establishes the asymptotic lack of contamination error when implementing our trimming rule, when the sorting variables are either weakly or strongly cross-sectionally correlated.
+% ---------------------
+\begin{lemma}
+\label{lem:trimerror} 
+Let assumptions \ref{ass:mixing}, \ref{ass:exogenous}, \ref{ass:crosssec}, \ref{ass:sups}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t) }} r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t) } \right\} \right. \\
+&\hspace{3.9cm} \left. - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t) } \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}\right\} \right) = o_{a.s.}(1).
+\end{align*}
+\end{lemma}
+\hl{Note that our trimming rule ensures that the contamination error is asymptotically negligible. [Where shown?]} \hl{Moreover, as shown in the proof of lemma} \ref{lem:trimerror}\hl{, the effect of trimming is that: [Not shown in proof]}
+\begin{align}
+	\label{cont}
+	&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t) }} r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} - \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)}\right\} \right) = o_{p}(1).
+\end{align}
+Without trimming (i.e. replacing $\widehat{S}_{\tau(t),R}^{p(1),L}$ with $\widehat{S}_{\tau(t),R}^{p(1)}$), the expression in \ref{cont} is no longer $o_p(1)$, hence producing a bias in the estimator of the average return of the first portfolio. An analogous reasoning holds for the $\mathcal{N}$-th portfolio.
+
+\noindent
+
+
+Theorem \ref{th:feasible} quantifies the difference between the trimmed feasible and the infeasible statistics, when the sorting variables are either weakly or strongly cross-sectionally correlated.
+
+\begin{theorem}
+\label{th:feasible} Let either assumptions \ref{ass:mixing},\ref{ass:exogenous},\ref{ass:crosssec},\ref{ass:sups}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
+
+\begin{enumerate}[(i)]
+\item Under $H_{0}$, if $\frac{N_{\tau(t)}^{1+\epsilon} \left( \sup c_{1,\tau(t),R} + \sup c_{\mathcal{N},\tau(t),R} \right)}{\inf_{t}N_{\tau(t)}} \rightarrow 0$ as $T,N,R\rightarrow \infty$: \hl{[Need to redefine condition because we dropped sup from trimming]}
+\begin{align*}
+	\widehat{Z}_{T,N,R}-Z_{T,N} &= \frac{\mathcal{N} m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t) }^{p(1)}\right) -\frac{\mathcal{N} m_{\mathcal{N}}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left(\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t) }^{p(\mathcal{N}-1)}\right) +o_{p}(1).
+\end{align*}
+
+\item Under $H_{A}$ as $T,N,R\rightarrow \infty$:
+\begin{align*}
+	\widehat{Z}_{T,N,R}-Z_{T,N} &= \frac{\mathcal{N} m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t) }^{p(1)}\right) -\frac{\mathcal{N} m_{\mathcal{N}}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \left(\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t) }^{p(\mathcal{N}-1)}\right) +o_{p}(1) \\
+	&+ O \left( \sqrt{T-R} \frac{ \sup c_{1,\tau(t),R} + \sup c_{\mathcal{N},\tau(t),R}}{\inf_{t}N_{\tau(t)}} \right).
+\end{align*}
+% ---------------------
+% \begin{align}
+% \lim_{T,N,R\rightarrow \infty }\Pr \left( \frac{\inf_{t}N_{\tau(t)}}{c_{N,R} \sqrt{T-R}} \left \vert \widehat{Z}_{T,N,R}-Z_{T,N} \right \vert >\eta \right) =1
+% \end{align}
+% ---------------------
+\end{enumerate}
+\end{theorem}
+
+\noindent
+The theorem states that if $\frac{N_{\tau(t)}^{1+\epsilon} \left( \sup c_{1,\tau(t),R} + \sup c_{\mathcal{N},\tau(t),R} \right)}{\inf_{t}N_{\tau(t)}} \rightarrow 0$ then, under the null hypothesis, the \hl{information loss error is asymptotically negligible}, and therefore the only difference between the trimmed feasible and the infeasible statistic is due measurement error, i.e. the difference between the order statistics constructed using the estimated sorting variables as opposed to the true ones, $\widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}$ and $\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}$. Given that the estimator of the unobservable sorting variable is based on $R$ observations, heuristically the contamination error vanishes if $(T-R)/R \rightarrow 0$ (this will be formally established in corollary \ref{cor:error}). Under the alternative hypothesis, the difference between trimmed feasible and infeasible statistics diverges \hl{provided that $\sqrt{T-R} / \inf_{t}N_{\tau(t)}\rightarrow \infty$}.
+
+
+
+\begin{corollary}
+\label{cor:error} 
+
+$\,$
+\begin{enumerate}[(i)] 
+\item Under $H_{0}$, if $\frac{N_{\tau(t)}^{1+\epsilon} \left( \sup c_{1,\tau(t),R} + \sup c_{\mathcal{N},\tau(t),R} \right)}{\inf_{t}N_{\tau(t)}} \rightarrow 0$ as $T,N,R\rightarrow \infty$:
+\begin{enumerate}[(a)] 
+\item \label{cor:error, i} If $\frac{T-R}{R} \rightarrow 0$ and either assumptions \ref{ass:mixing},\ref{ass:exogenous},\ref{ass:crosssec},\ref{ass:sups}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold:
+\begin{align}
+\widehat{Z}_{T,N,R}=Z_{T,N}+o_{p}(1).  \label{No-PEE}
+\end{align}
+
+\item If $\frac{T-R}{R} \rightarrow \pi $ where $0<\pi <\infty$ and assumptions \ref{ass:mixing},\ref{ass:exogenous},\ref{ass:crosssec},\ref{ass:sups} hold: 
+\begin{align*}
+	%\label{PEE}
+	\widehat{Z}_{T,N,R}\overset{d}{\rightarrow }N\left( 0, \Omega \right),
+\end{align*}
+where
+\begin{align*}
+	\Omega = V+V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+\text{covs}
+\end{align*}
+where $V$ is defined as in theorem \ref{th:observable} and, 
+\begin{align*}
+	V_{S^{q(1)}} = \lim_{N,T,R\rightarrow \infty }\mathrm{var}\left( \frac{\mathcal{N} m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \mu_{f_{S_1}} \left(\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}\right) \right),
+\end{align*}
+$\mu_{f_{S_1}} = E \left( f_S \left( S_{\tau(t),R}^{p(1)} \right) \right)$, $V_{S^{q_{\mathcal{N}}}}$ is defined analogously, and \textrm{covs} denotes the covariance between the statistic in absence of measurement error and the measurement error component.
+
+\item If $\frac{T-R}{R} \rightarrow \pi $ where $0<\pi <\infty$ and assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:sups} hold: 
+\begin{align*}
+	%\label{PEE}
+	\widehat{Z}_{T,N,R}\overset{d}{\rightarrow }N\left( 0, \Omega^\ast \right),
+\end{align*}
+where
+\begin{align*}
+	\Omega^\ast = V^\ast + V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+\text{covs}
+\end{align*}
+where $V^\ast$ is defined as in theorem \ref{th:strongdep}.
+\end{enumerate}
+
+\item Under $H_A$, there exists $\eta > 0$ such that:
+\begin{align*}
+ 	\lim_{T,N,R \rightarrow \infty } \Pr \left( \frac{1}{\sqrt{T-R}} \lvert \widehat{Z}_{T,N,R} \rvert \geq \eta \right) = 1
+\end{align*}
+\end{enumerate}
+\end{corollary}
+
+\noindent
+The corollary states that, under the null hypothesis, if $\left( T-R\right)/R \rightarrow 0$ then the measurement error (and hence the classification errors) is asymptotically negligible, and the trimmed statistic $\widehat{Z}_{T,N,R}$ is equivalent to the infeasible one $Z_{N,T}$. If instead $\left( T-R\right)$ and $R$ grow at the same rate, then we need to take into account the quantile estimation error, due to the difference between quantiles computed using estimated or true sorting variables. More precisely, the variance is equal to the sum of the variance without the measurement error, the variance due to the measurement error of the first and last quantiles (from theorem \ref{th:feasible}), and their covariance. It follows that the trimmed feasible statistic is unbiased, but has higher variance than the infeasible statistic.
+
+In practice, it may be the case that $T-R$ is much larger than the rolling window $R$, so that $(T-R)/R\rightarrow \infty$ seems to be a more appropriate description of the relative rate of growth. In this case we need to use a different scaling for the feasible statistic. Let $\widetilde{Z}_{T,N,R} = \sqrt{\frac{R}{T-R}} \widehat{Z}_{T,N,R}$. From the proofs of theorem \ref{th:feasible} and corollary \ref{cor:error} it follows that: \hl{Check}
+\begin{align*}
+	\widetilde{Z}_{T,N,R} &= \frac{\mathcal{N} m_{1} \sqrt{R}}{T-R} \sum_{t=R+1}^{T} \left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t) }^{p(1)}\right) -\frac{\mathcal{N} m_{\mathcal{N}} \sqrt{R}}{T-R}\sum_{t=R+1}^{T} \left(\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t) }^{p(\mathcal{N}-1)}\right) +o_{p}(1).
+\end{align*}
+Therefore: 
+\begin{align*}
+%\label{cov}
+	\widetilde{Z}_{T,N,R}\overset{d}{\rightarrow }N\left(0, V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+ covs\right), 
+\end{align*}
+where \textrm{covs} here denotes the covariance between lowest and highest percentile estimation error. 
+
+
+%=========================================
+% SUBSAMPLING
+%=========================================
+
+\section{Subsampling}
+\label{Subsampling}
+
+As established in corollary \ref{cor:error}, unless $(T-R)/R\rightarrow 0$, we need to take into account the contribution to the asymptotic variance due to the difference between quantiles formed sorting on the estimated and the true (but unobservable) sorting variable. 
+
+In general, we do not have a closed form expression for the covariance term in $\Omega$ and furthermore computation of $V_{S^{q(1)}}$ and $V_{S^{q(\mathcal{N})}}$ is not trivial. Hence, the natural solution is to rely on resampling techniques to get asymptotically valid critical values. Panel data with strong cross-sectional dependence can be dealt using the block bootstrap proposed by \cite{gonccalves2011moving}. However, her setup does not easily extend to unbalanced panels. Moreover, while we have observations for the returns at a daily frequency, sorting variables can be available at lower frequencies (whether they are observed or estimated). Therefore we resort to subsampling to obtain asymptotically valid critical values.
+
+Notice that $\Omega$ in corollary \ref{cor:error} depends explicitly on $\pi,$ the speed of growth of $T-R$ relative to $R$. Therefore, it is crucial to keep the same ratio in the subsampling scheme. Accordingly, for $0<\delta<1$, we consider overlapping subsamples of $T_{\delta}=\left\lfloor T^{\delta}\right\rfloor$ days and we define $R_\delta = \left\lfloor R T_\delta / T \right\rfloor$\footnote{Notice that to keep the same ratio $\pi$, the following relation must hold: $\frac{T_\delta - R_\delta}{R_\delta} = \frac{T - R}{R}$. Solving the equality we obtain the expression for $R_\delta$.}. Then, for all $\tau(t) \in \lbrack \underline{T}_{i},\overline{T}_{i} \rbrack$ where $\tau(t) >\underline{T}_{i}+R_\delta$, we estimate $S_{i,\tau(t)}$ using rolling windows of $R_\delta$ observations in order to obtain $\widehat{S}_{i,\tau(t),R_\delta}$. Thus, we construct \hl{$K=T-T_\delta+1$} statistics, which are defined as follows: 
+
+\begin{definition}
+For $k=1,\ldots,K$, the subsampled counterpart of $\widehat{Z}_{T,N,R}$ is given by:
+\begin{align*}
+    \widehat{Z}_{T_\delta,N,R_\delta}^{(k)} &= \frac{\mathcal{N}}{\sqrt{T_\delta - R_\delta}} \sum_{t=1+R_\delta+k}^{1+R_\delta+k+T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1}\left\{ \widehat{S}_{i,\tau(t),R_\delta}\leq \widehat{S}_{\tau(t) ,R_\delta}^{p(1), L_\delta}\right\} - \mathds{1}\left\{ \widehat{S}_{\tau(t), R_\delta}^{p(\mathcal{N}-1), U_\delta} < \widehat{S}_{i,\tau(t), R_\delta} \right\} \right). 
+\end{align*}
+\end{definition}
+
+\noindent
+Note that $\widehat{S}_{\tau(t) ,R_\delta}^{p(1), L_\delta}$ and $\widehat{S}_{\tau(t), R_\delta}^{p(\mathcal{N}-1), U_\delta}$ are defined analogously to $\widehat{S}_{\tau(t) ,R}^{p(1), L}$ and $\widehat{S}_{\tau(t), R}^{p(\mathcal{N}-1), U}$, respectively, except that $R_\delta$ is used in place of $R$. Finally, we construct the empirical distribution of $\widehat{Z}_{T_\delta,N,R_\delta}^{(1)},\ldots,\widehat{Z}_{T_\delta,N,R_\delta}^{(K)}$ and form its $\alpha \%$ (resp. $(1-\alpha )\%$) critical values, denoted by $c_{T_\delta,K,\alpha }$ (resp. $c_{T_\delta,K,(1-\alpha )}$). Before stating our next result, we need an additional assumption.
+\begin{assumption}
+\label{ass:subsampling} 
+For each $k=1,\ldots,K$: 
+\begin{align*}
+    \lim_{T_\delta,N,R_\delta\rightarrow \infty }\mathrm{var}\left(\widehat{Z}_{T_\delta,N,R_\delta}^{(k)}\right)= \lim_{T,N,R\rightarrow \infty }\mathrm{var} \left(\widehat{Z}_{T,N,R}\right),
+\end{align*}
+and for each $j=1,\ldots,\mathcal{N}$: \hl{Removed time index from $S^{q(j)}$}
+\begin{align*}
+&\lim_{T_\delta,N,R_\delta\rightarrow \infty }\mathrm{var}\left( \frac{\mathcal{N}}{\sqrt{T_\delta}} \sum_{t=1+R_\delta+k}^{1+R_\delta+k+T_\delta}\left( \widehat{S}_{\tau(t) ,R_\delta}^{q(j)}-S^{q(j)}\right) \right) = \lim_{T,N,R\rightarrow \infty }\mathrm{var}\left( \frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{q(j)}-S^{q(j)}\right) \right). 
+\end{align*}
+\end{assumption}
+
+\noindent
+Assumption \ref{ass:subsampling} mirrors condition (8) in \cite{politis1997subsampling} for the validity of subsampling in the case of heteroskeastic observations. 
+
+Theorem \ref{th:subsampling} establishes the first order validity of inference based on subsampling.
+
+\begin{theorem}
+\label{th:subsampling}
+
+Let either assumptions \ref{ass:mixing},\ref{ass:exogenous},\ref{ass:crosssec}-\ref{ass:subsampling}, or \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous}-\ref{ass:subsampling} hold. 
+
+\begin{enumerate}[(i)]
+\item Under $H_{0}$, if $\frac{N_{\tau(t)}^{1+\epsilon} \left( \sup c_{1, \tau(t),R} + \sup c_{\mathcal{N}, \tau(t),R} \right)}{\inf_{t}N_{\tau(t)}} \rightarrow 0$, $\lim_{T \rightarrow \infty }\frac{R_\delta}{T_\delta}=\lim_{T \rightarrow \infty }\frac{R}{T}$ and $\frac{T_\delta}{T}\rightarrow 0$ and $\lim_{T \rightarrow \infty }\frac{R}{T-R}=\lim_{T \rightarrow \infty }\frac{R_\delta}{T_\delta-R_\delta}=\pi$, with $0 \leq \pi <\infty$, as $T,N,R,T_\delta,K,R_\delta\rightarrow \infty$:
+\begin{align*}
+    \lim_{T,N,R\rightarrow \infty }\Pr \left( c_{T_\delta,K,\alpha }\leq \widehat{Z}_{T,N,R}\leq c_{T_\delta,K,(1-\alpha )}\right) = \alpha.
+\end{align*}
+
+\item Under $H_{A}$, if $\lim_{T \rightarrow \infty }\frac{R_\delta}{T^\delta}=\lim_{T \rightarrow \infty }\frac{R}{T}$ and $\frac{T_\delta}{T} \rightarrow 0$, as $T,N,R,T_\delta,K,R_\delta \rightarrow \infty$:
+\begin{align*}
+    \lim_{T,N,R\rightarrow \infty }\Pr \left( \left( \widehat{Z}_{T,N,R}<c_{T_\delta,K,\alpha }\right) \cup \left( c_{T_\delta,K,(1-\alpha )} < \widehat{Z}_{T,N,R}\right) \right) = 1.
+\end{align*}
+\end{enumerate}
+
+\end{theorem}
+
+\noindent
+The theorem states that, under the null hypothesis, the subsampled statistics properly mimic the distribution of the (sample) statistic, regardless of whether the contribution of sorting error vanishes or not. Under the alternative hypothesis, the statistic diverges to plus or minus infinity at a faster rate than its subsampled counterpart, thus ensuring unitary asymptotic power. 
+
+Finally, if $T$ and $T_\delta$ grow at a faster rate than $R$ and $R_\delta$ respectively, we need to compare $\widetilde{Z}_{T,N,R}$ with critical values based on the emprical distribution of $\sqrt{\frac{R_\delta}{T_\delta-R_\delta}} \widehat{Z}_{T_\delta,N,R_\delta}^{(k)}$. \hl{Check}
+
+
+%=========================================
+% EMPIRICAL EXAMPLE
+%=========================================
+
+\section{Sorting by Idiosyncratic Volatility}
+\label{Sorting by Idiosyncratic Volatility}
+
+In the first part of this section, we simulate stock returns to quantify the contamination error and the information loss error, both in the presence and in the absence of trimming. In particular, we consider portfolio sorts based on idiosyncratic volatility following \cite{ang2006cross}. The idiosyncratic volatility computed from historical data is taken to be the true unobservable sorting variable, while the idiosyncratic volatility computed from simulated data is taken to be the sorting variable estimated with measurement error. In the second part of this section, we simulate stock returns to verify that the trimming procedure leads to tests for equalities of returns across percentiles which have correct asymptotic size and unit power. %In the third section, we apply our methodology to reproduce part of the analysis performed by \cite{ang2006cross}. Their study of portfolios sorted according to idiosyncratic volatility is justified by the fact that, if market volatility is a missing component of systematic risk (as they establish), then standard models of systematic risk, such as the CAPM or the Fama-French three-factor model, should misprice portfolios sorted by idiosyncratic volatility because these models do not include factor loadings quantifying the exposure to market volatility risk. 
+
+\subsection{Data}
+
+We use data from the CRSP U.S. Stock database, which contains end-of-day prices on equity securities listed on U.S stock exchanges. Of the whole universe, we retain only ordinary common shares (share codes 10 or 11), traded on the New York Stock Exchange, the American Stock Exchange and the Nasdaq Stock Market (exchange codes 1,2,3). In addition, we retrieve daily data for the three Fama French factors (market, size, and value), along with the risk free rate, from Kenneth French's web site at Dartmouth. We consider the time span from January 1963 to December 2023\footnote{Data availability: for Nyse from December 31, 1925; for Nyse Market from July 2, 1962; for Nasdaq from December 14, 1972; for Arca from March 8, 2006; for the Fama-French factors from July 1, 1926.}, during which the average number of days in a month is 21, and the number of listed stocks varies from a minimum of 1956 to a maxium of 7465. Figure \ref{img:num_stocks} shows the number of common stocks present in the CRSP U.S. stock database over time. Our universe consists of $15\, 354$ trading days and $26\, 085$ stocks.\footnote{For the sake of computational efficiency, in section \ref{Simulations for Hypothesis Testing}, we use a sample of 15 years (January 2009 - December 2023) and 2000 stocks.} 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/data/num_stocks.pdf}
+\caption{Number of common stocks in the CRSP U.S. stock database.}
+\label{img:num_stocks}
+\end{figure}
+
+\subsection{Simulations for Classification Errors}
+
+\textbf{True sorting variable:} First, we compute the idiosyncratic volatility of each stock at each rebalancing date. More precisely, at each rebalancing date $\tau(t) \geq R$ (i.e. every 21 days), we regress the excess return of each stock over the Fama French factors using data of the past $R$ days, and discarding stocks with more than 5\% of datapoints missing (these stocks can be reconsidered at the next rebalancing date). Consistently with the literature, we set $R$ to be equal to a multiple $E$ of the average number of trading days in a month, $R=21 E$ for $E \in \{1,6,12\}$, thus using an estimation period of one month, half a year, and one year. Thus, we estimate:
+\begin{align}
+\label{reg_estim}
+    r_{i,t}^e = \alpha_{i,\tau(t)} + \beta_{i, \tau(t)}^{MKT} MKT_{t} + \beta_{i, \tau(t)}^{SMB} SMB_{t} + \beta_{i, \tau(t)}^{HML} HML_{t} + \epsilon_{i,t}
+\end{align}
+for $i=1, \dots, N_{\tau(t)}$ and $t \in (\tau(t)-R, \tau(t)]$, and where $r_{i,t}^e = r_{i,t} - r_t^f$. Finally, we compute the idiosyncratic volatility of each stock relative to the FF-3 model as the sample standard deviation of the fitted residuals:\footnote{We indicate fitted or estimated values with "$\sim$".}
+\begin{align}
+\label{std_estim}
+    \widetilde{\sigma}_{i, \tau(t)} = \sqrt{\frac{1}{R - 4} \sum_{t=\tau(t)-R+1}^{\tau(t)} \widetilde{\epsilon}_{i, t}^2}
+\end{align}
+In the remainder of this section, we set $S_{i,\tau(t)} \equiv \widetilde{\sigma}_{i, \tau(t)}$, i.e. $\widetilde{\sigma}_{i, \tau(t)}$ is taken to be the true unobservable sorting variable for stock $i$ at the rebalancing date $\tau(t)$. Figure \ref{img:vol_vol} shows the standard deviation of the sorting variable when the stocks are sorted into 10 portfolios.\footnote{On each rebalancing date, we sorted the stocks into 10 portfoloios according to the values of the sorting variable; then, we computed the standard deviation of the sorting variable for each portfolio and rebalancing date; finally, we took the average across the rebalancing dates.} This highlights the importance of a trimming variable that accounts for the standard error of the sorting variable.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/estim/126-10/vol_vol.pdf}
+\caption{Average standard deviation of the sorting variable across time ($\mathcal{N}=10, E=6$).}
+\label{img:vol_vol}
+\end{figure}
+
+\textbf{Estimated sorting variable:} Next, we simulate the excess returns of the stocks and we recompute the idiosyncratic volatilities at each rebalancing date. More precisely, for each simulation $s=1,\dots,500$, at each rebalancing date $\tau(t) \geq R$, we simulate the excess returns of each stock over the past $R$ days, using the historical values of the Fama-French factors, the estimated coefficients from regression \eqref{reg_estim}, and drawing the innovations from a normal distribution with mean zero and standard deviation equal to the one computed from equation \eqref{std_estim}:
+\begin{align*}
+   r_{i,t,s}^e = \widetilde{\alpha}_{i,\tau(t)} + \widetilde{\beta}_{i,\tau(t)}^{MKT} MKT_{t} + \widetilde{\beta}_{i,\tau(t)}^{SMB} SMB_{t} + \widetilde{\beta}_{i,\tau(t)}^{HML} HML_{t} + \epsilon_{i,t,s}
+\end{align*}
+for $i=1, \dots, N_{\tau(t)}$ and $t \in (\tau(t)-R, \tau(t)]$, where $\epsilon_{i,t,s} \sim N(0, \widetilde{\sigma}_{i, \tau(t)}^2)$. Then, for each stock we re-estimate regression \eqref{reg_estim}, using the simulated excess returns $r_{i,t,s}^e$ in place of the historical ones $r_{i,t}^e$. Finally, we re-compute the idiosyncratic volatility $\widetilde{\sigma}_{i,\tau(t),s}$ using equation \eqref{std_estim} and the fitted residuals from the re-estimated regression $\widetilde{e}_{i,t,s}$ in place of the historical ones $\widetilde{e}_{i,t}$. In the remainder of this section, we set $\widehat{S}_{i,\tau(t),R,s} \equiv \widetilde{\sigma}_{i,\tau(t),s}$, i.e. $\widetilde{\sigma}_{i,\tau(t),s}$ is taken to be the sorting variable estimated with measurement error. 
+
+\textbf{Untrimmed portfolios:} Next, we sort the stocks into untrimmed and trimmed portfolios at each rebalancing date. More precisely, for the untrimmed portfolios, at each rebalancing date $\tau(t) \geq R$, we sort the $N_{\tau(t)}$ stocks according to the values of $S_{i,\tau(t)}$ and $\widehat{S}_{i,\tau(t),R,s}$ and we allocate them to $\mathcal{N} \in \{5, 10\}$ groups to obtain the untrimmed portfolios defined by the true unobservable sorting variable and the sorting variable estimated with measurement error, respectively. Thus, for the latter, we allocate the stocks according to the following conditions:
+\begin{align*}
+\text{Portfolio $j=1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)} \right\} \\
+\text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \\
+\text{Portfolio $j=\mathcal{N}$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i, \tau(t),R,s} \right\} 
+\end{align*}
+and similarly for the former, where $S_{i, \tau(t)}$ and $S_{\tau(t)}^{p(j)}$ are substituted to $\widehat{S}_{i, \tau(t),R,s}$ and $\widehat{S}_{\tau(t),R,s}^{p(j)}$. 
+
+\textbf{Trimmed portfolios:} In order to define the trimmed portfolios, at each rebalancing date $\tau(t) \geq R$, first we compute the almost sure bound for the error using the law of iterated logarithms:
+\begin{align*}
+c_{i,\tau(t),R,s} = \sqrt{2 R \ln \left( \ln \left(  R\right) \right)} \ \frac{\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right)}{\sqrt{R}}
+\end{align*}
+for $i=1, \dots, N_{\tau(t)}$. We compute the standard deviation of the estimated sorting variables $\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right)$ using bootstrapping. In particular, for each iteration of bootstrapping $b = 1, \dots, 100$, and for each stock $i$ on the given rebalancing date $\tau(t)$, we re-sample with replacement the residuals $\widetilde{e}_{i,t,s}$ that we used to compute $\widehat{S}_{i,\tau(t),R,s}$, and we calculate their standard deviation using equation \eqref{std_estim}, thus obtaining a bootstrapped estimated sorting variable $\widehat{S}_{i,\tau(t),R,s,b}$. Finally, we compute the standard deviation of the 100 bootstrapped estimated sorting variables:
+\begin{align*}
+\text{Std} \left( \widehat{S}_{i, \tau(t),R,s} \right) = \sqrt{ \frac{1}{99} \sum_{b=1}^{100} \left( \widehat{S}_{i,\tau(t),R,s,b} - \frac{1}{100} \sum_{b=1}^{100} \widehat{S}_{i,\tau(t),R,s,b} \right)^2 }
+\end{align*}
+We proceed to compute the bounds of the trimmed portfolios. Recall that, for the $1$-st (resp. $\mathcal{N}$-th) portfolio, we only need "adjust" the sorting variables by subtracting (resp. adding) to the estimated sorting variables the respective almost-sure bounds for the error. Indeed, the lower bound (resp. upper bound) of the portfolio is unchanged. Instead, for portfolios $j=2,\dots,\mathcal{N}-1$, we need to "adjust" once adding and once subtracting the almost-sure bounds for the error. Thus, first we compute the adjusted sorting variables:
+\begin{align}
+    \text{Portfolio $j=1$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{1,L} = \widehat{S}_{i,\tau(t),R,s} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)} \right\} c_{i,\tau(t),R,s} \label{sims - bound trimmed bottom}\\
+    \text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{j,U} = \widehat{S}_{i,\tau(t),R,s} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} <\widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} c_{i,\tau(t),R,s} \\
+    & \quad \widehat{S}_{i,\tau(t),R,s}^{j,L} = \widehat{S}_{i,\tau(t),R,s} - \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} c_{i,\tau(t),R,s} \\
+    \text{Portfolio $j=\mathcal{N}$:} & \quad \widehat{S}_{i,\tau(t),R,s}^{\mathcal{N},U} = \widehat{S}_{i,\tau(t),R,s} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\} c_{i,\tau(t),R,s} \label{sims - conditions trimmed top}
+\end{align}
+Then, we compute the $jN_{\tau(t)}/\mathcal{N}$-th order statistics $\widehat{S}_{\tau(t),R,s}^{p(j),U}$ and $\widehat{S}_{\tau(t),R,s}^{p(j),L}$ of $\widehat{S}_{i,\tau(t),R,s}^{j,U}$ and $\widehat{S}_{i,\tau(t),R,s}^{j,L}$ respectively. Finally, we allocate the stocks according to the following conditions:
+\begin{align*}
+\text{Portfolio $j=1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1),L} \right\} \\
+\text{Portfolio $j=2,\dots,\mathcal{N}-1$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1),U} < \widehat{S}_{i, \tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j),L} \right\} \\
+\text{Portfolio $j=\mathcal{N}$:} & \quad 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1),U} < \widehat{S}_{i, \tau(t),R,s} \right\} 
+\end{align*}
+Figure \ref{img:port_size} shows the average size of the trimmed and untrimmed portfolios across simulations.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-errors/252-10/port_size_quant_trim.pdf}
+    \caption{Left plot: average size of portfolios across simulations and time; Right plot: average quantity trimmed across simulations ($\mathcal{N}=10, E=12$).}
+    \label{img:port_size}
+\end{figure}
+
+\textbf{Classification errors:} Next, we compute the contamination error and the information loss error for the untrimmed and trimmed extreme portfolios. More precisely, at each rebalancing date $\tau(t) \geq R$, we measure the contamination error for the $1$-st (resp. $\mathcal{N}$-th) untrimmed portfolio determined by $\widehat{S}_{i,\tau(t),R,s}$ as the number of stocks in this portfolio that are included in each of the $2$-nd to $\mathcal{N}$-th (resp. $1$-st to $(\mathcal{N}-1)$-th) untrimmed portfolios determined by $S_{i,\tau(t)}$, taken as a percentage of the size of the former. Thus, the contamination error in the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $j=2,\ldots, \mathcal{N}$ (resp. $j=1,\ldots, \mathcal{N}-1$) is given by:
+\begin{align*}
+\begin{aligned}
+\text{Cont. in}\\[-11pt]
+\text{$1$ due to $j$} 
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t) }^{p(j-1)} < S_{i,\tau(t)} \leq S_{\tau(t) }^{p(j)} \right\} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(1)}\right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s}\leq \widehat{S}_{\tau(t),R,s}^{p(1)}\right\}} \\
+\begin{aligned}
+\text{Cont. in}\\[-11pt]
+\text{$\mathcal{N}$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t) }^{p(j-1)} < S_{i,\tau(t)} \leq S_{\tau(t) }^{p(j)} \right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s} \right\}}
+\end{align*}
+Similarly, we measure the information loss error for the $1$-st (resp. $\mathcal{N}$-th) untrimmed portfolio determined by $S_{i,\tau(t)}$ as the number of stocks in this portfolio that are included in each of the $2$-nd to $\mathcal{N}$-th (resp. $1$-st to $(\mathcal{N}-1)$-th) untrimmed portfolios determined by $\widehat{S}_{i,\tau(t),R,s}$, taken as a percentage of the size of the former. Thus, the information loss error in the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $j=2,\ldots, \mathcal{N}$ (resp. $j=1,\ldots, \mathcal{N}-1$) is computed as:
+\begin{align*}
+\begin{aligned}
+\text{Info. loss in}\\[-11pt]
+\text{$1$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\}} \\
+\begin{aligned}
+\text{Inf. loss in}\\[-11pt]
+\text{$\mathcal{N}$ due to $j$}
+\end{aligned}
+&= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}
+\end{align*}
+Finally, we take the average of these values across simulations and time. A similar reasoning applies to the trimmed portfolios. Tables \ref{tab:errors-untrim-252-10} and \ref{tab:errors-trim-252-10} shows the contamination error and the information loss error without and with trimming, respectively. Note that the cells that show the errors for the $1$-st (resp. $\mathcal{N}$-th) portfolio due to portfolio $1$ (resp. $\mathcal{N}$) are showing the percentage of stocks correclty allocated. Two observations are in order. First, as expected, the two types of classification errors decrease as we move away from the extreme portfolios. Second, we can see how the trimming procedure correctly reduces the classification errors. 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim.tex} 
+
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-trim.tex} 
+
+\noindent
+Image \ref{img:cont-compare} shows the contamination error for different number of portfolios and estimation periods. The dashed line shows how the error is reduced when trimming is applied. Notice how a longer estimation period reduces the classification error across the board.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-errors/compare/cont-compare.pdf}
+    \caption{Contamination error with and without trimming for different number of portfolios and estimation periods.}
+    \label{img:cont-compare}
+\end{figure}
+
+
+\subsection{Simulations for Hypothesis Testing}
+\label{Simulations for Hypothesis Testing}
+
+\textbf{Return processes:} First, we compute the idiosyncratic volatility of each stock over its entire lifespan. More precisely, we regress the excess return of each stock over the Fama French factors using data of its entire time series from date $\underline{T}_i$ to date $\overline{T}_i$, and discarding stocks with a lifespan shorter than 252 trading days. 
+Thus, we estimate:
+\begin{align}
+\label{reg_estim_bal}
+r_{i,t}^e = \alpha_{i} + \beta_{i}^{MKT} MKT_{t} + \beta_{i}^{SMB} SMB_{t} + \beta_{i}^{HML} HML_{t} + \epsilon_{i,t}
+\end{align}
+for $i=1, \dots, N$ and $t \in [\underline{T}_i, \overline{T}_{i}]$, and where $r_{i,t}^e = r_{i,t} - r_t^f$. Notice that, differently from regression \eqref{reg_estim}, regression \eqref{reg_estim_bal} has constant coefficients. Next, we compute the idiosyncratic volatility of each stock relative to the FF-3 model as the sample standard deviation of the fitted residuals:
+\begin{align}
+\label{std_estim_bal}
+\widetilde{\sigma}_{i} = \sqrt{\frac{1}{T_i - 4} \sum_{t=\underline{T}_i}^{\overline{T}_{i}} \widetilde{\epsilon}_{i, t}^2}
+\end{align}
+Figure \ref{img:vol_dist} shows the empirical distribution of the historical idiosyncratic volatilities just estimated, which resambles a log-normal distribution.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/estim/bal/vol_dist.pdf}
+\caption{Empirical distribution of the sorting variable estimated on the whole sample.}
+\label{img:vol_dist}
+\end{figure}
+
+Next, we simulate the excess returns of the stocks under the null and the alternative hypothesis. More precisely, for each simulation $s=1, \dots, 500$, we simulate the excess returns of each stock over their entire life span as follows:
+\begin{align*}
+    r_{i,t,s}^e = \alpha_{i,s} + \beta_{i,s}^{MKT} MKT_t + \beta_{i,s}^{SMB} SMB_t + \beta_{i,s}^{HML} HML_t + \epsilon_{i,t,s}
+\end{align*}
+where we impose $\beta_{i,s}^{MKT} \sim N(1.0, 0.2)$, $\beta_{i,s}^{SMB} \sim N(0.8, 0.2)$, and $\beta_{i,s}^{HML} \sim N(0.8, 0.2)$. This ensures that stocks returns are positively correlated as they are exposed to common systematic factors, as per assumption \refAssPart{ass:mixing, iv}. We impose $\alpha_{i,s}$ and the distribution of $\epsilon_{i,t,s}$ depending on whether we are running simulations under the null or the alternative hypothesis, and on whether we assume that there is weak or strong cross-sectional correlation of the sorting variables. Let:
+\begin{align*}
+    \widetilde{\sigma}_{i,s} \sim \ln N \left( \frac{1}{N} \sum_{i=1}^N \widetilde{\sigma}_i, \frac{1}{N} \sum_{i=1}^N \left( \widetilde{\sigma}_i - \frac{1}{N} \sum_{i=1}^N \widetilde{\sigma}_i \right)^2 \right)
+\end{align*}
+\begin{itemize}
+    \item Under the null hypothesis \eqref{H0}:
+    \begin{align*}
+        \alpha_{i,s} = 0.0002
+    \end{align*}
+    \item Under the alternative hypothesis \eqref{HA}:
+    \begin{align*}
+        \alpha_{i,s} &= 
+        0.0002 +
+        \begin{cases}
+            + M & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(1)} \right\} \\
+            - M m & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(1)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(2)} \right\} \\
+            + 0 & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(2)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(\mathcal{N}-2)} \right\} \\
+            + M m & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(\mathcal{N}-2)} < \widetilde{\sigma}_{i,s} \leq \widetilde{\sigma}_s^{p(\mathcal{N}-1)} \right\} \\
+            - M & \text{if} \ \mathds{1} \left\{ \widetilde{\sigma}_s^{p(\mathcal{N}-1)} < \widetilde{\sigma}_{i,s} \right\} \\
+        \end{cases}
+    \end{align*}
+    where we $M$ and $m$ are some positive constants, and where $\widetilde{\sigma}_s^{p(j)}$ denotes the $jN_{\tau(t)}/\mathcal{N}$-th order statistic of $\widetilde{\sigma}_{i,s}$.
+    \item If assumption \refAssPart{ass:mixing, v} holds, i.e. there is weak cross-sectional correlation of the sorting variable:
+    \begin{align*}
+        \epsilon_{i,t,s} \sim N \left( 0, \widetilde{\sigma}_{i,s}^2 \right)
+    \end{align*}
+    \item If assumption \ref{ass:strongdep} holds, i.e. there is strong cross-sectional correlation of the sorting variable:
+    \begin{align*}
+        \epsilon_{i,t,s} \sim N \left( 0, \widetilde{\sigma}_{i,s}^2 v_t^2 \right) \quad \text{where} \quad v_t \sim \ln N \left(0, 0.6^2 \right)
+    \end{align*}
+\end{itemize}
+First, note that these simulations give rise to a balanced panel. Second, note that, under the null hypothesis, the stocks offer the same expected return, which we arbitrarily set equal to 2bp per day. Instead, under the alternative hypothesis, stocks with low idiosyncratic volatility offer higher expected returns than those with high idiosyncratic volatility, in accordance with the findings in \cite{ang2006cross}. We achieve this by increasing the alpha of the bottom portfolio by a "magnitude" coefficient $M$, while decreasing the alpha of the top portfolio by $M$. To introduce contamination error, we decrease the alpha of the 2-nd portfolio by the product of the magnitude coefficient $M$ times a multiplier $m$, while we increase the alpha of the $\mathcal{N}-1$-th portfolio by $M m$. Given that we are interested in whether the returns of the bottom and top portfolios are statistically different, and given that the contamination error is strongest between adjacent portfolios, we do not alterate the alpha of the middle portfolio(s). This setup ensures that stocks that belong to the 2nd/$\mathcal{N}-1$-th portfolio and are incorrecly allocated to the 1st/$\mathcal{N}$-th portfolio (due to estimation error) reduce the power of the test-statistic. Third, note that, under the assumption of weak cross-sectional correlation of the sorting variable, the stocks have a standard deviation equal to $\widetilde{\sigma}_{i,s}$. Instead, under the assumption of strong cross-sectional correlation of the sorting variable the stocks have a standard deviation equal to the product of $\widetilde{\sigma}_{i,s}$ times a common factor $v_t$. We arbitrarily set the standard deviation of $v_t$ equal to 0.6. This structure introduces strong cross-sectional dependence between the sorting variables. 
+
+\textbf{Subsampling scheme:} For these simulations, we set $T=15\,120$ days (60 years) and $R=63$ days (3 months). This yields a ratio $\frac{T-R}{R} = 239$. To mantain the same the speed of growth of $T-R$ relative to $R$ in the subsampling cheme, we set $T_\delta = 5\,040$ days (20 years) and $R_\delta = 21$ days (1 month). We thus obtain 480 overlapping windows in the subsampling scheme. 
+
+We now outline the steps to compute the test statistic $\widehat{Z}_{T,N,R,s}$, the subsampled counterpart $\widehat{Z}_{B,N,R_\delta,s}^{(k)}$, and the size and power of the subsampling procedure. First, we recompute the idiosyncratic volatility of each stock at each rebalancing date. More precisely, for each stock we estimate %regression \eqref{reg_estim}, using the simulated excess returns $\widetilde{r}_{i,t,s}^e$ in place of the historical ones $r_{i,t}^e$, and 
+the standard deviation of the excess returns using data for the past $R$ days. %Finally, we re-compute the idiosyncratic volatility $\widetilde{\sigma}_{i,\tau(t),s}$ using equation \eqref{std_estim} and the fitted residuals from the re-estimated regression in place of the historical ones $\widehat{e}_{i,t}$. 
+In the remainder of this section, $\widehat{S}_{i,\tau(t),R,s} \equiv \widetilde{\sigma}_{i,\tau(t),s}$, i.e. $\widetilde{\sigma}_{i,\tau(t),s}$ is taken to be the sorting variable estimated with measurement error.  
+
+
+Next, we sort the stocks into trimmed portfolios at each rebalancing date, following the same steps outlined in the previous section in equations \eqref{sims - bound trimmed bottom} - \eqref{sims - conditions trimmed top}. Namely, at the last business day of each month, we sort the $N$ stocks according to the values of $\widehat{S}_{i,\tau(t),R,s}$, we allocate them into $\mathcal{N}$ portfolios, and we compute the confidence interval around the true unobservable ordered statistics to trim the observations. 
+
+Finally, we compute the test statistic. More precisely, given the composition of the $1$-st and the $\mathcal{N}$-th trimmed portfolios at each rebalancing date, we compute the equally weighted average return of the stocks in these portfolios for each day until the next rebalancing date (i.e. we compute the average daily return of the portfolios over the month which starts the day after the rebalancing). Then we take the difference, thus obtaining the time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolio, where the two are dynamically updated. Lastly, we compute the test statistic as the average of this difference multiplied by the square root of the number of observations.  
+\begin{align*}
+    \widehat{Z}_{T,N,R,s} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t,s}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R,s}\leq \widehat{S}_{\tau(t),R,s}^{L, p(1)} \right\} - \mathds{1}\left\{  \widehat{S}_{\tau(t),R,s}^{U, p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R,s}\right\} \right), \notag
+\end{align*}
+where $R$ in the square root and in the starting value of the summation should more accurately be the number of days until the first rebalancing date.
+
+Next, we implement the subsampling procedure. We proceed as outlined above to recompute the idiosyncratic volatility of the stocks, sort them into trimmed portfolios at each rebalancing date, and obtain a time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolios. The only difference is the facts that we now use an estimation period of $R_{\tau(t), \delta}$ days as opposed to $R$. 
+
+Lastly, we compute the statistic for windows of $T_\delta$ days. More precisely, we start from the day after the first rebalancing $t = R_{\tau(t),\delta} + 1$, and consider a window of $T_\delta$ observations, iteratively shifting it by one day, thus considering a total of $K=T-T_\delta-R_{\tau(t),\delta} + 1$ overlapping subsamples. For each subsample, we compute the test statistic $\widehat{Z}_{T_\delta,N,R_\delta}^{(k)}$ as the average of the return difference multiplied by the square root of the number of observations. 
+\begin{align*}
+    \widehat{Z}_{T_\delta,N,R_\delta,s}^{(k)} &=\frac{\mathcal{N}}{\sqrt{T_\delta}}\sum_{t=R_{\tau(t), \delta}+1}^{T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t,s}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R_{\tau(t), \delta},s}\leq \widehat{S}_{\tau(t),R_{\tau(t), \delta},s}^{L, p(1)} \right\} -\mathds{1}\left\{  \widehat{S}_{\tau(t),R_{\tau(t), \delta},s}^{U, p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R_{\tau(t), \delta},s}\right\} \right), 
+\end{align*}
+Thus, we obtain an empirical distribution of $K$ test statistics, of which we compute the $5\%$ and $95\%$ critical values, $c_{B,K,\alpha/2,s}$ and $c_{B,K,1-\alpha/2,s}$. 
+
+As a final step, we compute the percentage number of times across simulations that $\widehat{Z}_{T,N,R}$ falls within and outside the critical values:
+\begin{align*}
+    \frac{\sum_{s=1}^{500} \mathds{1} \left\{ c_{B,K,\alpha/2,s} \leq \widehat{Z}_{T,N,R,s} \leq c_{B,K,1-\alpha/2,s} \right\}}{500} 
+\end{align*}
+\begin{align*}
+    \frac{\sum_{s=1}^{500} \mathds{1} \left\{ \widehat{Z}_{T,N,R,s} \leq c_{B,K,\alpha/2,s} \right\} + \mathds{1} \left\{ c_{B,K,1-\alpha/2,s} \leq \widehat{Z}_{T,N,R,s} \right\}}{500} 
+\end{align*}
+
+Table \ref{tab:simul_tests} shows the size of the test for different number of portfolios and both under the assumption of weak and strong correlation of the sorting variable. Appendix \ref{sec:Simulations for Hypothesis Testing} provides further details.
+\input{../../portfolio-sorts/tables/simul-tests/simul_tests.tex} 
+
+
+%\subsection{Pricing Idiosyncratic Volatility in the Cross-Section}
+
+%\cite{ang2006cross} define idiosyncratic volatility using the model in equations \eqref{reg_estim} and \eqref{std_estim}. They concentrate most of their analisys on a trading strategy that involves an estimation period and a rebalancing frequency of one month. More precisely, at each rebalancing date, they sort stocks into five value-weighted portfolios, based on the isiosyncratic volatility computed using daily returns over the past month, and hold them  for one month, at the end of which they are rebalanced. Instead, in our replication, we adopt a longer estimation period of one year, as shorter estimation periods lead to significant classification errors that may require to discard all stocks from a given trimmed portfolio. In this section, we use the sample period from July 1963 to December 2000 to be consistent with the original paper. 
+
+%Tables \ref{tab:ang-untrim-252-5} and \ref{tab:ang-trim-252-5} shows the key statistics reported by \cite{ang2006cross} for the portfolios sorted on idiosyncratic volatility, without and with trimming, respectively. The first two rows show the mean and standard deviation of the monthly return of the value weighted portfolios. We compute the return of the untrimmed portfolio $j=1, \dots, \mathcal{N}$ over the month running from rebalancing day $\tau(t)$ until the next rebalancing day as follows:
+%\begin{align*}
+%    r_{j, \tau(t) \rightarrow \tau(t) + \mathcal{T}} = \left( \sum_{ i \in \mathcal{J} } w_{i,\tau(t)} \prod_{t=\tau(t)}^{\tau(t) + \mathcal{T}} \left( 1 + r_{i,t} \right) \right) - 1
+%\end{align*}
+%where $\mathcal{J} \equiv \left\{ i \ \big\vert \ 1 = \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(j-1)} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(j)} \right\} \right\}$.
+%An analogous calculation holds for the trimmed portfolios except that $\widehat{S}_{\tau(t),R}^{p(j-1),U}$ and $\widehat{S}_{\tau(t),R}^{p(j),L}$ are substituted to $\widehat{S}_{\tau(t),R}^{p(j-1)}$ and $\widehat{S}_{\tau(t),R}^{p(j)}$. The third and fourth rows show Jensen's alpha of the value weighted portfolios for the Fama-French model and the CAPM. For the Fama French-model, we compute the alpha of the untrimmed portfolio $j=1, \dots, \mathcal{N}$ as follows:
+%\begin{align*}
+%    r_{j,t}^e = \alpha_{i} + \beta_{j}^{MKT} MKT_{t} + \beta_{j}^{SMB} SMB_{t} + \beta_{j}^{HML} HML_{t} + \epsilon_{j,t}
+%\end{align*}
+%for $t \in [0, T]$, and where $r_{j,t}^e = r_{j,t} - r_t^f$. A similar calculation holds for the CAPM and for the trimmed portfolios. We report the \cite{newey1986simple} t-statistic in brakets. 
+
+%\input{../../portfolio-sorts/tables/ang/252-5/ang-untrim.tex}
+
+%\input{../../portfolio-sorts/tables/ang/252-5/ang-trim.tex}
+
+%For the untrimmed portfolios, the average return increase from 1.04\% per month for the first quintile (low volatility) to 1.18\% per month for the second quintile, then it drops sharply to 0.27\% for the fifth quintile (high volatility). The difference in average returns between the fifth and the first portfolio (high volatility minus low volatility) is -0.77\% but the difference in Fama-French and CAPM alphas is 0\%. For the trimmed portfolio, the average return displays a similar behavior, increasing in the first two portfolios, and decreasing thereafter. However, the difference between the top and bottom average returns is more pronounced. The alphas remain 0\%. Image \ref{img:port_value} shows the average return of the trimmed portfolios for different number of portfolios and estimation periods. 
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/ang/compare/ang-compare.pdf}
+%    \caption{Average return of the portfolios.}
+%    \label{img:port_value}
+%\end{figure}
+
+%\input{../../portfolio-sorts/tables/ang/21-5/ang-untrim.tex}
+
+%\input{../../portfolio-sorts/tables/ang/21-5/ang-trim.tex}
+
+%=========================================
+% PROOF OF THEOREM 1
+%=========================================
+
+\section{Proof of Theorem 1}
+\label{Proof of th:observable}
+
+\subsection{Part (i)}
+
+Rewriting the test statistic in definition \ref{def: Zeta}:
+\begin{align*}
+Z_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} - \mathds{1}\left\{ S^{q(\mathcal{N}-1)} < S_{i,\tau(t) }\right\} \right) \\
+& + \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1}\left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} - \mathds{1}\left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} \right) \\
+&- \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t} \left( \mathds{1} \left\{ S_{\tau(t) }^{p(\mathcal{N} - 1)} < S_{i,\tau(t) } \right\} - \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) } \right\} \right) \\
+&= I_{T,N} + II_{T,N} + III_{T,N}.
+\end{align*}
+First, under the null hypothesis in equation \eqref{H0} and given assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem (see \cite{rio2017asymptotic}, Theorem 4.2):\hl{Added reference}
+\begin{align*}
+I_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t} \mathds{1}\left\{ S_{i,\tau(t) } \leq S^{q(1)}\right\} -\mu^{q(1)}\right) \\
+& - \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} \mathds{1}\left\{ S^{q(\mathcal{N} -1)} < S_{i,\tau(t) }\right\} -\mu^{q(\mathcal{N})}\right) \\
+& \overset{d}{\rightarrow} N \left( 0, V \right).
+\end{align*}
+Second, rewriting $II_{T,N}$: 
+\begin{align*}
+II_{T,N} &=\frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} -F\left( S_{\tau(t) }^{p(1)}\right) \right) - \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} -F\left( S^{q(1)} \right) \right) \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( F\left( S_{\tau(t) }^{p(1)}\right) -F\left( S^{q(1)} \right) \right) \\
+&= II_{T,N}^{A} + II_{T,N}^{B},
+\end{align*}
+where $F\left( x \right)$ is the CDF of $S_{i,\tau(t) }$ evaluated at $x$. First, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. Moreover, let $f(x)$ be the PDF of $S_{i,\tau(t) }$ evaluated at $x$. By a first-order expansion around $S^{q(1)}$ and given assumption \refAssPart{ass:mixing, v}:
+\begin{align*}
+II_{T,N}^{B} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t}f\left( S^{q(1)} \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right)  \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} f\left( S^{q(1)} \right) - \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right) \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= \mathrm{E}\left( r_{i,t} f \left( S^{q(1)} \right) \right) \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T} \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) \\
+&+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} f\left( S^{q(1)} \right) - \mathrm{E} \left( r_{i,t} f\left( S^{q(1)} \right) \right) \right) \left( S_{\tau(t) }^{p(1)}-S^{q(1)} \right) + o_p(1) \\
+&= O_{p} \left( N^{-(1-\rho)/2} \right) + o_{p}(1) \\
+&=o_{p}(1).
+\end{align*} 
+Third, using similar arguments as above, also $III_{T,N}=o_{p}(1)$. 
+
+\subsection{Part (ii)}
+
+Under the alternative hypothesis in equation \eqref{HA}, $Z_{T,N}$ is the sum of $T-\mathcal{T}$ non-zero differences divided by $\sqrt{T-\mathcal{T}}$ and diverges at the rate $\sqrt{T-\mathcal{T}}$. Dividing by $\sqrt{T-\mathcal{T}}$ the result follows.
+
+
+
+%=========================================
+% PROOF OF THEOREM 2
+%=========================================
+
+\section{Proof of Theorem 2}
+\label{Proof of th:strongdep}
+
+As in theorem \ref{th:observable}, $Z_{T.N}=I_{T,N}+II_{T,N}+III_{T,N}$. First, under the null hypothesis \ref{H0} and given assumption \refAssRange{ass:mixing, i}{ass:mixing, iv}, by the central limit theorem, $I_{T,N}\overset{d}{\rightarrow } N\left( 0,V\right)$. Second, $II_{T,N}=II_{T,N}^{A}+II_{T,N}^{B}$. In particular, $II_{T,N}^{A}=o_{p}(1)$ because of stochastic equicontinuity. On the other hand, under assumption \ref{ass:strongdep} in place of \refAssPart{ass:mixing, v}, $\rho =1$ and $II_{T,N}^{B}$ is no longer $o_{p}(1)$, since var $\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) $ is bounded away from zero. In fact, given assumptions \refAssPart{ass:mixing, i} and \ref{ass:strongdep},
+\begin{align*}
+II_{T,N}^{B}=\mathrm{E}\left( r_{i,t} f\left( S^{q(1)}\right) \right) \frac{\mathcal{N}}{\sqrt{T - \mathcal{T}}} \sum_{t=\mathcal{T}+1}^{T}\left( S_{\tau(t)}^{p(1)}-S^{q(1)} \right) 
+\end{align*}
+satisfies a central limit theorem and the statement follows. Finally, $III_{T,N}$ can be treated analogously.
+
+\subsection{Part (ii)}
+
+Analogous reasoning to that in theorem \ref{th:observable}.
+
+
+%=========================================
+% PROOF OF LEMMA 1
+%=========================================
+
+\section{Proof of Lemma 1}
+\label{Proof of lem:trimerror}
+
+\hl{Let $c_{j,\tau(t) ,R}=\sup_{i\text{.s.t. }I_{i,T,R}^{(j)}=1}c_{i,\tau(t) ,R}$. [Trimming rule no longer uses sup]} We begin with the case in which we \hl{include in the first portfolio a stock that should instead belong to another portfolio. [This is not what equation says because second term has a hat]} From equation \eqref{almostsurebounds}:
+\begin{align*}
+&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t) ,R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t) } \right\}  \\
+=&\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ S_{i,\tau(t) }+\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t) }\right) \leq \widehat{S}_{\tau(t) ,R}^{p(1),L}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t) ,R}^{p(1)} < S_{i,\tau(t) } \right\}  \\
+\leq &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{ S_{i,\tau(t) }\leq \widehat{S}_{\tau(t),R}^{p(1),L}+c_{1,\tau(t),R} \right\} \mathds{1} \left\{ \widehat{S}_{\tau(t) ,R}^{p(1)} < S_{i,\tau(t) } \right\} \\
+%= &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{\widehat{S}_{\tau(t) ,R}^{p(1)} < \widehat{S}_{\tau(t) ,R}^{p(1),L}+c_{1,\tau(t) ,R}\right\} \\
+= &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t) }}\sum_{i=1}^{N_{\tau(t) }}r_{i,t} \mathds{1} \left\{0 < -c_{1,\tau(t) ,R}+c_{1,\tau(t),R}\right\} =o_{a.s.}(1)
+\end{align*} 
+An analogous result holds for the last portfolio.
+
+
+%=========================================
+% PROOF OF THEOREM 3
+%=========================================
+
+\section{Proof of Theorem 3}
+\label{Proof of th:feasible}
+
+\subsection{Part (i)}
+
+Rewriting the test statistic in definition \ref{def: Ztilde}, and because of lemma \ref{lem:trimerror}:
+\begin{align*}
+    \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)} \right\} \right) \\
+    &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} \\
+    &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} + o_{a.s.}(1) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+    &-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} -\mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &=I_{T,N,R}+II_{T,N,R}+III_{T,N,R}.
+\end{align*}
+%Let:
+%\begin{align*}
+%    N_{1,\tau(t)} = \sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq S_{\tau(t)}^{p(1)} \right\} 
+%\end{align*}
+%\begin{align*}
+%    N_{\mathcal{N},\tau(t)} = \sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} 
+%\end{align*}
+%and
+%\begin{align*}
+%    C_{1,\tau(t)} = \left\{ i: \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq S_{\tau(t)}^{p(1)} \right\} = 1 \right\}
+%\end{align*}
+%\begin{align*}
+%    C_{\mathcal{N},\tau(t)} = \left\{ i: \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \leq \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} \leq S_{i,\tau(t)} \right\} = 1 \right\}
+%\end{align*}
+%Rewriting $I_{T,N,R}$:
+%\begin{align*}
+%    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+%    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+%\end{align*}
+
+Let $\widehat{u}_{\tau(t),R}^{p(1)}=\widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}$. Rewriting $II_{T,N,R}$:
+\begin{align*}
+    II_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) \right) \right. \\
+    &\hspace{7.3cm}- \left. \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} -F\left(S_{\tau(t)}^{p(1)}\right)\right) \right) \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) -F\left( S_{\tau(t)}^{p(1)}\right) \right) \\
+    &= II_{T,N,R}^A + II_{T,N,R}^B.
+\end{align*}
+$II_{T,N,R}^A = o_p(1)$ because of stochastic equicontinuity. Moreover, rewriting $II_{T,N,R}^B$:
+\begin{align*}
+    II_{T,N,R}^B &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right)\\
+    &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
+    &+ \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right. \\
+    &\hspace{3.3cm}- \left. E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
+    &= m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) + o_p(1)
+\end{align*}
+where $m_1 = E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right)$. \hl{Verify definition of $m_1$}
+Using similar arguments as above for $III_{T,N,R}$, it follows that:
+\begin{align*}
+    \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    &+m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) \\
+    &=Z_{T,N} - \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
+    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
+    &+m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right)
+\end{align*}
+%\hl{Add explanation of this step}
+%\begin{align}
+%\widehat{Z}_{T,N,R} &= Z_{T,N}+ m_{1}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) - m_{\mathcal{N}}\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) \notag \\
+%&-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1),L}\leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \label{Z} \\
+%&\hspace{4.2cm}-\left. \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}\leq \widehat{S}_{i,\tau(t),R}\leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{N_{\tau(t)}/\mathcal{N}}\right\} \right) \notag
+%\end{align}
+\hl{Continue}
+\begin{align*}
+    &\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \\
+    &=\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} - \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right) \\
+    &=\mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} - \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} - \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right) \\
+\end{align*}
+Recall that, $\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),L}=c_{\mathcal{N},\tau(t),R}$, where \hl{$c_{\mathcal{N},\tau(t),R}=\sup_{i\text{.s.t. }I_{i,T,R}^{(\mathcal{N})}=1}c_{i,\tau(t),R}$}. We now show that the last term on the RHS of the last equality in (\ref{Z}) is $o_{p}(1).$ The term reads as:
+\begin{align*}
+    &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right. \notag \\
+    &\hspace{3.4cm} \left. -r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}+c_{\mathcal{N},\tau(t),R} \right\} \right). \label{BTNR}
+\end{align*}
+Let $C_{1,\tau(t),R}$ be the set of all stocks for which $\widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t) ,R}^{U}\leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}$:
+\begin{align*}
+    C_{1,\tau(t),R}=\left\{ i:\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} =1\right\} ,
+\end{align*}
+
+\noindent Given assumption \ref{ass:crosssec}, the cardinality of $C_{1,\tau(t),R}$ is $O_{a.s.}\left( N_{\tau(t)}^{1+\varepsilon }c_{1,\tau(t),R} \right)$. Define $C_{\mathcal{N},\tau(t),R}$ analogously. Thus:
+\begin{align}
+    &\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)}-c_{1,\tau(t),R} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} \right. \notag \\
+    &\hspace{3.4cm} \left. -r_{i,t}\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \leq \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}+c_{\mathcal{N},\tau(t),R} \right\} \right) \notag \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \left( r_{i,t}-\mu_{i}\right) -\frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i\in C_{\mathcal{N}-1,\tau(t),R}} \left( r_{i,t} - \mu_{i} \right) \notag \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \mu_{i}-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{\mathcal{N}-1,\tau(t),R}} \mu_{i}  \notag \\
+    &=O_p \left( \frac{N_{\tau(t),R}^{1+\varepsilon }\left( c_{1,\tau(t),R} + c_{\mathcal{N},\tau(t),R} \right) }{\inf_{t}N_{\tau(t)}}\right) \notag \\
+    &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i\in C_{1,\tau(t),R}} \mu_{i} - \frac{\mathcal{N}}{\sqrt{T-R}} \sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}} \sum_{i \in C_{\mathcal{N}-1,\tau(t),R}} \mu_{i}, %\label{BTNR2}
+\end{align}
+and the last term on the RHS of %(\ref{BTNR2}) 
+is zero under $H_0$ and of order $\sqrt{T-R}\frac{N_{\tau(t)}^{1+\varepsilon }\left(c_{1,\tau(t),R} + c_{\mathcal{N},\tau(t),R} \right) }{\inf_t N_{\tau(t)}}$ under $H_A$. Then both the statement in (i) and in (ii) follow.
+
+\subsection{Part (ii)}
+
+\noindent (iii) Under $H_{A},$%
+\begin{align*}
+\widehat{Z}_{T,N,R} &=Z_{T,N,R}+m_{1}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -m_{\mathcal{N}}\left( \widehat{S}_{\tau(t),R}^{(\mathcal{N-}1)N_{\tau(t)}/\mathcal{N}}-S_{\tau(t)}^{(\mathcal{N-} 1)N_{\tau(t)}/\mathcal{N}}\right)  \\
+&+O_{a.s.}\left( \sqrt{T-R}\frac{n_{\tau(t),R}^{1+\varepsilon }\left( c_{1,\tau(t),R}^{U}+c_{\mathcal{N},\tau(t),R}^{U}\right) }{\inf_{t}N_{\tau(t)}}\right).
+\end{align*}
+Since $Z_{T,N,R}$ diverges at rate $\sqrt{T-R},$ $\widehat{Z}_{T,N,R}$ will diverge at least at rate $\sqrt{T-R}.$
+
+
+%=========================================
+% PROOF OF THEOREM 4
+%=========================================
+
+\section{Proof of Theorem 4}
+\label{Proof of th:subsampling}
+
+\subsection{Part (i)}
+
+Let: 
+\begin{align*}
+Z_{B,N}^{(k)}=\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta \textcolor{red}{+1}+k+B}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathbbm{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} - \mathbbm{1} \left\{ S_{\tau(t) }^{p(\mathcal{N}-1)} \leq S_{i,\tau(t) } \right\} \right).
+\end{align*}
+By the same argument as in the proof of theorem %\ref{th:feasible}
+, given $\frac{c_{N,R_\delta}}{\inf_{t}N_{\tau(t)}}\rightarrow 0$, we have that for any $k$:
+\begin{align*}
+\widehat{Z}_{B,N,R_\delta}^{(k)} &= Z_{B,N}^{(k)} \\
+& +\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{1} \left( \widehat{S}_{\tau(t),R_\delta}^{p(1)\textcolor{red}{-c_{N,R}}}-S_{\tau(t)}^{p(1)\textcolor{red}{-c_{N,R}}}\right) \\
+& -\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{\mathcal{N}} \left( \widehat{S}_{\tau(t),R_\delta}^{p(\mathcal{N}-1)\textcolor{red}{-c_{N,R}}}-S_{\tau(t)}^{p(\mathcal{N}-1)\textcolor{red}{-c_{N,R}}}\right) +o_{p}(1) \\
+&= Z_{B,N}^{(k)}+\left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) +o_{p}(1).
+\end{align*}
+Given assumption %\crefdefpart{ass:sups, i}
+, and using the results from theorem %\ref{th:observable}
+, under $H_{0}$, for each $k$, $Z_{B,N}^{(k)}\overset{d}{\rightarrow }N(0,V_{1})$ as $B,N\rightarrow \infty $, where $V_{1}$ is defined in theorem %\ref{th:observable}
+. By the same argument as in the proof of theorem %\ref{th:feasible}:
+\begin{align*}
+& \left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) \\
+&= \frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{1} \left( \widehat{S}_{\tau(t), R_\delta}^{q(1)}-S_{\tau(t) }^{q(1)}\right) -\frac{\mathcal{N}}{\sqrt{B}}\sum_{t=R_\delta+1+k}^{R_\delta\textcolor{red}{+1}+k+B} m_{\mathcal{N}} \left(\widehat{S}_{\tau(t) ,R_\delta}^{q(\mathcal{N}\textcolor{red}{-1})}-S_{\tau(t) }^{q(\mathcal{N}\textcolor{red}{-1})}\right) +o_{p}(1),
+\end{align*}
+Recalling that $R_\delta=(R/T)/T^{\delta}$, under both hypotheses: \textcolor{red}{Which hypotheses?; Why?}
+\begin{align*}
+\left( I_{B,N,R_\delta}^{(k)}-II_{B,N,R_\delta}^{(k)}\right) \overset{d}{\rightarrow }N\left( 0,\left( V_{S^{q(1)}}+V_{S^{q(\mathcal{N})}}+ covs \right) \right) ,\text{ for }B,N,R_\delta\rightarrow \infty.
+\end{align*}
+Hence, for each $k,$ $\widehat{Z}_{B,N,R_\delta}^{(k)}$ has the same limiting distribution as $\widehat{Z}_{T,N,R}.$ 
+
+Given assumption %\crefdefpart{ass:mixing, i} 
+and %\crefdefpart{ass:mixing, v}
+, and given that $B/(T-R)\rightarrow 0,$ and the number of subsampled statistics $K\rightarrow \infty ,$ the statement follows from Corollary 3.2 in \cite{politis1992general}. 
+
+\subsection{Part (ii)}
+
+The statement follows as the subsampled statistic diverges at rate $\sqrt{B}$ while the statistic diverges at rate $\sqrt{T-R}.$
+
+%=========================================
+% PROOF OF THEOREM 4
+%=========================================
+
+\section{Simulations for Hypothesis Testing}
+\label{sec:Simulations for Hypothesis Testing}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-tests/compare/results-simul-tests-h0-pt1.pdf}
+    \caption{Test statistic and empirical confidence bounds under $H_0$, without trimming (left) and with trimming (right).}
+    \label{img:results-simul-tests-h0-pt1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-tests/compare/results-simul-tests-h0-pt2.pdf}
+    \caption{Percentage minimum (blue), maximum (blue) and average (orange) number of stocks retained in the bottom (left) and top (right) portfolios after trimming is applied, both for the main test statistic (top) and for the subsampled counterpart (bottom) under $H_0$. The minimum, maximum and average are computed across the $500$ simulations.}
+    \label{img:results-simul-tests-h0-pt2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-tests/compare/results-simul-tests-h1-pt1.pdf}
+    \caption{Test statistic and empirical confidence bounds under $H_1$, without trimming (left) and with trimming (right).}
+    \label{img:results-simul-tests-h1-pt1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{../../portfolio-sorts/images/simul-tests/compare/results-simul-tests-h1-pt2.pdf}
+    \caption{Percentage minimum (blue), maximum (blue) and average (orange) number of stocks retained in the bottom (left) and top (right) portfolios after trimming is applied, both for the main test statistic (top) and for the subsampled counterpart (bottom) under $H_1$. The minimum, maximum and average are computed across the $500$ simulations.}
+    \label{img:results-simul-tests-h1-pt2}
+\end{figure}
