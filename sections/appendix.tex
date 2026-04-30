@@ -24,7 +24,8 @@ I_{T,N} &= \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\fr
 \end{align*}
 Second, rewriting $II_{T,N}$: 
 \begin{align*}
-II_{T,N} &=\frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} -F\left( S_{\tau(t) }^{p(1)}\right) \right) - \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} -F\left( S^{q(1)} \right) \right) \right) \\
+II_{T,N} &=\frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}} r_{i,t} \left( \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S_{\tau(t) }^{p(1)}\right\} -F\left( S_{\tau(t) }^{p(1)}\right) \right) \right.\\
+&\hspace{4.8cm} \left.- \left( \mathds{1} \left\{ S_{i,\tau(t) }\leq S^{q(1)}\right\} -F\left( S^{q(1)} \right) \right) \right) \\
 &+ \frac{\mathcal{N}}{\sqrt{T-\mathcal{T}}}\sum_{t=\mathcal{T}+1}^{T}\frac{1}{N_{\tau(t)}} \sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( F\left( S_{\tau(t) }^{p(1)}\right) -F\left( S^{q(1)} \right) \right) \\
 &= II_{T,N}^{A} + II_{T,N}^{B},
 \end{align*}
@@ -115,12 +116,13 @@ An analogous result holds for the last portfolio.
 
 Rewriting the test statistic in Definition~\ref{def: Ztilde} and using Lemma~\ref{lem:trimerror}:
 \begin{align*}
-    \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)} \right\} \right) \\
+    &\widehat{Z}_{T,N,R} \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(1)} < S_{i,\tau(t)} \right\} \right) \\
     &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)} \leq  \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} \right\} + \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
     &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L} \right\} \mathds{1} \left\{ S_{i,\tau(t)} \leq \widehat{S}_{\tau(t),R}^{p(1)} \right\} \\
     &- \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1}\left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} + o_{a.s.}(1) \\
     &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
-    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    & \hspace{4.8cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
     &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq \widehat{S}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
     &-\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{\widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \left( \mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} -\mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
     &=I_{T,N,R}+II_{T,N,R}+III_{T,N,R}.
@@ -147,9 +149,10 @@ Rewriting the test statistic in Definition~\ref{def: Ztilde} and using Lemma~\re
 
 Let $\widehat{u}_{\tau(t),R}^{p(1)}=\widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}$. Rewriting $II_{T,N,R}$:
 \begin{align*}
-    II_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
+    &II_{T,N,R} \\
+    &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -\mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right) \\
     &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right\} -F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) \right) \right. \\
-    &\hspace{7.3cm}- \left. \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} -F\left(S_{\tau(t)}^{p(1)}\right)\right) \right) \\
+    &\hspace{8.cm}- \left. \left( \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} -F\left(S_{\tau(t)}^{p(1)}\right)\right) \right) \\
     &+\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \left( F\left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)}\right) -F\left( S_{\tau(t)}^{p(1)}\right) \right) \\
     &= II_{T,N,R}^A + II_{T,N,R}^B.
 \end{align*}
@@ -158,17 +161,17 @@ $II_{T,N,R}^A = o_p(1)$ because of stochastic equicontinuity. Moreover, rewritin
     II_{T,N,R}^B &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right)\\
     &= \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
     &+ \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T} \frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}} \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right. \\
-    &\hspace{3.3cm}- \left. E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
+    &\hspace{3.6cm}- \left. E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right) \right) \left( \widehat{S}_{\tau(t),R}^{p(1)} - S_{\tau(t)}^{p(1)} \right) \\
     &= \frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) + o_p(1)
 \end{align*}
 where $m_1 = E \left( r_{i,t} \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} f \left( S_{\tau(t)}^{p(1)}+\widehat{u}_{\tau(t),R}^{p(1)} \right) \right)$.
 Using similar arguments as above for $III_{T,N,R}$, it follows that:
 \begin{align*}
     \widehat{Z}_{T,N,R} &=\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R}\leq \widehat{S}_{\tau(t),R}^{p(1),L}\right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
-    & \hspace{4.3cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
+    & \hspace{4.8cm} \left. -\mathds{1} \left\{ \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} < \widehat{S}_{i,\tau(t),R}\right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)}\right\} \right) \\
     &+\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -\frac{\mathcal{N}m_{\mathcal{N}}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right) \\
     &=Z_{T,N} - \frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t}\left( \mathds{1} \left\{  \widehat{S}_{\tau(t),R}^{p(1),L} < \widehat{S}_{i,\tau(t),R} \right\} \mathds{1} \left\{ S_{i,\tau(t)}\leq S_{\tau(t)}^{p(1)}\right\} \right. \\
-    & \hspace{5.5cm} \left. -\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
+    & \hspace{6.0cm} \left. -\mathds{1} \left\{ \widehat{S}_{i,\tau(t),R} \leq \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1),U} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\} \right) \\
     &+\frac{\mathcal{N}m_{1}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(1)}-S_{\tau(t)}^{p(1)}\right) -\frac{\mathcal{N}m_{\mathcal{N}}}{\sqrt{T-R}}\sum_{t=R+1}^{T}\left( \widehat{S}_{\tau(t),R}^{p(\mathcal{N}-1)}-S_{\tau(t)}^{p(\mathcal{N}-1)}\right)  
 \end{align*}
 %\hl{Add explanation of this step}
@@ -260,8 +263,7 @@ Substituting back and rearranging:
 \widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)} &=\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ \widehat{S}_{i,\tau(t),R}\leq S^{q(1)}\right\} \right) +o_p\!\left( \left|\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}\right|\right),
 \end{align*}
 \begin{align*}
-S_{\tau(t)}^{q(1)}-S^{q(1)}
-&=\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right)
+S_{\tau(t)}^{q(1)}-S^{q(1)} =\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \frac{1}{\mathcal{N}}-\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\} \right)
 +o_p\!\left( \left|S_{\tau(t)}^{q(1)}-S^{q(1)}\right|\right).
 \end{align*}
 Subtracting the two expansions:
@@ -274,11 +276,11 @@ where $r_{\tau(t),R}
 =o_p\!\left( \left|\widehat{S}_{\tau(t),R}^{q(1)}-S^{q(1)}\right|\right)
 +o_p\!\left( \left|S_{\tau(t)}^{q(1)}-S^{q(1)}\right|\right)$ and $\frac{\mathcal{N}}{\sqrt{T-R}}\sum_{t=R+1}^{T}r_{\tau(t),R}=o_p(1)$. Next, rewriting:
 \begin{align*}
-\widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)}
+&\widehat{S}_{\tau(t),R}^{q(1)}-S_{\tau(t)}^{q(1)} \\
 &=\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\}-\mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right)\right\} \right)
 +r_{\tau(t),R} \\
 &=\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\Bigg( \Big( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}\right\}-F\left( S^{q(1)}\right) \Big) \\
-&\hspace{2.5cm} -\Big( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right)\right\}
+&\hspace{3.3cm} -\Big( \mathds{1}\left\{ S_{i,\tau(t)}\leq S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right)\right\}
 -F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) \Big) \Bigg) \\
 &\quad +\frac{1}{f\left( S^{q(1)}\right)}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}\left( F\left( S^{q(1)}\right)-F\left( S^{q(1)}-\left( \widehat{S}_{i,\tau(t),R}-S_{i,\tau(t)}\right) \right) \right)
 +r_{\tau(t),R} \\
