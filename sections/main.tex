@@ -7,7 +7,7 @@
 
 Portfolio sorting according to some stock characteristics is a standard practice in empirical asset pricing. The objective is generally to uncover some systematic cross-sectional relationship between expected returns and stock characteristics. A special role is played by sorting according to betas \citep{fama1973risk}. Other well known examples of sorting variables are size and book-to-market value \citep{fama1993common}, momentum \citep{jegadeesh1993returns}, idiosyncratic volatility \citep{ang2006cross}, coskewness \citep{harvey2000conditional}, and realized skewness and kurtosis \citep{amaya2015does}.
 
-The null hypothesis of interest is that the expected return over low and high quantiles is the same, against its negation. For example, the capital asset pricing model \citep{sharpe1964capital, lintner1965valuation} predicts a positive relation between expected returns and betas. Yet, there is some empirical evidence about a negative relation, so that a strategy based on selling (buying) high (low) betas stocks gives positive returns \citep{frazzini2014betting}. The literature has acknowledged problems arising with these tests. For example, \cite{fama1973risk}, when testing the CAPM, find over-rejection of the null hypothesis due to a positive bias on high percentiles and a negative on low percentiles. \cite{lo1988stock} point out over-rejection due to possible correlation between the sorting variable and the regression residuals. As a remedy to this snoopy effect, authors such as \cite{liang2000portfolio} have suggested to randomly pick a subset of the sample for sorting variable estimation and use the rest of the sample for test statistic construction. \cite{cattaneo2022beta} study the statistical properties of beta-sorted portfolios and provide conditions ensuring consistency and asymptotic normality, along with uniform inference procedures allowing for uncertainty quantification and general hypothesis testing. \cite{lopez2024has} study the problem of specification errors --- namely, omitted variable bias and colliders --- on the performance of factor investing strategies, and propose ways to address those errors.
+The null hypothesis of interest is that the expected return over low and high quantiles is the same, against its negation. For example, the capital asset pricing model \citep{sharpe1964capital, lintner1965valuation} predicts a positive relation between expected returns and betas. Yet, there is some empirical evidence about a negative relation, so that a strategy based on selling (buying) high (low) beta stocks gives positive returns \citep{frazzini2014betting}. The literature has acknowledged problems arising with these tests. For example, \cite{fama1973risk}, when testing the CAPM, find over-rejection of the null hypothesis due to a positive bias on high percentiles and a negative on low percentiles. \cite{lo1988stock} point out over-rejection due to possible correlation between the sorting variable and the regression residuals. As a remedy to this snoopy effect, authors such as \cite{liang2000portfolio} have suggested to randomly pick a subset of the sample for sorting variable estimation and use the rest of the sample for test statistic construction. \cite{cattaneo2022beta} study the statistical properties of beta-sorted portfolios and provide conditions ensuring consistency and asymptotic normality, along with uniform inference procedures allowing for uncertainty quantification and general hypothesis testing. \cite{lopez2024has} study the problem of specification errors --- namely, omitted variable bias and colliders --- on the performance of factor investing strategies, and propose ways to address those errors.
 
 Sorting can be done according to observable or unobservable characteristics. In the latter case the sorting variable needs to be estimated, and the measurement error leads to two types of classification errors when constructing the portfolios. First, we may include in a portfolio stocks that should be included in a lower or higher portfolio if we could observe the true sorting variable. Second, we may discard from a given portfolio stocks that should instead be included. The former can be seen as a contamination error, and the latter as an information loss error. Heuristically, if the expected return does not display a systematic pattern with the sorting variable, these two forms of misclassification should not affect the outcome of the test, while they should under the alternative hypothesis of a systematic pattern. In this paper, we formally investigate the effect of sorting errors on the test outcome. 
 
@@ -63,7 +63,7 @@ The objective is to test the null hypothesis that returns are independent of the
 
 We begin by considering the case where the sorting variable is observable and the only source of error is the discrepancy between the order statistic and the unobservable quantile, i.e. there is no measurement error. This occurs, for example, when stocks are sorted according to size, or book to market ratio. At each rebalancing date $\tau(t) \geq 0$, we use the available $N_{\tau(t)}$ stocks to compute the order statistics $S_{\tau(t)}^{p(j)}$ for $j=1,\ldots, \mathcal{N}$. 
 
-\subsection{Asymptotic Results under Weak Correlation of the Sorting Variable}
+\subsection{Asymptotic Results Under Weak Correlation of the Sorting Variable}
 
 In the sequel, we need the following definition and assumptions. 
 
@@ -101,7 +101,7 @@ Assumption \refAssPart{ass:mixing, i} is a distribution and memory condition. In
 % In particular, the stationarity conditions ensure that the expected return of the $j$-th quantile portfolio does not depend on the time span. 
 % The mixing conditions restrict the serial dependence of the time series of returns and sorting variables. 
  
-%In particular, the condition requires that the cross-sectional sum of the demeaned sorting variables is bounded in probability when appropriately standardised by $N_{\tau(t)}$, where the parameter $\rho$ reflects the degree of cross-sectional dependence.  which is ensured by a sufficient degree of sparsity (in particular, $\rho=1/2$ is the case of zero cross-sectional dependence). Notice that the equation follos from the CLT. If the sorting variables are independent then we have N iid random variables and we can do a CLT. If the variables have little cross-sectional dependence, then we can use both the time and the cross-sectional variation; otherwise only the time variation. 
+%In particular, the condition requires that the cross-sectional sum of the demeaned sorting variables is bounded in probability when appropriately standardised by $N_{\tau(t)}$, where the parameter $\rho$ reflects the degree of cross-sectional dependence.  which is ensured by a sufficient degree of sparsity (in particular, $\rho=1/2$ is the case of zero cross-sectional dependence). Notice that the equation follows from the CLT. If the sorting variables are independent then we have N iid random variables and we can do a CLT. If the variables have little cross-sectional dependence, then we can use both the time and the cross-sectional variation; otherwise only the time variation. 
 % --------------------
 \begin{assumption}
 \label{ass:exogenous} $ $
@@ -145,7 +145,7 @@ where:
 \noindent
 The theorem states that under the assumption of weak cross-sectional correlation of the sorting variable the quantile estimation error $S_{\tau(t)}^{p(j)}-S^{q(j)}$ does not contribute to the limiting distribution. Indeed, $V$ is the variance obtained by replacing $S_{\tau(t)}^{p(1)}$ and $S_{\tau(t)}^{p(\mathcal{N}-1)}$ with $S^{q(1)}$ and $S^{q(\mathcal{N}-1)}$ in $Z_{T,N}$. Under the alternative hypothesis, the test statistic diverges at the rate $\sqrt{T}$. 
 
-\subsection{Asymptotic Results under Strong Correlation of the Sorting Variable}
+\subsection{Asymptotic Results Under Strong Correlation of the Sorting Variable}
 
 In the sequel, we need the following alternative assumption. 
 
@@ -160,7 +160,7 @@ Assumption \ref{ass:strongdep} requires strong cross-sectional correlation of th
 
 Theorem \ref{th:strongdep} studies the asymptotic behavior of the test statistic under assumption \ref{ass:strongdep} of strong cross-sectional correlation of the sorting variable.
 % --------------------
-% Sorting takes place using a factor that depends only on time; for example business cycle is the same for all stocks so there is perfect cross-correlation and we cannot use the cross-correcation because there is no variation. 
+% Sorting takes place using a factor that depends only on time; for example business cycle is the same for all stocks so there is perfect cross-correlation and we cannot use the cross-correlation because there is no variation. 
 % --------------------
 \begin{theorem}
 \label{th:strongdep} Let assumptions \refAssRange{ass:mixing, i}{ass:mixing, iv}, \ref{ass:exogenous} and \ref{ass:strongdep} hold.
@@ -186,7 +186,9 @@ where $f\left( x \right) $ denotes the density of the sorting variable evaluated
 \end{theorem}
 
 \noindent
-The theorem states that under the assumption of strong cross-sectional correlation of the sorting variable there is an additional term in the asymptotic covariance matrix. This is because the difference between the order statistic and the quantile is of order $1/\sqrt{T}$, rather than $1/(\sqrt{ {T}}N^{1-\rho })$ with $1/2\leq \rho <1$ as in the weak cross-sectional correlation case. Intuitively, since the sorting variables are highly correlated, we can use only the time dimension to estimate the quantile of the order statistics and the cross-sectional dimension no longer contributes to the convergence. Thus, the error is no longer negligible.
+The theorem states that under the assumption of strong cross-sectional correlation of the sorting variable there is an additional term in the asymptotic covariance matrix. %This is because the difference between the order statistic and the quantile is of order $1/\sqrt{T}$, rather than $1/(\sqrt{ {T}}N^{1-\rho })$ with $1/2\leq \rho <1$ as in the weak cross-sectional correlation case. Intuitively, since the sorting variables are highly correlated, we can use only the time dimension to estimate the quantile of the order statistics and the cross-sectional dimension no longer contributes to the convergence.
+Intuitively, under weak cross-sectional dependence, the cross-section helps estimate the cutoff: the order-statistic error shrinks with \(N\), so its normalized time-summed contribution is \(o_p(1)\). Under strong cross-sectional dependence, a common component makes the cutoff errors move together across stocks, so the cross-section no longer provides an additional rate of convergence. The term \((T-\mathcal T)^{-1/2}\sum_t (S_{\tau(t)}^{p(j)}-S^{q(j)})\) is no longer negligible and must enter the asymptotic variance.
+
 % --------------------
 % If we had weak convergence, 9 would go to zero as the terms in 9 goes to zero at $\sqrt{N}$. But if we have strong convergence the terms in 9 no longer go to zero.
 
@@ -283,7 +285,7 @@ Note that trimming varies across quantiles. Figure \ref{img:trimming} illustrate
 
 \subsection{Asymptotic Results}
 
-We now define the feasible and trimmed counterpart of $Z_{T,N}$. Moreover, in order to properly control for sorting errors, we need two additional assumptions.
+We now define the feasible and trimmed counterpart of $Z_{T,N}$. Moreover, in order to properly control for sorting errors, we need three additional assumptions.
 
 \begin{definition}
 \label{def: Ztilde}
@@ -751,7 +753,7 @@ We use data from the CRSP U.S. Stock database, which contains end-of-day prices 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.55\textwidth]{../../portfolio-sorts/images/data/num_stocks.pdf}
+\includegraphics[width=0.6\textwidth]{../../portfolio-sorts/images/data/num_stocks.pdf}
 \caption[Number of common stocks in CRSP U.S. stock database]{Number of common stocks in the CRSP U.S. stock database.}
 \label{img:num_stocks}
 \end{figure}
@@ -852,11 +854,11 @@ Similarly, we measure the information loss error for the $1$-st (resp. $\mathcal
 \end{aligned}
 &= \frac{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ \widehat{S}_{\tau(t),R,s}^{p(j-1)} < \widehat{S}_{i,\tau(t),R,s} \leq \widehat{S}_{\tau(t),R,s}^{p(j)} \right\} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}{\sum_{i=1}^{N_{\tau(t)}} \mathds{1} \left\{ S_{\tau(t)}^{p(\mathcal{N}-1)} < S_{i,\tau(t)} \right\}}
 \end{align*}
-Finally, we take the average of these values across simulations and time. A similar reasoning applies to the trimmed portfolios. Tables \ref{tab:errors-untrim-252-10} and \ref{tab:errors-trim-252-10} show the contamination error and the information loss error without and with trimming, respectively. For example, consider the row "Contamination P1": columns P2-P10 show the percentage of stocks allocated to portfolio 1 that would actually belong to portfolios 2, ..., 10; column P1 is the total classification error, i.e. the sum of columns P2-P10. Two observations are in order. First, as expected, the two types of classification errors decrease as we move away from the extreme portfolios. Second, we can see how the trimming procedure correctly reduces the classification errors. Appendix \ref{app:Classification Errors} reports the same table for other values of $E$ and $\mathcal{N}$.
+Finally, we take the average of these values across simulations and time. A similar reasoning applies to the trimmed portfolios. Tables \ref{tab:errors-untrim-252-10-main} and \ref{tab:errors-trim-252-10-main} show the contamination error and the information loss error without and with trimming, respectively. For example, consider the row "Contamination P1": columns P2-P10 show the percentage of stocks allocated to portfolio 1 that would actually belong to portfolios 2, ..., 10; column P1 is the total classification error, i.e. the sum of columns P2-P10. Two observations are in order. First, as expected, the two types of classification errors decrease as we move away from the extreme portfolios. Second, we can see how the trimming procedure correctly reduces the classification errors. Appendix \ref{app:Classification Errors} reports the same table for other values of $E$ and $\mathcal{N}$.
 
-\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim.tex} 
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-untrim-main.tex} 
 
-\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-trim.tex} 
+\input{../../portfolio-sorts/tables/simul-errors/252-10/errors-trim-main.tex} 
 
 \noindent
 Image \ref{img:cont-compare} shows the contamination error for different numbers of portfolios and estimation periods. The dashed line shows how the error is reduced when trimming is applied. Notice how a longer estimation period reduces the classification error across the board.
@@ -910,28 +912,11 @@ Instead, in the setting with strong cross-sectional correlation of the sorting v
 \begin{align*}
     \beta_{i,t,s} = \beta_{0,i} + \beta_W W_{t,s}.
 \end{align*}
-Because the same common shift $\beta_W W_{t,s}$ is added to all stocks, the cross-sectional ordering induced by $\beta_{0,i}$ is preserved over time. Finally, the residual component is Gaussian and independent across $i$ and $t$:
+Because the same common shift $\beta_W W_{t,s}$ is added to all stocks, the cross-sectional ordering induced by $\beta_{0,i}$ is preserved over time. Moreover, the residual component is Gaussian and independent across $i$ and $t$:
 \begin{align*}
     \varepsilon_{i,t,s} \sim N\left(0,\sigma_{\varepsilon,i}^{2}\right),
 \end{align*}
-where $\sigma_{\varepsilon,i}$ equals a baseline scale outside the boundary bands and an inflated multiple of that scale inside $\mathcal{B}_2 \cup \mathcal{B}_{\mathcal{N}-1}$.
-
-The four simulation designs are then the following.
-\begin{itemize}
-    \item Under $H_{0}$ and weak cross-sectional correlation of the sorting variable, we set $\beta_{i,t,s}=\beta_{0,i}$ and
-    \begin{align*}
-        \alpha_{i,t,s}
-        =
-        -\mu_M \beta_{0,i}
-        +
-        \begin{cases}
-            -a_{0} & \text{if } i \in \mathcal{B}_{2},\\
-            +a_{0} & \text{if } i \in \mathcal{B}_{\mathcal{N}-1},\\
-            0 & \text{otherwise.}
-        \end{cases}
-    \end{align*}
-
-    \item Under $H_{0}$ and strong cross-sectional correlation of the sorting variable, we set $\beta_{i,t,s}=\beta_{0,i}+\beta_W W_{t,s}$ and
+where $\sigma_{\varepsilon,i}$ equals a baseline scale outside the boundary bands and an inflated multiple of that scale inside $\mathcal{B}_2 \cup \mathcal{B}_{\mathcal{N}-1}$. Finally, under $H_{0}$ we set:
     \begin{align*}
         \alpha_{i,t,s}
         =
@@ -943,23 +928,7 @@ The four simulation designs are then the following.
             0 & \text{otherwise.}
         \end{cases}
     \end{align*}
-
-    \item Under $H_{A}$ and weak cross-sectional correlation of the sorting variable, we set $\beta_{i,t,s}=\beta_{0,i}$ and
-    \begin{align*}
-        \alpha_{i,t,s}
-        =
-        -\mu_M \beta_{0,i}
-        +
-        \begin{cases}
-            -a_{1} & \text{if } i \in \mathcal{P}_{1},\\
-            +m_{H} a_{1} & \text{if } i \in \mathcal{B}_{2},\\
-            -m_{H} a_{1} & \text{if } i \in \mathcal{B}_{\mathcal{N}-1},\\
-            +a_{1} & \text{if } i \in \mathcal{P}_{\mathcal{N}},\\
-            0 & \text{otherwise.}
-        \end{cases}
-    \end{align*}
-
-    \item Under $H_{A}$ and strong cross-sectional correlation of the sorting variable, we set $\beta_{i,t,s}=\beta_{0,i}+\beta_W W_{t,s}$ and
+Instead, under $H_{A}$ we set:
     \begin{align*}
         \alpha_{i,t,s}
         =
@@ -973,9 +942,8 @@ The four simulation designs are then the following.
             0 & \text{otherwise.}
         \end{cases}
     \end{align*}
-\end{itemize}
 
-In the two $H_{0}$ designs, the additional alpha shifts are confined to narrow boundary bands in portfolios $2$ and $\mathcal{N}-1$, so that the bottom and top portfolios continue to have the same expected return in the absence of sorting errors. In the two $H_{A}$ designs, instead, the alpha shifts are negative in portfolio $1$ and positive in portfolio $\mathcal{N}$, with larger opposite-signed adjustments in the adjacent boundary bands, so that expected returns increase with beta while contamination from the neighboring portfolios attenuates the bottom-minus-top spread. The weak-correlation design keeps the true beta fixed over time, whereas the strong-correlation design makes it depend on the common state variable $W_{t,s}$, thereby inducing strong cross-sectional dependence in the sorting variable.
+Note that in the $H_{0}$ design, the additional alpha shifts are confined to narrow boundary bands in portfolios $2$ and $\mathcal{N}-1$, so that the bottom and top portfolios continue to have the same expected return in the absence of sorting errors. In the $H_{A}$ design, instead, the alpha shifts are negative in portfolio $1$ and positive in portfolio $\mathcal{N}$, with larger opposite-signed adjustments in the adjacent boundary bands, so that expected returns increase with beta while contamination from the neighboring portfolios attenuates the bottom-minus-top spread. The weak-correlation design keeps the true beta fixed over time, whereas the strong-correlation design makes it depend on the common state variable $W_{t,s}$, thereby inducing strong cross-sectional dependence in the sorting variable.
 
 
 \paragraph{Subsampling scheme} We set $R=252$ days (12 months), which implies a ratio $\frac{T-R}{R} = 59$. To maintain the same speed of growth of $T-R$ relative to $R$ in the subsampling scheme, we set $T_\delta = 5\,040$ days (20 years) and $R_\delta = 84$ days (7 months). We thus obtain 481 overlapping windows in the subsampling scheme. We now outline the steps to compute the test statistic $\widehat{Z}_{N,T,R,s}$, the subsampled counterpart $\widehat{Z}_{N,T_\delta,R_\delta,s}^{(k)}$, and recover the size and power of the test statistic. 
@@ -990,7 +958,7 @@ Finally, we compute the test statistic. More precisely, given the composition of
 \end{align*}
 where $R$ in the square root and in the starting value of the summation should more accurately be the number of days until the first rebalancing date.
 
-Next, we implement the subsampling procedure. We proceed as outlined above to recompute the idiosyncratic volatility of the stocks, sort them into trimmed portfolios at each rebalancing date, and obtain a time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolio. The only difference is the fact that we now use an estimation period of $R_\delta$ days as opposed to $R$. Lastly, we compute the statistic for windows of $T_\delta$ days. More precisely, we start from the day after the first rebalancing $t = R_\delta + 1$, and consider a window of $T_\delta$ observations, iteratively shifting it by one day, thus considering a total of $K=T-T_\delta-R_\delta + 1$ overlapping subsamples. For each subsample, we compute the test statistic $\widehat{Z}_{N,T_\delta,R_\delta}^{(k)}$ as the average of the return difference multiplied by the square root of the number of observations.
+Next, we implement the subsampling procedure. We proceed as outlined above to recompute the market beta of the stocks, sort them into trimmed portfolios at each rebalancing date, and obtain a time series for the return of the $1$-st trimmed portfolio minus the return of the $\mathcal{N}$-th trimmed portfolio from which we compute the statistic. The only difference is that instead of considering the whole sample, we now consider overlapping windows of $T_\delta$ observations (shifting them by one month at the time), and that we now use an estimation period of $R_\delta$ days as opposed to $R$. For each subsample, we compute the test statistic $\widehat{Z}_{N,T_\delta,R_\delta}^{(k)}$ as the average of the return difference multiplied by the square root of the number of observations.
 \begin{align*}
     \widehat{Z}_{T_\delta,N,R_\delta,s}^{(k)} &=\frac{\mathcal{N}}{\sqrt{T_\delta}}\sum_{t=R_\delta+1}^{T_\delta}\frac{1}{N_{\tau(t)}}\sum_{i=1}^{N_{\tau(t)}}r_{i,t,s}\left( \mathds{1} \left\{ \widehat{S}_{i,\tau(t),R_\delta,s}\leq \widehat{S}_{\tau(t),R_\delta,s}^{L, p(1)} \right\} -\mathds{1}\left\{  \widehat{S}_{\tau(t),R_\delta,s}^{U, p(\mathcal{N}-1)} < \widehat{S}_{i,\tau(t),R_\delta,s}\right\} \right), 
 \end{align*}
