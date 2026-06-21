@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.2)  21 JUN 2026 01:53
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.1.2)  21 JUN 2026 02:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -3509,31 +3509,30 @@ LaTeX Font Info:    No math alphabet change to frozen version normal on input li
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 983.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 983.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 983.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 985.
  (../../portfolio-sorts/tables/application/application.tex
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
 
-Underfull \hbox (badness 10000) in alignment at lines 23--23
+Underfull \hbox (badness 10000) in alignment at lines 26--26
 [][][][][][][] 
  []
 
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 23.
-)
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
-LaTeX Font Info:    No math alphabet change to frozen version normal on input line 987.
- [33]
+LaTeX Font Info:    No math alphabet change to frozen version normal on input line 26.
+) [33]
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 989.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 989.
 LaTeX Font Info:    No math alphabet change to frozen version normal on input line 989.
@@ -4838,7 +4837,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  90i,19n,117p,1901b,824s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newpx/npxsups_T1.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newtx/ntx-ot1-tlf.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newtx/ntx-ec-tlf.enc}{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/NewPXMI.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/NewPXMI_gnu.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/doublestroke/dsrom10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/npxsups-Regular.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/pxmiaX.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/pxsys.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newtx/txexs.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/zplb.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/zplr.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/newpx/zplri.pfb>
-Output written on draft.pdf (54 pages, 521955 bytes).
+Output written on draft.pdf (54 pages, 522615 bytes).
 PDF statistics:
  1200 PDF objects out of 1200 (max. 8388607)
  922 compressed objects within 10 object streams
