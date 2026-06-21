@@ -18,9 +18,9 @@ We establish sufficient conditions for performing tests for equalities of return
 
 Throughout the paper we consider a realistic environment in which returns are observed at a daily frequency, and new stocks can enter and others exit on any given day. This gives rise to an unbalanced panel. At every rebalancing date, we use a rolling window of past returns to construct an estimate of the sorting variable for each stock and compute the relative order statistics. We use end-of-period returns over different percentiles to construct the test. Hence, our testing procedure is genuinely out of sample.
 
-As a leading example, we consider sorting stocks according to their (estimated) market beta. We calibrate the simulation design to the historical distribution of estimated betas and study both the classification-error problem and the finite-sample behavior of the testing procedure. First, treating rolling beta estimates as the latent true sorting variable, we quantify contamination and information-loss errors in the extreme portfolios and show that the proposed trimming rule substantially reduces contamination. Second, using simulated return panels generated under the null and the alternative, and under both weak and strong cross-sectional correlation of the sorting variable, we compare the untrimmed and trimmed test statistics. The simulations show that contamination makes the untrimmed statistic oversized under the null and underpowered under the alternative, whereas trimming combined with subsampling moves the rejection frequencies in the direction predicted by the theory, delivering tests with size closer to the nominal level and power closer to one.
+As a leading example, we consider sorting stocks according to their (estimated) market beta. We calibrate the simulation design to the historical distribution of estimated betas and study both the classification-error problem and the finite-sample behavior of the testing procedure. First, treating rolling beta estimates as the latent true sorting variable, we quantify contamination and information-loss errors in the extreme portfolios and show that the proposed trimming rule substantially reduces contamination. Second, using simulated return panels generated under the null and the alternative, and under both weak and strong cross-sectional correlation of the sorting variable, we compare the untrimmed and trimmed test statistics. The simulations show that contamination makes the untrimmed statistic oversized under the null and underpowered under the alternative, whereas trimming combined with subsampling moves the rejection frequencies in the direction predicted by the theory, delivering tests with size closer to the nominal level and power closer to one. Finally, we apply the procedure directly to historical beta-sorted portfolios and show that trimming strengthens the high-minus-low beta spread, especially when the extreme portfolios are more sensitive to boundary misclassification.
 
-The rest of the paper is organized as follows. Section \ref{Set-Up} describes the set-up. Section \ref{Sorting Without Measurement Error} considers the case of sorting without measurement error. Section \ref{Sorting With Measurement Error} considers the case of sorting with measurement error, introduces our trimming rule and establishes the asymptotic properties of the trimmed statistics. In particular, we show how percentile measurement error contributes to the asymptotic variance. As the latter is not always known in closed form, in Section \ref{Subsampling} we suggest how to construct asymptotically valid subsampling critical values, which properly mimic estimation error. Section \ref{Simulations} studies the case of sorting according to betas. All proofs are gathered in the Appendix.
+The rest of the paper is organized as follows. Section \ref{Set-Up} describes the set-up. Section \ref{Sorting Without Measurement Error} considers the case of sorting without measurement error. Section \ref{Sorting With Measurement Error} considers the case of sorting with measurement error, introduces our trimming rule and establishes the asymptotic properties of the trimmed statistics. In particular, we show how percentile measurement error contributes to the asymptotic variance. As the latter is not always known in closed form, in Section \ref{Subsampling} we suggest how to construct asymptotically valid subsampling critical values, which properly mimic estimation error. Section \ref{Simulations} studies the case of sorting according to betas. Section \ref{Empirical Example} applies the procedure to historical beta-sorted portfolios. All proofs are gathered in the Appendix.
 
 
 %=========================================
@@ -117,8 +117,6 @@ Assumption \refAssPart{ass:mixing, i} is a distribution and memory condition. In
 Assumption \refAssPart{ass:exogenous, i} requires that a positive fraction of all stocks is traded at any time. Assumption \refAssPart{ass:exogenous, ii} imposes a lower bound on the lifetime of each stock.
 
 Theorem \ref{th:observable} studies the asymptotic behavior of the test statistic under assumption \refAssPart{ass:mixing, v} of weak cross-sectional correlation of the sorting variable.
-
-\pagebreak
 
 \begin{theorem}
 \label{th:observable} 
@@ -460,8 +458,6 @@ and for each $j=1,\ldots,\mathcal{N}$:
 
 \noindent
 Assumption \ref{ass:subsampling} mirrors condition (8) in \cite{politis1997subsampling} for the validity of subsampling in the case of heteroskedastic observations.
-
-\pagebreak
 
 Theorem \ref{th:subsampling} establishes the first order validity of inference based on subsampling.
 
@@ -977,13 +973,6 @@ Table \ref{tab:252-5040-84-6} shows the size and power of the test for different
 
 \input{../../portfolio-sorts/tables/simul-tests/252-5040-84-6.tex} 
 
-\section{Conclusion}
-\label{Conclusion}
-
-This paper studies how sorting errors affect tests for equality of expected returns across portfolios. When the sorting characteristic is observable, the relevant error comes from using order statistics to approximate the unobservable population quantiles. We show that this error is asymptotically negligible only when the sorting variable is weakly cross-sectionally correlated; otherwise, it contributes to the asymptotic variance and has to be accounted for in inference. When the sorting characteristic is unobservable and must be estimated, measurement error creates contamination and information-loss errors in the resulting portfolios. The former occurs when a portfolio includes stocks that should belong to another portfolio, while the latter occurs when stocks that should belong to a given portfolio are excluded from it. These classification errors can distort the bottom-minus-top return spread and lead to incorrect inference.
-
-We propose an adaptive trimming procedure that discards stocks close to the portfolio boundaries, where classification errors are most likely to occur. The trimming rule is designed to control contamination while requiring conditions under which the information loss induced by trimming is asymptotically negligible. Because the additional variance terms generated by estimated sorting variables are not generally available in closed form, we combine trimming with a subsampling procedure that preserves the relative growth rate of the testing and estimation windows. The theoretical results show that the resulting tests have correct asymptotic size and unit power. In simulations calibrated to beta-sorted portfolios, trimming substantially reduces contamination, and trimming coupled with subsampling moves rejection frequencies toward the nominal size under the null and toward unit power under the alternative.
-
 %=========================================
 % EMPIRICAL EXAMPLE
 %=========================================
@@ -991,7 +980,26 @@ We propose an adaptive trimming procedure that discards stocks close to the port
 \section{Empirical Example}
 \label{Empirical Example}
 
+We now apply the beta-sorting procedure directly to the historical returns. We use the same CRSP and Fama--French data described above. At each monthly rebalancing date, we estimate the market beta of each stock from regression \eqref{reg_estim}, using rolling windows of length $R=21E$, with $E \in \{12,24,60\}$. We then sort stocks into $\mathcal{N}\in\{2,5,10\}$ portfolios according to the estimated beta. For each specification, we construct both the untrimmed portfolios and the trimmed portfolios, where trimming is based on the same law-of-iterated-logarithm bound used in the simulation section. Finally, we compute the equally weighted return of the lowest-beta and highest-beta portfolios over the following month, and report the corresponding high-minus-low beta-sorted statistic. Thus, negative values indicate that the high-beta portfolio earns a lower average return than the low-beta portfolio.
+
 \input{../../portfolio-sorts/tables/application/application.tex} 
+
+Table \ref{tab:application} reports the empirical statistics. Across all specifications, the high-minus-low statistic is negative, consistent with the well-known weak empirical performance of high-beta stocks relative to low-beta stocks. More importantly for our purposes, trimming moves the statistic farther away from zero in every case. For example, when $E=12$ and $\mathcal{N}=10$, the statistic decreases from $-0.068$ without trimming to $-0.097$ with trimming; when $E=24$ and $\mathcal{N}=10$, it decreases from $-0.065$ to $-0.090$. The same pattern is present, though less pronounced, for $\mathcal{N}=2$ and $\mathcal{N}=5$.
+
+This behavior is exactly what the classification-error analysis suggests. Stocks close to the beta cutoffs are the most likely to be assigned to the wrong extreme portfolio. Since these boundary stocks tend to have returns closer to those of adjacent portfolios, their inclusion attenuates the return spread between the two extremes. By removing the observations whose portfolio assignment is least reliable, the trimming procedure delivers cleaner extreme portfolios and strengthens the empirical beta-sorted spread. The effect is largest when $\mathcal{N}=10$, where the extreme portfolios are narrowest and therefore most sensitive to boundary misclassification, and it becomes smaller as the estimation window increases from $E=12$ to $E=60$, when beta estimates are more precise.
+
+%=========================================
+% CONCLUSION
+%=========================================
+
+\section{Conclusion}
+\label{Conclusion}
+
+This paper studies how sorting errors affect tests for equality of expected returns across portfolios. When the sorting characteristic is observable, the relevant error comes from using order statistics to approximate the unobservable population quantiles. We show that this error is asymptotically negligible only when the sorting variable is weakly cross-sectionally correlated; otherwise, it contributes to the asymptotic variance and has to be accounted for in inference. When the sorting characteristic is unobservable and must be estimated, measurement error creates contamination and information-loss errors in the resulting portfolios. The former occurs when a portfolio includes stocks that should belong to another portfolio, while the latter occurs when stocks that should belong to a given portfolio are excluded from it. These classification errors can distort the bottom-minus-top return spread and lead to incorrect inference.
+
+We propose an adaptive trimming procedure that discards stocks close to the portfolio boundaries, where classification errors are most likely to occur. The trimming rule is designed to control contamination while requiring conditions under which the information loss induced by trimming is asymptotically negligible. Because the additional variance terms generated by estimated sorting variables are not generally available in closed form, we combine trimming with a subsampling procedure that preserves the relative growth rate of the testing and estimation windows. The theoretical results show that the resulting tests have correct asymptotic size and unit power. In simulations calibrated to beta-sorted portfolios, trimming substantially reduces contamination, and trimming coupled with subsampling moves rejection frequencies toward the nominal size under the null and toward unit power under the alternative.
+
+We also apply the procedure directly to historical beta-sorted portfolios. At each monthly rebalancing date, we estimate market betas over rolling windows, sort stocks into beta portfolios, and compare the high-minus-low return statistic with and without trimming. The empirical results show that trimming strengthens the beta-sorted spread, especially when the number of portfolios is larger and the extreme portfolios are more sensitive to boundary misclassification.
 
 %\subsection{Pricing Idiosyncratic Volatility in the Cross-Section}
 

@@ -1,19 +1,19 @@
 # Fdb version 3
-["bibtex draft"] 1781994473 "draft.aux" "draft.bbl" "draft" 1781994475
+["bibtex draft"] 1782003215 "draft.aux" "draft.bbl" "draft" 1782003217
   "/usr/local/texlive/2022/texmf-dist/bibtex/bst/natbib/abbrvnat.bst" 1233624470 26532 66bed5cc59495faaa3f9ae9af9fa5e42 ""
   "bibliography.bib" 1776621519 7772 622bd0ed5a3c47b1bcfbb93626c50093 ""
-  "draft.aux" 1781994475 30770 806008fc38026674c610ff468487a1cc "pdflatex"
+  "draft.aux" 1782003217 30768 2e16abc2925a7277d28b33cd43bb219d "pdflatex"
   (generated)
   "draft.bbl"
   "draft.blg"
-["pdflatex"] 1781994473 "/Users/nicoloceneda/Library/CloudStorage/Dropbox/Bhamra-Ceneda/research/portfolio sorts/paper/manuscript/draft.tex" "draft.pdf" "draft" 1781994475
+["pdflatex"] 1782003215 "/Users/nicoloceneda/Library/CloudStorage/Dropbox/Bhamra-Ceneda/research/portfolio sorts/paper/manuscript/draft.tex" "draft.pdf" "draft" 1782003217
   "../../portfolio-sorts/images/data/num_stocks.pdf" 1773361529 49763 34286d04a560404169e3f8739efd97ba ""
   "../../portfolio-sorts/images/estim/bal/betas_dist.pdf" 1774092357 14520 67c546c7d0a849abf1236e06feef0030 ""
   "../../portfolio-sorts/images/presentation/cont-info-errors-trim.pdf" 1719626979 23885 22a1d093ca40ed4342945c8ef12f560c ""
   "../../portfolio-sorts/images/presentation/trimming.pdf" 1719626996 38199 a22ff97cdf9cc325ce271f0b722d890a ""
   "../../portfolio-sorts/images/simul-errors/252-10/port_size_quant_trim.pdf" 1776249244 32295 e590aeaae2f5227679a286ab4d659ba0 ""
   "../../portfolio-sorts/images/simul-errors/compare/cont-compare.pdf" 1776249377 21348 b7f682767f5bf8b70dfc28964ee1f20d ""
-  "../../portfolio-sorts/tables/application/application.tex" 1781994026 1137 c8b4db594e213886fc9c659de45ad7a1 ""
+  "../../portfolio-sorts/tables/application/application.tex" 1781994808 1133 a8f24bccfee0b94eccafa6c9024d8571 ""
   "../../portfolio-sorts/tables/estim_params/beta_summary_1260-10.tex" 1777515425 1506 3f97430d18086da93678879a9da98cac ""
   "../../portfolio-sorts/tables/estim_params/beta_summary_1260-5.tex" 1777515426 1007 04a3942e91c5251797f48a66e4aa54cb ""
   "../../portfolio-sorts/tables/estim_params/beta_summary_252-10.tex" 1777515425 1507 a57bca0a1efea6ad7a3cc33c98f02eb9 ""
@@ -36,7 +36,7 @@
   "../../portfolio-sorts/tables/simul-errors/504-5/errors-untrim.tex" 1777515427 1133 af7da595d09829ad8014ea9413d002c4 ""
   "../../portfolio-sorts/tables/simul-tests/252-5040-84-6.tex" 1777516001 1025 d7ced12fffde1d9c00a0abbcc3942975 ""
   "../sections/appendix.tex" 1777514467 47868 90366bb937aec7b31662f1419fd15752 ""
-  "../sections/main.tex" 1781994470 108594 640ea432bf0e42590d90f2b883cb7c86 ""
+  "../sections/main.tex" 1782003212 111804 978c58686df3429bf04046276b94bf9c ""
   "/Users/nicoloceneda/Library/CloudStorage/Dropbox/Bhamra-Ceneda/research/portfolio sorts/paper/manuscript/draft.tex" 1776569324 6439 f589e9dd51d306b969fa018135d35fbb ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newpx/npxsups_T1.enc" 1643577229 3661 61346f7979fa024feefe72e8b0269f02 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/newpx/zpl_TOsF.enc" 1638997615 2697 c0e4acf9af2683eef1d80f88a94044c0 ""
@@ -304,9 +304,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1672617624 2826433 0b4864743ee1c50739397d1523b05a05 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "draft.aux" 1781994475 30770 806008fc38026674c610ff468487a1cc "pdflatex"
-  "draft.bbl" 1781994473 6403 3492caa66b34995ffb84cd0eb5d5786c "bibtex draft"
-  "draft.out" 1781994475 7342 a5f0b8baf971d871d3cc79fa81523be9 "pdflatex"
+  "draft.aux" 1782003217 30768 2e16abc2925a7277d28b33cd43bb219d "pdflatex"
+  "draft.bbl" 1782003215 6403 3492caa66b34995ffb84cd0eb5d5786c "bibtex draft"
+  "draft.out" 1782003217 7342 09ebad8f3ff03e15b7a7be81dbfd1422 "pdflatex"
   "draft.tex" 1776569324 6439 f589e9dd51d306b969fa018135d35fbb ""
   (generated)
   "draft.aux"
